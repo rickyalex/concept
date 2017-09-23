@@ -187,6 +187,17 @@ class Qms_model extends CI_Model {
         return $res;
     }
     
+    function getDiscount($id) {
+        $query = $this->DB->query("SELECT floor(discount*100) as result from m_package where id = '$id'");
+        if ($query->num_rows() > 0) {
+            $res = $query->row()->result;
+        }
+        else
+            $res = '';
+
+        return $res;
+    }
+    
 	function getPackageDetail($id) {
         $query = $this->DB->query("SELECT * from mpd where id_header = $id");
         if ($query->num_rows() > 0) {
@@ -462,9 +473,9 @@ class Qms_model extends CI_Model {
                 $res = array();
 
         }elseif($tipe == 'PA'){
-            $query = $this->DB->query("SELECT SUM(a.qty * receive_price) AS receive_price, SUM(a.qty * selling_price) AS selling_price
-                                       FROM mpd a, rsd b
-                                       WHERE a.id_header = $receive_id AND a.product_id=b.id");
+            $query = $this->DB->query("SELECT SUM(a.qty * receive_price) AS receive_price, SUM(a.qty * selling_price) * (1 - c.discount) AS selling_price
+                                        FROM mpd a, rsd b, m_package c
+                                        WHERE a.id_header = 5 AND a.product_id=b.id AND a.id_header=c.id");
             if ($query->num_rows() > 0) {
                 $res = $query->result_array();
             }
@@ -487,8 +498,30 @@ class Qms_model extends CI_Model {
         return $res;
     }
 	
-	function getOrderID($order_no) {
+    function getOrderID($order_no) {
         $query = $this->DB->query("SELECT id as result from order_header where order_no = '$order_no'");
+        if ($query->num_rows() > 0) {
+            $res = $query->row()->result;
+        }
+        else
+            $res = '';
+
+        return $res;
+    }
+    
+    function getCash($order_no) {
+        $query = $this->DB->query("SELECT payment as result from order_header where order_no = '$order_no'");
+        if ($query->num_rows() > 0) {
+            $res = $query->row()->result;
+        }
+        else
+            $res = '';
+
+        return $res;
+    }
+    
+	function getReturn($order_no) {
+        $query = $this->DB->query("SELECT `return` as result from order_header where order_no = '$order_no'");
         if ($query->num_rows() > 0) {
             $res = $query->row()->result;
         }

@@ -20,6 +20,7 @@ class Transaction extends MX_Controller {
 		
         $this->load->helper('url');
         $this->load->library('form_validation');
+        $this->load->library('html2pdf');
         $this->load->model('qms_model');
     }
 
@@ -249,7 +250,7 @@ class Transaction extends MX_Controller {
 
 					$rsd['qty_on_hand'] = $packQtyonHand - $data['qty'];
 					$qty = $data['qty'];
-					
+
 					if($rsd['qty_on_hand'] < 0){						
 						$data = array();
 						array_push($data, array(
@@ -301,56 +302,6 @@ class Transaction extends MX_Controller {
 				
 			}
 			
-			/* if ($data['id'] == '' || $data['id'] == null){
-			//mode insert;
-			$product_id = $data['product_id'];
-			if(substr($product_id,0,2)=="PA"){
-				//package
-				$package_id = substr($product_id,2);
-				//die('package '.$package_id);
-				$package = $this->qms_model->getPackageProducts($package_id);
-				
-				foreach($package as $product => $item){
-					$qty_on_hand = $this->qms_model->getQtyOnHand($package[$product]['product_id']);
-					
-					$rsd['qty_on_hand'] = $qty_on_hand - $package[$product]['qty'];
-				
-					if($rsd['qty_on_hand'] >= 0){
-						$data['product_id'] = $this->qms_model->getProductID($package[$product]['product_id']);
-						$this->qms_model->submitTableData('order_detail',$data);
-					
-						$this->db->where('id', $receive_id);
-						$query = $this->db->update('rsd' ,$rsd);
-						
-						$this->db->where('product_id', $data['product_id']);
-						$query = $this->db->update('inventory_on_hand' ,$rsd);
-					}
-					else die('Qty is greater than on hand !');
-				}
-			}
-			elseif(substr($product_id,0,2)=="PR"){
-				//product
-				$receive_id = substr($product_id,2);
-				die('package '.$receive_id);
-				$qty_on_hand = $this->qms_model->getQtyOnHand($receive_id);
-			
-				$rsd['qty_on_hand'] = $qty_on_hand - $data['qty'];
-				
-				if($rsd['qty_on_hand'] >= 0){
-					$data['product_id'] = $this->qms_model->getProductID($data['product_id']);
-					$this->qms_model->submitTableData('order_detail',$data);
-				
-					$this->db->where('id', $receive_id);
-					$query = $this->db->update('rsd' ,$rsd);
-					
-					$this->db->where('product_id', $data['product_id']);
-					$query = $this->db->update('inventory_on_hand' ,$rsd);
-				}
-				else die('Qty is greater than on hand !');
-				
-				//$res = "Insert Success";
-			} */
-			
 			
 		}
 		else{
@@ -401,14 +352,66 @@ class Transaction extends MX_Controller {
         return $arr;
     }
 	
+
 	public function checkout() {
-		$header['mode'] = 'checkout';
-		$data['mode'] = 'checkout 2';
+		foreach($_POST as $key => $value){
+			$data[$key] = $this->input->post($key);
+		}
+
+		$data['status'] = 'CLOSED';
+		$data['flag_print'] = 'Y';
+
+		$this->db->where('id', $data['id']);
+		$query = $this->db->update('order_header' ,$data);
+	}
+
+	public function print_out() {
+		// $header['mode'] = 'checkout';
+		// $data['mode'] = 'checkout 2';
+
 		//die(print_r($data));
-        // $this->load->view('commons/header', $header);
-        $this->load->view('checkout',$data);
         // $this->load->view('commons/footer');
-		// die('Print Out Preview');
+			    //Load the library
+	    // $this->load->library('html2pdf');
+	    
+	    //Set folder to save PDF to
+	    // $this->html2pdf->folder('./assets/pdfs/');
+	    
+	    //Set the filename to save/download as
+	    // $this->html2pdf->filename('test.pdf');
+	    
+	    //Set the paper defaults
+	    // $this->html2pdf->paper('a4', 'portrait');
+	    
+		if ($this->uri->segment(3) !== FALSE){
+			$order_no = $this->uri->segment(4);
+			
+			$arr = $this->qms_model->getTransactionDetailByOrderNo($order_no);
+			foreach($arr as $key => $value){
+				if($arr[$key]['tipe'] == 'NP')
+					$arr[$key]['product'] = $this->qms_model->getProductName($arr[$key]['product_id']);
+				elseif($arr[$key]['tipe'] == 'PA')
+					$arr[$key]['product'] = $this->qms_model->getPackageName($arr[$key]['product_id']);
+
+			}
+			// die(print_r($arr));
+		}
+		// $data = array();
+		$data['cash']  = $this->qms_model->getCash($order_no);
+		$data['return']  = $this->qms_model->getReturn($order_no);
+		$data['product']  = $arr;
+		// die(print_r($data));
+	    // $data = array(
+	    // 	'title' => 'PDF Created',
+	    // 	'message' => 'Hello World!'
+	    // );
+	    $this->load->view('checkout',$data);
+	    // $this->html2pdf->html($this->load->view('checkout',$data, true));
+	    
+	    // if($this->html2pdf->create('download')) {
+	    // 	//PDF was successfully saved or downloaded
+	    // 	echo 'PDF saved';
+	    // }
     }
 	
 	// public function getTestData() {
