@@ -1,0 +1,26 @@
+	.table >tbody >tr:hover>td,
+	.table>tbody>tr:hover{
+		cursor: pointer;
+	}
+
+    /* When the body has the loading class, we turn
+       the scrollbar off with overflow:hidden */
+    body.loading {
+        overflow: hidden;   
+    }
+
+    /* Anytime the body has the loading class, our
+       modal element will be visible */
+    body.loading .modal {
+        display: block;
+    }
+	
+	.splash-box img{
+		margin: 5px;
+		cursor: pointer;
+		opacity: 0.7; 
+	}
+	
+	.splash-box img:hover{
+		opacity: 1; 
+	}
