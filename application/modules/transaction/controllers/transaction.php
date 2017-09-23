@@ -397,8 +397,10 @@ class Transaction extends MX_Controller {
 			// die(print_r($arr));
 		}
 		// $data = array();
+		$data['order_no']  = $order_no;
 		$data['cash']  = $this->qms_model->getCash($order_no);
 		$data['return']  = $this->qms_model->getReturn($order_no);
+		$data['customer']  = $this->qms_model->getCustomer($order_no);
 		$data['product']  = $arr;
 		// die(print_r($data));
 	    // $data = array(

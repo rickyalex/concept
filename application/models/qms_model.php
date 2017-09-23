@@ -520,8 +520,19 @@ class Qms_model extends CI_Model {
         return $res;
     }
     
-	function getReturn($order_no) {
+    function getReturn($order_no) {
         $query = $this->DB->query("SELECT `return` as result from order_header where order_no = '$order_no'");
+        if ($query->num_rows() > 0) {
+            $res = $query->row()->result;
+        }
+        else
+            $res = '';
+
+        return $res;
+    }
+    
+	function getCustomer($order_no) {
+        $query = $this->DB->query("SELECT `customer_name` as result from order_header where order_no = '$order_no'");
         if ($query->num_rows() > 0) {
             $res = $query->row()->result;
         }

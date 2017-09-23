@@ -3,6 +3,7 @@
         {
             size: auto;   /* auto is the current printer page size */
             margin: 0mm;  /* this affects the margin in the printer settings */
+
         }
 
         body 
@@ -13,15 +14,34 @@
     </style>
 <section class="content-header" style="margin-left:10px;">
 	<div id="checkout_header" class="row">
-		<label>Header</label>
+		<img src="<?php echo base_url();?>assets/img/header_concept.jpg" width="350" height="auto"/>
 	</div>
     <ol class="breadcrumb">
 </section>
 <section class="content">
-	<div id="checkout_content" class='row' style="margin-left:10px;">
+	<div id="checkout_content" class='row' style="display:block;margin:auto;">
+	<div>
 		<table>
 			<tr>
-				<td style="text-align:center;width:120px;">Item</td>
+				<td style="width:100px;">Order No.</td>
+				<td>: <?php echo $order_no; ?></td>
+			</tr>
+			<tr>
+				<td style="width:100px;">Customer.</td>
+				<td>: <?php echo $customer; ?></td>
+			</tr>
+			<tr>
+				<td style="width:100px;">Date</td>
+				<td>: <?php echo date("d-m-Y H:i:s "); ?></td>
+			</tr>
+			<tr>
+				<td colspan="2">--------------------------------------------------</td>
+			</tr>
+		</table>
+	</div>
+		<table>
+			<tr>
+				<td style="text-align:center;width:200px;">Item</td>
 				<td style="text-align:center">Qty</td>
 				<td style="text-align:center">Price</td>
 				<td style="text-align:center">Subtotal</td>
@@ -71,6 +91,9 @@
 			 		}
 			 	} ?>
 		 	<tr>
+				<td colspan="4">--------------------------------------------------</td>
+			</tr>
+		 	<tr>
 				<td colspan="3" style="text-align:right">TOTAL : </td>
 				<td style="text-align:right"><?php echo number_format($Subtotal,0,",","."); ?></td>
 			</tr>
@@ -83,9 +106,17 @@
 				<td style="text-align:right"><?php echo number_format($return,0,",","."); ?></td>
 			</tr>
 		</table>
+		<br/>
 	</div>
 	
 </section>
+<section class="content-footer" style="margin-left:10px;">
+	<div id="checkout_footer" class="row">
+		<img src="<?php echo base_url();?>assets/img/footer_concept.jpg" width="238" height="auto" style="margin:0 0 0 20px"/>
+	</div>
+    <ol class="breadcrumb">
+</section>
 <script>
   window.print();
+  window.close();
 </script>

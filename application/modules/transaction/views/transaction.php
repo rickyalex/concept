@@ -274,7 +274,8 @@
 			processData: false,
 			url: "<?php echo base_url();?>transaction/checkout/order_no/<?php echo $result['order_no']; ?>",
 			success: function(response) {
-				window.open('<?php echo base_url(); ?>transaction/print_out/order_no/<?php echo $result['order_no']; ?>','_parent');
+				window.open('<?php echo base_url(); ?>transaction/print_out/order_no/<?php echo $result['order_no']; ?>','_blank');
+				window.open('<?php echo base_url(); ?>billed_transaction','_parent');
 			},
 			error: function(response){
 				alert('save header error');
