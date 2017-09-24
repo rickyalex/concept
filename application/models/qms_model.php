@@ -577,6 +577,18 @@ class Qms_model extends CI_Model {
 
         return $res;
     }
+	
+	function getOpenTransaction() {
+        
+        $query = $this->DB->query("SELECT COUNT(id) as result from order_header where status = 'OPEN'");
+        if ($query->num_rows() > 0) {
+            $res = $query->row()->result;
+        }
+        else
+            $res = 0;
+
+        return $res;
+    }
     
     // function getQtyOnHand3($receive_id) {
         
@@ -704,7 +716,79 @@ class Qms_model extends CI_Model {
 		//die(print_r($table));
         $this->db->insert($table, $data);
     }
-
+	
+	//=============================== CHART ========================================//
+    
+    function chart1(){
+        //CHART FOR NON-SERVICE PRODUCTS FOR TODAY
+        $query = $this->DB->query("SELECT c.`type`, COUNT(a.id) AS total FROM order_detail a, m_product b, m_type c, m_kategori d 
+                                       WHERE a.`product_id` = b.id AND b.`id_type` = c.`id` AND c.`id_category` = d.`id` AND a.`date_created` = DATE(NOW()) AND d.`category` <> 'SERVICES' GROUP BY d.`category`");
+        if ($query->num_rows() > 0) {
+            $res = $query->result_array();
+        }
+        //$this->fb->log($res);
+        else $res = array();
+        
+        return $res;
+    }
+    
+    function chart2(){
+        //CHART FOR NON-SERVICE PRODUCTS FOR TODAY
+        $query = $this->DB->query("SELECT b.`package`, COUNT(a.id) AS total FROM order_detail a, m_package b
+                                        WHERE a.`product_id` = b.id AND a.`date_created` = DATE(NOW()) AND a.`tipe` = 'PA' GROUP BY b.`id`");
+        if ($query->num_rows() > 0) {
+            $res = $query->result_array();
+        }
+        //$this->fb->log($res);
+        else $res = array();
+        
+        return $res;
+    }
+	
+	//=============================== REPORTS =========================================//
+	
+	function getNonServiceData(){
+        //TABLE FOR NON-SERVICE PRODUCTS
+        $query = $this->DB->query("SELECT a.`product_id`, b.`description`, a.date_created, c.`type`, d.`category`, SUM(a.`subtotal`) AS total FROM order_detail a, m_product b, m_type c, m_kategori d
+										WHERE a.`product_id` = b.product_id AND b.`id_type` = c.`id` AND c.`id_category` = d.`id` AND d.`category` <> 'SERVICES'
+										GROUP BY a.`product_id`, a.date_created ORDER BY a.date_created DESC");
+        if ($query->num_rows() > 0) {
+            $res = $query->result_array();
+        }
+        //$this->fb->log($res);
+        else $res = array();
+        
+        return $res;
+    }
+	
+	function getServiceData(){
+        //TABLE FOR SERVICE PRODUCTS
+        $query = $this->DB->query("SELECT a.`product_id`, b.`description`, a.date_created, c.`type`, d.`category`, SUM(a.`subtotal`) AS total FROM order_detail a, m_product b, m_type c, m_kategori d
+										WHERE a.`product_id` = b.product_id AND b.`id_type` = c.`id` AND c.`id_category` = d.`id` AND d.`category` = 'SERVICES'
+										GROUP BY a.`product_id`, a.date_created ORDER BY a.date_created DESC");
+        if ($query->num_rows() > 0) {
+            $res = $query->result_array();
+        }
+        //$this->fb->log($res);
+        else $res = array();
+        
+        return $res;
+    }
+	
+	function getPackageData(){
+        //TABLE FOR SERVICE PRODUCTS
+        $query = $this->DB->query("SELECT b.`package`, a.date_created, SUM(a.`subtotal`) AS total FROM order_detail a, m_package b
+										WHERE a.`product_id` = b.id
+										GROUP BY b.`id`, a.date_created ORDER BY a.date_created DESC");
+        if ($query->num_rows() > 0) {
+            $res = $query->result_array();
+        }
+        //$this->fb->log($res);
+        else $res = array();
+        
+        return $res;
+    }
+	
 }
 
 ?>

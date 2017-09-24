@@ -177,6 +177,8 @@
 			$("#payment").val('');
 			$("#return").val('');
 			$("#order_no").focus();
+			$('#receive_date').val('<?php echo Date('Y-m-d'); ?>');
+			$('#down_payment').val('0');
 		<?php } ?>
 		
 		$("#package").select2({
@@ -272,10 +274,11 @@
 			data: formData,
 			contentType: false,
 			processData: false,
-			url: "<?php echo base_url();?>transaction/checkout/order_no/<?php echo $result['order_no']; ?>",
+			url: "<?php echo base_url();?>transaction/checkout/order_no/<?php if($mode=="update") echo $result['order_no'];else echo $order_no; ?>",
 			success: function(response) {
-				window.open('<?php echo base_url(); ?>transaction/print_out/order_no/<?php echo $result['order_no']; ?>','_blank');
+				window.open('<?php echo base_url(); ?>transaction/print_out/order_no/<?php if($mode=="update") echo $result['order_no'];else echo $order_no; ?>','_blank');
 				window.open('<?php echo base_url(); ?>billed_transaction','_parent');
+				
 			},
 			error: function(response){
 				alert('save header error');

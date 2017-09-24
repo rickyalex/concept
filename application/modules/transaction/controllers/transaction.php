@@ -357,11 +357,14 @@ class Transaction extends MX_Controller {
 		foreach($_POST as $key => $value){
 			$data[$key] = $this->input->post($key);
 		}
+		
+		//die(print_r($data));
 
 		$data['status'] = 'CLOSED';
 		$data['flag_print'] = 'Y';
+		unset($data['id']);
 
-		$this->db->where('id', $data['id']);
+		$this->db->where('order_no', $data['order_no']);
 		$query = $this->db->update('order_header' ,$data);
 	}
 
