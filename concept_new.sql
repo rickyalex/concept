@@ -1,0 +1,1725 @@
+/*
+SQLyog Ultimate v12.4.1 (64 bit)
+MySQL - 5.6.35 : Database - concept
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`concept` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `concept`;
+
+/*Table structure for table `admins` */
+
+DROP TABLE IF EXISTS `admins`;
+
+CREATE TABLE `admins` (
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `nama_lengkap` varchar(100) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `level` varchar(20) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL DEFAULT 'user',
+  `blokir` enum('Y','N') CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL DEFAULT 'N',
+  `dibuat` datetime DEFAULT NULL,
+  `lastupdate` datetime DEFAULT NULL,
+  `lastlogin` datetime DEFAULT NULL,
+  `ipaddress` varchar(50) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `Keterangan` varchar(50) DEFAULT NULL,
+  `alias` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`username`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `admins` */
+
+insert  into `admins`(`username`,`password`,`nama_lengkap`,`level`,`blokir`,`dibuat`,`lastupdate`,`lastlogin`,`ipaddress`,`Keterangan`,`alias`) values 
+('1','c4ca4238a0b923820dcc509a6f75849b','1','admin','N',NULL,NULL,'2017-02-14 09:40:00','10.2.2.236',NULL,'1'),
+('admin','4f033a0a2bf2fe0b68800a3079545cd1','Administrator','admin','N','0000-00-00 00:00:00','0000-00-00 00:00:00','2015-04-24 15:17:49','118.96.40.19','Administrator','ADMINISTRATOR'),
+('agus','fdf169558242ee051cca1479770ebac3','Agus Hikmat','user','N','2014-09-15 12:09:53','2014-09-15 12:09:53','2014-10-27 08:44:58','10.2.2.141','Transport Gunung Putri','AGUS HIKMAT'),
+('andri','6bd3108684ccc9dfd40b126877f850b0','Andri Purwanto','procure','N','2013-07-22 04:07:23','2013-07-22 04:07:23','2015-11-23 07:45:12','10.2.2.130','Purchasing Officer ','ANDRI PURWANTO'),
+('arnaja','e1373ab47a162e593c38ae2a22dfc1ff','arnaja','procure','N','2015-06-08 11:06:27','2015-06-08 11:06:27','2015-06-08 14:40:12','10.2.2.111','Accounting','ARNAJA'),
+('citra','57f3e822f3b24cc70006c33cf133f3de','Citra','admin','N',NULL,NULL,'2015-11-18 16:00:10','10.2.2.32',NULL,'CITRA'),
+('fitri','534a0b7aa872ad1340d0071cbfa38697','sri fitriani','admin','N','2015-01-23 03:01:31','2015-01-23 03:01:31','2015-10-01 13:29:27','10.2.2.165','manager','SRI FITRIANI'),
+('guntoro','efebfdd23dfa0c7f171f58eb7cc68b73','Guntoro','admin','N','2014-06-13 02:06:57','2014-06-13 02:06:57','2016-05-13 11:43:30','10.2.2.231','Procurement Supervisor','GUNTORO'),
+('lina','f6f4deb7dad1c2e5e0b4d6569dc3c1c5','rehulina','admin','N','2014-08-07 12:08:06','2014-08-07 12:08:06','2015-04-23 15:05:00','10.2.2.48','it','REHULINA'),
+('mumus','f7e10480d4ee435101f6584400f768c0','Mustaniroh','user','N','2014-09-15 12:09:02','2014-09-15 12:09:02','2014-10-01 17:04:43','10.2.2.57','Packaging','MUSTANIROH'),
+('suparmadi','098f6bcd4621d373cade4e832627b4f6','Suparmadi','procure','N','2013-07-06 12:07:05','2013-07-06 12:07:05','2015-11-24 08:58:50','10.2.2.122','Purchasing Officer','PROCUREMENT');
+
+/*Table structure for table `calendar` */
+
+DROP TABLE IF EXISTS `calendar`;
+
+CREATE TABLE `calendar` (
+  `date` date NOT NULL,
+  `data` varchar(255) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `calendar` */
+
+/*Table structure for table `comment` */
+
+DROP TABLE IF EXISTS `comment`;
+
+CREATE TABLE `comment` (
+  `comment` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `comment` */
+
+insert  into `comment`(`comment`) values 
+('');
+
+/*Table structure for table `date_format` */
+
+DROP TABLE IF EXISTS `date_format`;
+
+CREATE TABLE `date_format` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `js` varchar(20) NOT NULL,
+  `php` varchar(20) NOT NULL,
+  `sql` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+/*Data for the table `date_format` */
+
+insert  into `date_format`(`id`,`js`,`php`,`sql`) values 
+(1,'mm-dd-yyyy','m-d-Y','%m-%d-%Y'),
+(2,'mm/dd/yyyy','m/d/Y','%m/%d/%Y'),
+(3,'dd-mm-yyyy','d-m-Y','%d-%m-%Y'),
+(4,'dd/mm/yyyy','d/m/Y','%d/%m/%Y');
+
+/*Table structure for table `groups` */
+
+DROP TABLE IF EXISTS `groups`;
+
+CREATE TABLE `groups` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+/*Data for the table `groups` */
+
+insert  into `groups`(`id`,`name`,`description`) values 
+(1,'admin','Administrator'),
+(2,'backoffice','Back Office'),
+(3,'cashier','Cashier');
+
+/*Table structure for table `history` */
+
+DROP TABLE IF EXISTS `history`;
+
+CREATE TABLE `history` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `document_no` varchar(100) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `qty` int(11) DEFAULT NULL,
+  `mode` varchar(20) DEFAULT NULL,
+  `created_by` varchar(100) DEFAULT NULL,
+  `date_created` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `history` */
+
+/*Table structure for table `inventory_on_hand` */
+
+DROP TABLE IF EXISTS `inventory_on_hand`;
+
+CREATE TABLE `inventory_on_hand` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` varchar(50) DEFAULT NULL,
+  `qty_on_hand` int(11) DEFAULT '0',
+  `last_updated` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=latin1;
+
+/*Data for the table `inventory_on_hand` */
+
+insert  into `inventory_on_hand`(`id`,`product_id`,`qty_on_hand`,`last_updated`) values 
+(1,'001',10,'0000-00-00 00:00:00'),
+(2,'002',10,'0000-00-00 00:00:00'),
+(3,'003',10,'0000-00-00 00:00:00'),
+(4,'004',10,'0000-00-00 00:00:00'),
+(5,'005',10,'0000-00-00 00:00:00'),
+(6,'006',10,'0000-00-00 00:00:00'),
+(7,'007',10,'0000-00-00 00:00:00'),
+(8,'008',10,'0000-00-00 00:00:00'),
+(9,'009',10,'0000-00-00 00:00:00'),
+(10,'010',10,'0000-00-00 00:00:00'),
+(11,'011',10,'0000-00-00 00:00:00'),
+(12,'012',10,'0000-00-00 00:00:00'),
+(13,'013',10,'0000-00-00 00:00:00'),
+(14,'014',10,'0000-00-00 00:00:00'),
+(15,'015',10,'0000-00-00 00:00:00'),
+(16,'016',10,'0000-00-00 00:00:00'),
+(17,'017',10,'0000-00-00 00:00:00'),
+(18,'018',10,'0000-00-00 00:00:00'),
+(19,'019',10,'0000-00-00 00:00:00'),
+(20,'020',10,'0000-00-00 00:00:00'),
+(21,'021',10,'0000-00-00 00:00:00'),
+(22,'022',10,'0000-00-00 00:00:00'),
+(23,'023',10,'0000-00-00 00:00:00'),
+(24,'024',10,'0000-00-00 00:00:00'),
+(25,'025',10,'0000-00-00 00:00:00'),
+(26,'026',10,'0000-00-00 00:00:00'),
+(27,'027',10,'0000-00-00 00:00:00'),
+(28,'028',10,'0000-00-00 00:00:00'),
+(29,'029',10,'0000-00-00 00:00:00'),
+(30,'030',10,'0000-00-00 00:00:00'),
+(31,'031',10,'0000-00-00 00:00:00'),
+(32,'032',10,'0000-00-00 00:00:00'),
+(33,'033',10,'0000-00-00 00:00:00'),
+(34,'034',10,'0000-00-00 00:00:00'),
+(35,'035',10,'0000-00-00 00:00:00'),
+(36,'036',10,'0000-00-00 00:00:00'),
+(37,'037',10,'0000-00-00 00:00:00'),
+(38,'038',10,'0000-00-00 00:00:00'),
+(39,'039',10,'0000-00-00 00:00:00'),
+(40,'040',10,'0000-00-00 00:00:00'),
+(41,'041',10,'0000-00-00 00:00:00'),
+(42,'042',10,'0000-00-00 00:00:00'),
+(43,'043',10,'0000-00-00 00:00:00'),
+(44,'044',10,'0000-00-00 00:00:00'),
+(45,'045',10,'0000-00-00 00:00:00'),
+(46,'046',10,'0000-00-00 00:00:00'),
+(47,'047',10,'0000-00-00 00:00:00'),
+(48,'048',10,'0000-00-00 00:00:00'),
+(49,'049',10,'0000-00-00 00:00:00'),
+(50,'050',10,'0000-00-00 00:00:00'),
+(51,'051',10,'0000-00-00 00:00:00'),
+(52,'052',10,'0000-00-00 00:00:00'),
+(53,'053',10,'0000-00-00 00:00:00'),
+(54,'054',10,'0000-00-00 00:00:00'),
+(55,'055',10,'0000-00-00 00:00:00'),
+(56,'056',10,'0000-00-00 00:00:00'),
+(57,'057',10,'0000-00-00 00:00:00'),
+(58,'058',10,'0000-00-00 00:00:00'),
+(59,'059',10,'0000-00-00 00:00:00'),
+(60,'060',10,'0000-00-00 00:00:00'),
+(61,'061',10,'0000-00-00 00:00:00'),
+(62,'062',10,'0000-00-00 00:00:00'),
+(63,'063',10,'0000-00-00 00:00:00'),
+(64,'064',10,'0000-00-00 00:00:00'),
+(65,'065',10,'0000-00-00 00:00:00'),
+(66,'066',10,'0000-00-00 00:00:00'),
+(67,'067',10,'0000-00-00 00:00:00'),
+(68,'068',10,'0000-00-00 00:00:00'),
+(69,'069',10,'0000-00-00 00:00:00'),
+(70,'070',10,'0000-00-00 00:00:00'),
+(71,'071',10,'0000-00-00 00:00:00'),
+(72,'072',10,'0000-00-00 00:00:00'),
+(73,'073',10,'0000-00-00 00:00:00'),
+(74,'074',10,'0000-00-00 00:00:00'),
+(75,'075',10,'0000-00-00 00:00:00'),
+(76,'076',10,'0000-00-00 00:00:00'),
+(77,'077',10,'0000-00-00 00:00:00'),
+(78,'078',10,'0000-00-00 00:00:00'),
+(79,'079',10,'0000-00-00 00:00:00'),
+(80,'080',10,'0000-00-00 00:00:00'),
+(81,'081',10,'0000-00-00 00:00:00'),
+(82,'082',10,'0000-00-00 00:00:00'),
+(83,'083',10,'0000-00-00 00:00:00'),
+(84,'084',10,'0000-00-00 00:00:00'),
+(85,'119',10,'0000-00-00 00:00:00'),
+(86,'120',10,'0000-00-00 00:00:00'),
+(87,'121',10,'0000-00-00 00:00:00'),
+(88,'122',10,'0000-00-00 00:00:00'),
+(89,'123',10,'0000-00-00 00:00:00'),
+(90,'124',10,'0000-00-00 00:00:00'),
+(91,'125',10,'0000-00-00 00:00:00');
+
+/*Table structure for table `m_kategori` */
+
+DROP TABLE IF EXISTS `m_kategori`;
+
+CREATE TABLE `m_kategori` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `category_id` varchar(25) NOT NULL DEFAULT '',
+  `category` varchar(50) DEFAULT NULL,
+  `create_user` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+
+/*Data for the table `m_kategori` */
+
+insert  into `m_kategori`(`id`,`category_id`,`category`,`create_user`) values 
+(1,'C00001','CONSUMABLES',NULL),
+(2,'C00002','TOOLS - EQUIPMENT',NULL),
+(3,'C00003','SERVICES',NULL);
+
+/*Table structure for table `m_package` */
+
+DROP TABLE IF EXISTS `m_package`;
+
+CREATE TABLE `m_package` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `package` varchar(200) DEFAULT NULL,
+  `discount` decimal(8,2) DEFAULT NULL,
+  `created_by` varchar(255) DEFAULT NULL,
+  `date_created` date DEFAULT NULL,
+  `updated_by` varchar(255) DEFAULT NULL,
+  `last_updated` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+
+/*Data for the table `m_package` */
+
+insert  into `m_package`(`id`,`package`,`discount`,`created_by`,`date_created`,`updated_by`,`last_updated`) values 
+(1,'PAKET PERSONAL',0.00,'77','0000-00-00','77\r',NULL),
+(2,'PAKET GRUP A',0.00,'77','0000-00-00','77\r',NULL),
+(3,'PAKET GRUP B',0.00,'77','0000-00-00','77\r',NULL),
+(4,'PAKET GRUP C',0.00,'77','0000-00-00','77\r',NULL),
+(5,'PAKET COUPLE A',0.00,'77','0000-00-00','77\r',NULL),
+(6,'PAKET COUPLE B',0.00,'77','0000-00-00','77\r',NULL),
+(7,'PAKET COUPLE C',0.00,'77','0000-00-00','77\r',NULL),
+(8,'PAKET FAMILY MINIMALIS B',0.00,'77','0000-00-00','77\r',NULL),
+(9,'PAKET FAMILY MINIMALIS A',0.00,'77','0000-00-00','77\r',NULL),
+(10,'PAKET FAMILY MINIMALIS C',0.00,'77','0000-00-00','77\r',NULL),
+(11,'PAKET FAMILY MINIMALIS D',0.00,'77','0000-00-00','77\r',NULL),
+(12,'PAKET FAMILY MINIMALIS E',0.00,'77','0000-00-00','77\r',NULL),
+(13,'PAKET FAMILY MINIMALIS F',0.00,'77','0000-00-00','77\r',NULL),
+(14,'PAKET FAMILY CLASSIC A',0.00,'77','0000-00-00','77\r',NULL),
+(15,'PAKET FAMILY CLASSIC B',0.00,'77','0000-00-00','77\r',NULL),
+(16,'PAKET FAMILY VINTAGE A',0.00,'77','0000-00-00','77\r',NULL),
+(17,'PAKET FAMILY VINTAGE B',0.00,'77','0000-00-00','77\r',NULL),
+(18,'PAKET BABY C',0.00,'77','0000-00-00','77\r',NULL),
+(19,'PAKET BABY A',0.00,'77','0000-00-00','77\r',NULL),
+(20,'PAKET BABY B',0.00,'77','0000-00-00','77\r',NULL),
+(21,'PAKET BABY D',0.00,'77','0000-00-00','77\r',NULL),
+(22,'PAKET MATERNITY A',0.00,'77','0000-00-00','77\r',NULL),
+(23,'PAKET MATERNITY B',0.00,'77','0000-00-00','77\r',NULL),
+(24,'PAKET MATERNITY C',0.00,'77','0000-00-00','77\r',NULL),
+(25,'PAKET WISUDA A',0.00,'77','0000-00-00','77\r',NULL),
+(26,'PAKET WISUDA B',0.00,'77','0000-00-00','77\r',NULL),
+(27,'PAKET WISUDA C',0.00,'77','0000-00-00','77\r',NULL),
+(28,'PAKET WISUDA D',0.00,'77','0000-00-00','77\r',NULL),
+(29,'PAKET PREWEDD A',0.00,'77','0000-00-00','77\r',NULL),
+(30,'PAKET PREWEDD B',0.00,'77','0000-00-00','77\r',NULL),
+(31,'PAKET PREWEDD C',0.00,'77','0000-00-00','77\r',NULL),
+(32,'PAKET PREWEDD D + MAKEUP',0.00,'77','0000-00-00','77\r',NULL),
+(33,'PAKET PREWEDD E + GAUN +MAKEUP',0.00,'77','0000-00-00','77\r',NULL),
+(34,'PAKET PREWEDD F EXPRESS',0.00,'77','0000-00-00','77\r',NULL);
+
+/*Table structure for table `m_product` */
+
+DROP TABLE IF EXISTS `m_product`;
+
+CREATE TABLE `m_product` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `product_id` varchar(25) NOT NULL DEFAULT '',
+  `id_type` bigint(20) NOT NULL,
+  `model` varchar(90) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `spec` varchar(255) DEFAULT NULL,
+  `brand` varchar(90) NOT NULL,
+  `uom` varchar(30) DEFAULT NULL,
+  `lokasi` varchar(90) NOT NULL,
+  `active` varchar(1) DEFAULT 'Y',
+  `created_by` varchar(34) NOT NULL,
+  `date_created` datetime NOT NULL,
+  `updated_by` varchar(34) NOT NULL,
+  `last_updated` datetime NOT NULL,
+  `ip_address` varchar(100) NOT NULL,
+  `browser` varchar(255) NOT NULL,
+  `min_stock` float(9,2) DEFAULT '0.00',
+  `max_stock` float(9,2) DEFAULT '0.00',
+  `package_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `material_id` (`product_id`),
+  KEY `index5` (`model`),
+  KEY `index6` (`description`),
+  KEY `index7` (`spec`),
+  KEY `index8` (`brand`)
+) ENGINE=MyISAM AUTO_INCREMENT=92 DEFAULT CHARSET=latin1;
+
+/*Data for the table `m_product` */
+
+insert  into `m_product`(`id`,`product_id`,`id_type`,`model`,`description`,`spec`,`brand`,`uom`,`lokasi`,`active`,`created_by`,`date_created`,`updated_by`,`last_updated`,`ip_address`,`browser`,`min_stock`,`max_stock`,`package_id`) values 
+(1,'001',1,'','CETAK 4R','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(2,'002',1,'','CETAK 5R','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(3,'003',1,'','CETAK 6R','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(4,'004',1,'','CETAK 20X30','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(5,'005',1,'','CETAK 30X40','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(6,'006',1,'','CETAK 40X60','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(7,'007',1,'','CETAK 50X75','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(8,'008',1,'','CETAK 60X90','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(9,'009',1,'','CETAK 20X30 CANVAS','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(10,'010',1,'','CETAK 30X40 CANVAS','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(11,'011',1,'','CETAK 40X60 CANVAS','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(12,'012',1,'','CETAK 50X75 CANVAS','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(13,'013',1,'','CETAK 60X90 CANVAS','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(14,'014',3,'','FRAME 4R MINIMALIS','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(15,'015',3,'','FRAME 6R MINIMALIS','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(16,'016',3,'','FRAME 10R MINIMALIS','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(17,'017',3,'','FRAME 30X40 MINIMALIS','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(18,'018',3,'','FRAME 40X60 MINIMALIS','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(19,'019',3,'','FRAME 4R ENGSEL','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(20,'020',3,'','FRAME MIX JASMINE','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(21,'021',3,'','FRAME MIX 5R 3 OPENING','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(22,'022',3,'','FRAME MIX 4R 3 OPENING','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(23,'023',3,'','FRAME MIX BABY','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(24,'024',3,'','FRAME MIX 5 ','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(25,'025',3,'','FRAME 50X75 CLASSIC','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(26,'026',3,'','FRAME 60X90 CLASSIC','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(27,'027',3,'','FRAME 50X75 VINTAGE','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(28,'028',3,'','FRAME 60X90 VINTAGE','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(29,'029',1,'','4R + FRAME MINIMALIS','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(30,'030',1,'','5R + FRAME MINIMALIS','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(31,'031',1,'','6R + FRAME MINIMALIS','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(32,'032',1,'','10R + FRAME MINIMALIS','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(33,'033',1,'','30X40 + FRAME MINIMALIS','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(34,'034',1,'','40X60 + FRAME MINIMALIS','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(35,'035',1,'','CETAK + FRAME 4R ENGSEL','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(36,'036',1,'','CETAK + FRAME MIX JASMINE','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(37,'037',1,'','CETAK + FRAME MIX 5R 3 OPENING','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(38,'038',1,'','CETAK + FRAME MIX 4R 3 OPENING','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(39,'039',1,'','CETAK + FRAME MIX BABY','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(40,'040',1,'','CETAK + FRAME MIX 5 ','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(41,'041',1,'','50X75 CANVAS + FRAME CLASSIC','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(42,'042',1,'','60X90 CANVAS + FRAME CLASSIC','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(43,'043',1,'','50X75 CANVAS + FRAME VINTAGE','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(44,'044',1,'','60X90 CANVAS + FRAME VINTAGE','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(45,'045',1,'','30X40 WRAPPING CANVAS','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(46,'046',1,'','40X60 WRAPPING CANVAS','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(47,'047',1,'','50X75 WRAPPING CANVAS','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(48,'048',1,'','60X90 WRAPPING CANVAS','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(49,'049',4,'','JASA FOTO PERSONAL','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(50,'050',4,'','JASA FOTO COUPLE','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(51,'051',4,'','JASA FOTO GRUP','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(52,'052',4,'','JASA FOTO FAMILY A','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(53,'053',4,'','JASA FOTO FAMILY B','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(54,'054',4,'','JASA FOTO FAMILY C','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(55,'055',4,'','JASA FOTO WISUDA A','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(56,'056',4,'','JASA FOTO WISUDA B','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(57,'057',4,'','JASA FOTO FAMILY D','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(58,'058',4,'','JASA FOTO PREWEDD A','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(59,'059',4,'','JASA FOTO PREWEDD B','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(60,'060',4,'','JASA FOTO PREWEDD C','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(61,'061',4,'','JASA FOTO PREWEDD D','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(62,'062',4,'','JASA FOTO PREWEDD E','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(63,'063',4,'','JASA FOTO PREWEDD EXPRESS','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(64,'064',4,'','JASA FOTO BABY A','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(65,'065',4,'','JASA FOTO BABY B','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(66,'066',4,'','JASA FOTO BABY C','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(67,'067',4,'','JASA FOTO MATERNITY A','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(68,'068',4,'','JASA FOTO GRUP B','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(69,'069',4,'','JASA FOTO COUPLE C','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(70,'070',4,'','SEWA STUDIO','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(71,'071',4,'','SEWA FOTOGRAFER','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(72,'072',4,'','MAKEUP PERSONAL','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(73,'073',4,'','MAKEUP COUPLE','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(74,'074',4,'','MAKEUP PREWEDDING 1 TEMA','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(75,'075',4,'','MAKEUP PREWEDDING 2 TEMA','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(76,'076',4,'','MAKEUP MATERNITY','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(77,'077',1,'','CD + COVER','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(78,'078',4,'','JASA FOTO WISUDA C','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(79,'079',4,'','PENAMBAHAN ORANG','','','orang','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(80,'080',5,'','KOSTUM/GAUN','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(81,'081',4,'','LEMBURAN PAKET EXPRESS','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(82,'082',4,'','JASA FOTO FAMILY E','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(83,'083',4,'','JASA FOTO WISUDA D','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(84,'084',5,'','TAMBAH TEMA','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(85,'119',1,'','CETAK 10R GRUP','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(86,'120',1,'','CETAK TAMBAHAN 20X30','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(87,'121',1,'','CETAK TAMBAHAN 30X40','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(88,'122',1,'','CETAK TAMBAHAN 40X60','','','pcs','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(89,'123',1,'','TAMBAHAN CETAK 10R + FRAME MINIMALIS','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(90,'124',1,'','TAMBAHAN CETAK 30X40 + FRAME MINIMALIS','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL),
+(91,'125',1,'','TAMBAHAN CETAK 40X60 + FRAME MINIMALIS','','','paket','','Y','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00','','',0.00,0.00,NULL);
+
+/*Table structure for table `m_type` */
+
+DROP TABLE IF EXISTS `m_type`;
+
+CREATE TABLE `m_type` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `type_id` varchar(25) NOT NULL,
+  `type` varchar(45) NOT NULL,
+  `id_category` bigint(20) NOT NULL,
+  `created_by` varchar(255) DEFAULT NULL,
+  `date_created` datetime DEFAULT NULL,
+  `updated_by` varchar(255) DEFAULT NULL,
+  `last_updated` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+/*Data for the table `m_type` */
+
+insert  into `m_type`(`id`,`type_id`,`type`,`id_category`,`created_by`,`date_created`,`updated_by`,`last_updated`) values 
+(1,'T00001','GENERAL',1,'64','2017-04-22 18:33:30',NULL,NULL),
+(2,'T00002','ALBUM',1,'64','2017-04-22 18:33:48',NULL,NULL),
+(3,'T00003','FRAME',1,'64','2017-04-22 18:34:04',NULL,NULL),
+(4,'T00004','PHOTO STUDIO',3,'64','2017-04-22 18:43:12',NULL,NULL),
+(5,'T00005','OTHER',1,'77','2017-05-03 16:30:28',NULL,NULL),
+(6,'T00006','TOOLS',2,'77','2017-10-06 20:25:39',NULL,NULL);
+
+/*Table structure for table `m_vendor` */
+
+DROP TABLE IF EXISTS `m_vendor`;
+
+CREATE TABLE `m_vendor` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `vendor_id` varchar(20) NOT NULL,
+  `alias` varchar(15) NOT NULL DEFAULT '',
+  `vendor` varchar(50) NOT NULL DEFAULT '',
+  `address1` text,
+  `address2` text,
+  `email` varchar(45) DEFAULT NULL,
+  `city` varchar(50) DEFAULT NULL,
+  `country` varchar(50) DEFAULT NULL,
+  `phone` varchar(50) DEFAULT NULL,
+  `fax` varchar(50) DEFAULT NULL,
+  `cp` varchar(50) DEFAULT NULL,
+  `remarks` text,
+  `description` text,
+  `active` enum('Y','N') DEFAULT 'Y',
+  `date_created` date DEFAULT NULL,
+  `created_by` varchar(100) DEFAULT NULL,
+  `last_updated` date DEFAULT NULL,
+  `updated_by` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=509 DEFAULT CHARSET=latin1;
+
+/*Data for the table `m_vendor` */
+
+insert  into `m_vendor`(`id`,`vendor_id`,`alias`,`vendor`,`address1`,`address2`,`email`,`city`,`country`,`phone`,`fax`,`cp`,`remarks`,`description`,`active`,`date_created`,`created_by`,`last_updated`,`updated_by`) values 
+(1,'V0157','MJP','MAJU MAPAN ','Narogong','JL.H.IDRUS. NO.11/23',NULL,'JATIASIH','INDONESIA','087884213123','','HENDRO','','','Y',NULL,NULL,'2013-07-25',NULL),
+(2,'V0158','MUJ','MITRAUSAHA JAYAMANDIRI','JL.SUNTER RAYA GARDEN','BLOK B.7.NO.9DE',NULL,'JAKARTA UTARA',NULL,'021-65833399','021-65830333','BOETJE DARYASA',NULL,NULL,'Y',NULL,NULL,'2013-07-23',NULL),
+(3,'V0001','ABM','ABADI MOTOR','JL. KEBON PEDES I, NO.51','BOGOR','abadimtr@yahoo , rudi_abm@yahoo.com','JAWA BARAT','INDONESIA','0251 - 8310759, 0812 1881 1655,','0251 - 8310275,','R U D Y  W I G U N A','TOP 30 DAYS','VOLVO, SCANIA , RENAULT ,','Y',NULL,NULL,'2015-07-23',NULL),
+(4,'V0002','ADI','ADHIREKSA INTICOR, PT','PCI BLOK D46 NO.2','',NULL,'CILEGON, BANTEN','INDONESIA','0254-392790','0254-381694','RETNO','','','Y',NULL,NULL,'2013-07-25',NULL),
+(5,'V0003','APU','AGUNG PERKASA UTAMA','JL.RAYA NAROGONG KM.8,5','CILEUNGSI',NULL,'BOGOR, JAWA BARAT','INDONESIA','021-8677018','','Y A N T O','','','Y',NULL,NULL,'2013-07-25',NULL),
+(6,'V0004','ACN','ALBANTANI CIPTA NIAGA, INTL','JL.RAYA MERAK KM.115','RAWA ARUM, CILEGON',NULL,'BANTEN','INDONESIA','0254-573005','0254-573007','SUGENG SANTOSO','','','N',NULL,NULL,'2015-07-29',NULL),
+(7,'V0005','APA','ALDY PUTRA ABADI, PT','JL.ROROTAN IX NO.37','CILINCING','ptaldyputraabadi@yahoo.com','JAKARTA UTARA','INDONESIA','021-44852579, JOKO 0877 7020 7979','021-44855308','PURWANTO/ JOKO /ERNI',NULL,NULL,'Y',NULL,NULL,'2015-05-27',NULL),
+(8,'V0006','SJY','SURYA JAYA, CV','JL.KH ZAINUL ARIFIN NO.02 BLOK.B1/09','JAKARTA BARAT','cv.suryajaya28@gmail.com','JAKARTA','INDONESIA','021-6336590/6346601','021 6343028','MIA MUSYAROFAH',NULL,NULL,'Y',NULL,NULL,'2014-06-11',NULL),
+(9,'V0007','ALT','ALTRAK 1978, PT','PONDOK CILEGON INDAH','BLOK A3/NO.5',NULL,'CILEGON, BANTEN','INDONESIA','0254-399971','0254-399972','BPK. FERDI PERMANA','','','N',NULL,NULL,'2015-07-29',NULL),
+(10,'V0008','ALI','ALUN INDAH, PT','JL. P. KOMARUDIN KM.23','CAKUNG','service.cakung@ptalun.com','JAKARTA','INDONESIA','021-4615657, 0811 8305 389','021-4615658','SIGIT HARDOYO',NULL,NULL,'Y',NULL,NULL,'2014-12-11',NULL),
+(11,'V0009','AD','AMINDO DIESEL','JL. D. RAYA NO.2 KARANG ANYAR',NULL,'amindojadi@gmail.com','JAKARTA PUSAT','INDONESIA','021 6297500','021  6242223,','AMIN',NULL,NULL,'Y',NULL,NULL,'2015-05-20',NULL),
+(12,'V0010','AJB','AMT JAYA BAN, CV','JL.ARTERI TOL CIBITUNG NO.88','TELAGA ASIH, KEC.CIKARANG BARAT',NULL,'BEKASI, JAWA BARAT','INDONESIA','021-88366801','021-88366801','H. AGUS SUSANTO','','','Y',NULL,NULL,'2013-07-25',NULL),
+(13,'V0011','AMK','ANDALAN MULTI KENCANA, PT','JL.RAYA BEKASI KM. 22','JAKARTA','yayanka@allmakes.co.id , car2_jkt@allmakes.co','JAKARTA','INDONESIA','021-46835566','021-46822393,','Y A Y A N',NULL,NULL,'Y',NULL,NULL,'2015-06-04',NULL),
+(14,'V0012','AJS','ANEKA JAYA SPARE PARTS','JL. RAYA DINAR ELOK C1 NO.3','',NULL,'SEMARANG','INDONESIA','024-76487066','024-76487066','S U D A R M A W A N','','','N',NULL,NULL,'2015-07-29',NULL),
+(15,'V0013','ANR','ANEKA RUBBER, UD','JL.RAYA SERANG','',NULL,'CILEGON, BANTEN','INDONESIA','0254-394322','0254-394322','SUPRATNO','','','Y',NULL,NULL,'2013-07-25',NULL),
+(16,'V0014','AAD','ARDHANA ARTHA DIHITA','RUKO PONDOK CILEGON INDAH, BLOK E22/NO.23','',NULL,'CILEGON, BANTEN','INDONESIA','0254-376190','0254-399916','WENI/WARNO','','','Y',NULL,NULL,'2013-07-25',NULL),
+(17,'V0015','AGP','ASTRA GRAPHIA TBK, PT','DEPO CILEGON, RUKO CILEGON GREEN MEGABLOCK','BLOK E.2 NO. 35',NULL,'CILEGON, BANTEN','INDONESIA','0254-383106','021-5526491 / 0254-383107','Bpk. SUPARNO',NULL,NULL,'Y',NULL,NULL,'2014-03-06',NULL),
+(18,'V0016','BGK','BALI GEMILANG KARYA','FESTIVAL RUKO BONAKARTA','',NULL,'CILEGON, BANTEN','INDONESIA','0254-385688','0254-399833','HIKMAH','','','Y',NULL,NULL,'2013-07-25',NULL),
+(19,'V0017','BMS','BANGUN MITRA SEJAHTERA INT, PT','JL. RAJAWALI KOMP. BUMI CIBEBER KENCANA','BLOK D19 NO. II',NULL,'CILEGON, BANTEN','INDONESIA','0254-390472','0254-376545','DENI SANI','','','Y',NULL,NULL,'2013-07-25',NULL),
+(20,'V0018','BPC','BENGKEL PC','MALL MANGGA DUA LT.4, BLOK B NO.2','JL.ARTERI MANGGA DUA RAYA',NULL,'JAKARTA','INDONESIA','021-30006164','021-62203990','ARSHENDI','','','N',NULL,NULL,'2015-07-29',NULL),
+(21,'V0020','BJL','BINA JAYA LESTARI','LABUAN','PANDEGLANG',NULL,'SERANG, BANTEN','INDONESIA','087773492888',NULL,'EFRAN',NULL,NULL,'Y',NULL,NULL,'2013-07-25',NULL),
+(22,'V0021','BAS','BINTANG ARSITA SAMUDRA','JL. PERAK TIMUR NO.124-126-128','',NULL,'SURABAYA','INDONESIA','031-3540274','031 3552812','IBU. LINDA','','','Y',NULL,NULL,'2014-04-02',NULL),
+(23,'V0022','BES','BINTANG ENERGI SEMESTA','DANAU SUNTER UTARA','BLOK J12 NO.37',NULL,'JAKARTA','INDONESIA','021-6511811','021-6511811','ARIF BUDIYONO','','','N',NULL,NULL,'2015-07-29',NULL),
+(24,'V0023','BMJ','BUBUT MAJU','JL. RAYA CILEGON KM.3.1','LEGOK, SERANG',NULL,'BANTEN','INDONESIA','0254-201213, 0877 7438 0740','','A PING','','','Y',NULL,NULL,'2014-12-11',NULL),
+(25,'V0024','CMI','CAKRAWALA MEGAH INDAH, PT','JLN RAYA SERANG KM. 76','KRAGILAN',NULL,'SERANG, BANTEN','INDONESIA','0254-280088-2063','0254-281309','Ibu JUNIATI / HELMI','','','Y',NULL,NULL,'2015-04-01',NULL),
+(26,'V0026','CLM','CITRALINDO MANDIRI, CV','JL.TAMANSARI RAYA','NO.90 F','soleh_deere@yahoo.com','JAKARTA BARAT','INDONESIA','021-6256720, 62202949, 6015913','021-62303398, 62202949','THOMMY. SOLEH 087776100056.',NULL,'GENERAL PART','Y',NULL,NULL,'2014-10-30',NULL),
+(27,'V0027','CKJ','CORIZA KURNIA JAYA','JL. MANGGA NO.26','KEMAYORAN','julia.sidarta@gmail.com','JAKARTA PUSAT','INDONESIA','021-94638001','021-89901443','YULIA',NULL,NULL,'Y',NULL,NULL,'2014-12-11',NULL),
+(28,'V0028','CIU','CYKLOP INDO UTAMA, PT','JL. LODAN NO. 1 BLOK B1','',NULL,'JAKARTA','INDONESIA','021-6919939 / 41','021-6917905','MISAN HIMAWAN','','','Y',NULL,NULL,'2013-07-25',NULL),
+(29,'V0029','DDW','DADANG WORKSHOP','JL. KOMP GSI BLOK C1 NO.3','SERDANG',NULL,'SERANG, BANTEN','INDONESIA','0254-383223','','DADANG','','','Y',NULL,NULL,'2013-07-25',NULL),
+(30,'V0030','DNR','DANA RAYA','JL. RAYA MERAK KM. 07 RAWA ARUM','GROGOL',NULL,'CILEGON, BANTEN','INDONESIA','','','HJ. SOPIYAH','','','N',NULL,NULL,'2015-07-29',NULL),
+(31,'V0031','DKP','DEKA PROMOSI','JL.JOMBANG MASJID NO.11','(DEPAN BIDAN KURNIA)','dekapromosi@gmail.com','CILEGON, BANTEN','INDONESIA','081380990422',NULL,'HENGKI IRAWAN',NULL,NULL,'Y',NULL,NULL,'2013-07-25',NULL),
+(32,'V0032','DAS','DIMAS AGUNG SENTOSA, PD','KUBANG WELLUT','SAMANG RAYA',NULL,'CILEGON, BANTEN','INDONESIA','087772273428','','H. DAMANHURI/SULHI','','','Y',NULL,NULL,'2014-04-07',NULL),
+(33,'V0033','DSB','DUA SEKAWAN BATTERY','JL. RAYA JAKARTA KM.4','PAKUPATAN',NULL,'SERANG, BANTEN','INDONESIA','0254-284405','0254-284405','S A R D I','','','Y',NULL,NULL,'2013-07-25',NULL),
+(34,'V0034','DST','DUA SKAWAN TEKNIK','JL.RAMBUTAN VI/BLOK C 16/10','KOMPLEK GN.PUTRI PERMAI',NULL,'BOGOR, JAWA BARAT','INDONESIA','021-8671550','021-86860756','SUHANDI','','','Y',NULL,NULL,'2013-07-25',NULL),
+(35,'V0035','DNB','DUNIA BARU','JL. A. YANI','CILEGON',NULL,'BANTEN','INDONESIA','0254-394228','0254-385831','A G U S','','','Y',NULL,NULL,'2013-07-25',NULL),
+(36,'V0036','DSF','DUNIA SAFTINDO, PT','JL. ANGKASA KAV. B6','MEGA KEMAYORAN TOWER','santy@safetyindonesia.com','JAKARTA','INDONESIA','021-29371188','021-26646889/65865614','Ibu. SANTY',NULL,NULL,'N',NULL,NULL,'2015-07-29',NULL),
+(37,'V0037','EKA','EKA KEMASINDO ASRI, PT.','JL. GUNUNG PERMATA NO.11','',NULL,'TANGERANG, BANTEN','INDONESIA','021-54204559','021-54204561','INDRI','','','Y',NULL,NULL,'2013-07-25',NULL),
+(38,'V0038','EMA','ELMAS APARINDO, CV','JL.RAYA BOGOR KM.42,3','PABUARAN, CIBINONG',NULL,'BOGOR, JAWA BARAT','INDONESIA','021-70027942','021-87913644','BUDI HARTO','','','Y',NULL,NULL,'2013-07-25',NULL),
+(39,'V0039','EMP','ENKA MILENIUM PERSADA, PT','JL. KANCIL NO.22 RAGUNAN','PASAR MINGGU',NULL,'JAKARTA','INDONESIA','081282803983','','KARNO','','','Y',NULL,NULL,'2013-07-25',NULL),
+(40,'V0040','FDS','FONDER STEEL, PT.','JL. DAAN MOGOT KM. 20',NULL,NULL,'TANGERANG, BANTEN','INDONESIA','021-65833775 / 021-6912990 / 021-6190630','021-6912994','HALIM/CHANDRA',NULL,NULL,'Y',NULL,NULL,'2013-11-19',NULL),
+(41,'V0041','GMT','GLORIA MOTOR','JL. AHMAD YANI NO.1','CILEGON',NULL,'BANTEN','INDONESIA','0254-374265','0254-374268','R O B E R T','','','Y',NULL,NULL,'2013-07-25',NULL),
+(42,'V0042','HUM','HARAPAN UTAMA MOTOR, PT','JL. SOLO-SRAGEN KM 9','GRUMBUL SAWIT JETIS JATEN','shell.surakarta@gmail.com','KARANGANYAR','INDONESIA','0271-716689 08164274099','0271-716689','ADAM EKO SAPUTRO','shell.surakarta@gmail.com',NULL,'Y',NULL,NULL,'2015-01-14',NULL),
+(43,'V0043','HBI','HARTA BAN INDONESIA, PT.','GD.MENARA SATU, SENTRA KELAPA GADING LT.0705','JL.BOULEVARD AYA KAV.LA-3/1, KELAPA GADING TIMUR',NULL,'JAKARTA','INDONESIA','021-29375677/78','021 29375795','H A R R Y','','','Y',NULL,NULL,'2014-04-23',NULL),
+(44,'V0044','HAT','HASRI ANEKA TAMA, PT.','JL. PLUIT RAYA 121 BLOK B1/15','JAKARTA UTARA',NULL,'JAKARTA','INDONESIA','021-6622930','021 6622940','HINDRA','','','Y',NULL,NULL,'2014-05-07',NULL),
+(45,'V0045','IMP','IMANUEL PNEUMATIC, CV.','JL. JEND A. YANI NO.60','',NULL,'CILEGON, BANTEN','INDONESIA','0254 393020','0254 391073','OSKANDAR / FITRI','','','Y',NULL,NULL,'2014-06-11',NULL),
+(46,'V0046','IDS','INDO DIESEL, PD','JL.LAUTZE RAYA','NO.17 A','psmjkt@gmail.com','JAKARTA','INDONESIA','021-6497112','021-6285510','S U W I T O',NULL,NULL,'N',NULL,NULL,'2015-07-29',NULL),
+(47,'V0047','IJM','INDOJAYA MANDIRI, CV','JL. GUNUNG SAHARI XI','NO. 12.','sri_ningsih6767@yahoo.com','JAKARTA','INDONESIA','021-6257960','021-6492075, 6008712','DARSONO','TOP 30 D','PART GENERAL','Y',NULL,NULL,'2014-11-14',NULL),
+(48,'V0048','IDP','INDOKARLO PERKASA','JL.RAYA JAKARTA BOGOR','KM.7, CIBINONG',NULL,'BOGOR, JAWA BARAT','INDONESIA','021-8754146','021-87916606','YUDITH ADITYA','','','Y',NULL,NULL,'2013-07-25',NULL),
+(49,'V0049','ISL','INDOSARANA LOKA PRATAMA, PT','JL.INDUSTRI RAYA III BLO AE/23A BUNDER CIKUPA','',NULL,'TANGERANG, BANTEN','INDONESIA','021-5902129','021-5924528','S H E L V I','','','Y',NULL,NULL,'2014-10-29',NULL),
+(50,'V0050','ITM','INDOTAMA MANDIRI','WISMA TROPODO','WARU',NULL,'SURABAYA','INDONESIA','0818 596 948','tri.utomo46@yahoo.com','T R I  U T O M O','','BAN FORKLIFT','Y',NULL,NULL,'2014-11-17',NULL),
+(51,'V0051','ITU','INDOTRUCK UTAMA PT. SEMARANG','RUKO MUTIARA MARINA KAV.14','JL.MARINA',NULL,'SEMARANG','INDONESIA','024-7616581','024-7616581','K WAHYUDI','','','Y',NULL,NULL,'2013-07-25',NULL),
+(52,'V0052','ITU','INDOTRUCK UTAMA PT. CILEGON','JL. RAYA MERAK','DESA GEREM',NULL,'CILEGON, BANTEN','INDONESIA','0254-571489','0254-571489','WAHYUDI',NULL,NULL,'Y',NULL,NULL,'2013-07-25',NULL),
+(53,'V0053','ITU','INDOTRUCK UTAMA PT. NAROGONG','JL. RAYA NAROGONG','',NULL,'BOGOR, JAWA BARAT','INDONESIA','021-8674127','021-8674127','CECEP','','','Y',NULL,NULL,'2013-07-25',NULL),
+(54,'V0054','IAK','INTI ABADI KEMASINDO, PT','KAMPUNG MUHARA','CITEUREUP',NULL,'BOGOR, JAWA BARAT','INDONESIA','021-8752544','021-8752542','RENI/IKA','','','Y',NULL,NULL,'2013-07-25',NULL),
+(55,'V0055','JNJ','JNJ','JL.MAYJEN SUTOYO KM.7','LAP.BOLA MKU TEGALWANGI',NULL,'CILEGON, BANTEN','INDONESIA','0254-573888,  0812 9076 459','0254-8494990','UMI FAUZIAH/ALI FAIZ',NULL,NULL,'Y',NULL,NULL,'2014-07-16',NULL),
+(56,'V0056','JIU','JALY INDONESIA UTAMA, PT','JL. H.M  ASHARI NO.47','CIBINONG 16911',NULL,'BOGOR, JAWA BARAT','INDONESIA','021-8754501','021-8752174','ASKARI','','','Y',NULL,NULL,'2013-07-25',NULL),
+(57,'V0057','JSG','JASOLA GADING, PT','JL. RAYA BOULEVARD BLOK FW1','NO.1-3, KELAPA GADING',NULL,'JAKARTA','INDONESIA','021-4532227','021-4524895','FAHRUDIEN','','','Y',NULL,NULL,'2013-07-25',NULL),
+(58,'V0058','JIC','JAYA INTER, CILEUNGSI','JL. RAYA CILEUNGSI JONGGOL KM.01','SAMPING RAMAYANA CILEUNGSI',NULL,'BOGOR, JAWA BARAT','INDONESIA','081318612131','','','','','Y',NULL,NULL,'2013-07-25',NULL),
+(59,'V0059','JJB','JOMBANG JAYA BAN, CV','JL.RAYA CIKUNIR','RT/RW 001/013, JATIASIH',NULL,'BEKASI, JAWA BARAT','INDONESIA','021-82428125, 087875073722','021-82428125, robby.auzinie@gmail.com','ROBI / SU UDI',NULL,NULL,'Y',NULL,NULL,'2014-12-11',NULL),
+(60,'V0060','KYA','KARYA AGUNG','JL. RAYA CILEGON SERANG','NO.83',NULL,'CILEGON, BANTEN','INDONESIA','0254-391291','','LAN TIE','','','Y',NULL,NULL,'2013-11-22',NULL),
+(61,'V0061','KYA','KARYA ANUGRAH','PELAMUNAN','',NULL,'SERANG, BANTEN','INDONESIA','0254 230984/0811122701','0254 230984','SUKIRNO','','','Y',NULL,NULL,'2014-05-07',NULL),
+(62,'V0062','KCM','KARYA CITRA MANDIRI','JL.NAROGONG KM 5/236-BJ','RAWA LUMBU',NULL,'BEKASI, JAWA BARAT','INDONESIA','021- 82425649','','A W I','','','Y',NULL,NULL,'2013-07-25',NULL),
+(63,'V0063','KSK','KARYA SUKSES','JL.GAJAH MADA','NO 125 A','karyasukses75@gmail.com','JAKARTA','INDONESIA','085966293516',NULL,'A M I N G',NULL,NULL,'Y',NULL,NULL,'2013-07-25',NULL),
+(64,'V0064','KTG','KASANA TEKNINDO GEMILANG  SBY, PT','JL. RAYA JUANDA KM.2','SIDOARJO',NULL,'JAWA TIMUR','INDONESIA','031-8662222','031-8668222','RIBUT KUSWORO','','','Y',NULL,NULL,'2013-07-25',NULL),
+(65,'V0065','KTG','KASANA TEKNINDO GEMILANG, PT, CLG','JL. RAYA CILEGON – MERAK','RT.003/02 NO.36',NULL,'CILEGON, BANTEN','INDONESIA','0254-572978','0254-572978','S U G E N G  R I Y A D I','','','Y',NULL,NULL,'2013-07-25',NULL),
+(66,'V0066','KTG','KASANA TEKNINDO GEMILANG, PT, JKT','JL. LINGKAR LUAR BARAT NO. 9','RAWA BUAYA','enquiry@kasana.co.id ,  imam@kasana.co.id','JAKARTA','INDONESIA','021 54359999/ 08170930135','021-54379999','Bapak Sugeng, part (ganjar, Imam )',NULL,NULL,'Y',NULL,NULL,'2015-06-29',NULL),
+(67,'V0067','KBI','PT. KRISBOW INDONESIA','JL. MAYOR OKING JAYAATMAJA 9B-C','CIRIUNG',NULL,'CIBINONG','INDONESIA','021-87901615/2710','021-8756352','SURYA.W','','','Y',NULL,NULL,'2014-01-23',NULL),
+(68,'V0068','KBI','KRISBOW INDONESIA, PT.  CILEGON','JL. AHMAD YANI NO.135 J-K','CILEGON',NULL,'BANTEN','INDONESIA','0254-387987, 087871416316','0254-391327','Bpk. ALFI',NULL,'Tools, Safety','Y',NULL,NULL,'2015-10-22',NULL),
+(69,'V0069','KMS','KM SAFETY','JL.RAYA GUNUNG PUTRI KM. 02 NO 71A','GUNUNG PUTRI',NULL,'BOGOR, JAWA BARAT','INDONESIA','021-98264186','021-86862013','R U S W A N D I','','','N',NULL,NULL,'2015-07-29',NULL),
+(70,'V0070','KNS','KORNESIA CO., LTD','KUMHO RICHENSIA A-2401, 61','YOIDO-DONG',NULL,'YOUNGDENGPO-GU','SEOUL, KOREA','007-82-2-980-8009','007-82-2-983-6906','FARIDA MOON H.','','','Y',NULL,NULL,'2015-02-17',NULL),
+(71,'V0071','KBM','KOTA BARU MANDIRI, CV','JL. S.A TIRTAYASA NO. 90','',NULL,'CILEGON, BANTEN','INDONESIA','0254 388654 / 391753','0254 395701','Bpk. FUDIN','','','Y',NULL,NULL,'2015-06-03',NULL),
+(72,'V0072','KDT','KREASI DASATAMA, PT','KAWASAN INDUSTRI DELTA SILICON II','JL. TREMBESI BLK F17-1 LIPPO CIKARANG',NULL,'BEKASI, JAWA BARAT','INDONESIA','021-29288348','021 29288347','BPK. J. IRVIN','','','Y',NULL,NULL,'2014-05-22',NULL),
+(73,'V0073','KGP','KURNIA GLOBAL PRATAMA, PT','JL. RAYA CILEGON KAV. M 161','CILEGON',NULL,'BANTEN','INDONESIA','0254-387814, 394152','0254-387815','D E N Y','','','N',NULL,NULL,'2015-07-29',NULL),
+(74,'V0074','LCR','LAKSANA CIPTA RAHARJA, PT','JL.RAYA PONDOK GEDE, KOMP.RUKO ONDERDIL NO.20','PONDOK GEDE',NULL,'BEKASI, JAWA BARAT','INDONESIA','021-84995339','021-8199316','SUNARDI','','','Y',NULL,NULL,'2013-07-25',NULL),
+(75,'V0075','LTP','LATANSA PARADISO, CV','JL. ARGA GEDE BLOK A1','',NULL,'CILEGON, BANTEN','INDONESIA','0254 341085','0254 341085','MARDIANTO','','','Y',NULL,NULL,'2014-12-10',NULL),
+(76,'V0076','LMT','LENI MOTOR','JL. RAYA MERAK KM.7 LINK.TEGALWANGI','KP.BARU RT/002/001',NULL,'CILEGON, BANTEN','INDONESIA','0254-570468','0254-570468','MUHLASIN','','','Y',NULL,NULL,'2013-07-25',NULL),
+(77,'V0077','LTK','LESTARI KIMIA','JL. RAYA NAROGONG KM.7','BEKASI',NULL,'JAWA BARAT','INDONESIA','021-8204074','021-82434706','S Y A F E I','','','Y',NULL,NULL,'2013-07-25',NULL),
+(78,'V0078','LIO','LIONG','JL.WIDOSARI V/8','SEMARANG',NULL,'JAWA TENGAH','INDONESIA','024-3552266','024-3543366','HANDY LESMANA','','','Y',NULL,NULL,'2013-07-25',NULL),
+(79,'V0079','MCC','MACRO.COM','HARCO MANGGA DUA BLOK B DASAR NO.133','DEKAT LIFT BARANG BLOK B, JL.MANGGA DUA RAYA ',NULL,'JAKARTA','INDONESIA','021-6125954','021-6125954','F R A N K I','','','N',NULL,NULL,'2015-07-29',NULL),
+(80,'V0080','MKT','MAHA KARYA TRI TUNGGAL, PT','JL.RAYA CILEGON KM.12 NO 77, RT.007/004','WANAYASA, KRAMATWATU',NULL,'SERANG, BANTEN','INDONESIA','0254-230555','0254-233201','HADI SUKIRNO','','','Y',NULL,NULL,'2013-07-25',NULL),
+(81,'V0081','MTS','MAINTRA SEJAHTERA, CV','JL. PANGERAN JAYAKARTA 8','KOMPLEK ARTHA',NULL,'JAKARTA','INDONESIA','021 6260186','021 6244379','BUNGA',NULL,NULL,'N',NULL,NULL,'2015-07-29',NULL),
+(82,'V0082','MJY','MAKMUR JAYA, CV','KAWASAN INDUSTRI JL. MARGOMULYO JAYA B7','',NULL,'SURABAYA','INDONESIA','031-7484274 / 75','031-7484282','BPK. JURIANTO','','','Y',NULL,NULL,'2014-07-18',NULL),
+(83,'V0083','MTA','MALAU TRANS ABADI, PT','KOMP, ARGA BAJA PURA','JL, WELINGI A6 GROGOL',NULL,'CILEGON, BANTEN 42436','INDONESIA','0254-573460/574903','0254-572013','BPK. H. RUFAJI/BPK. TUSABIH','','','Y',NULL,NULL,'2013-07-25',NULL),
+(84,'V0084','MDT','MANDIRI TEKNIK','JL.DAKOTA 2E NO.103','KOTA BANDAR KEMAYORAN',NULL,'JAKARTA','INDONESIA','021-65860490','021-65868530','SUWARDI','','','Y',NULL,NULL,'2015-07-29',NULL),
+(85,'V0085','MGP','MEGA PRATAMA','PASAR TAMAN SARI BLOK D NO.23','JL.TAMAN SARI','dfgian@gmail.com','JAKARTA','INDONESIA','081906101259','0254-8485026','AGUS SUKANA',NULL,NULL,'Y',NULL,NULL,'2013-07-25',NULL),
+(86,'V0086','MPI','MEGAH PITA INDONESIA, PT','JL PANGERAN JAYAKARTA 68 BLOK B/11','',NULL,'JAKARTA','INDONESIA','021-6007212 / 6243231','021-6120274','IBU. RISKA','','','Y',NULL,NULL,'2013-12-09',NULL),
+(87,'V0087','MUD','MENTENG UTAMA DIESEL','JL. TAMAN SARI VIII NO. 14 A',NULL,'mentengutama@gmail.com','JAKARTA-BARAT','INDONESIA','021-62200318/317','021-62200109','SINYU ALEXANDER',NULL,NULL,'Y',NULL,NULL,'2015-05-20',NULL),
+(88,'V0088','MTK','METRO TEKNIK','PASAR HWI LINDETEVES','BLOK BKS NO 95','metroteknik.mt@gmail.com','JAKARTA','INDONESIA','08128038259',NULL,'I N D R A  J A Y A',NULL,NULL,'Y',NULL,NULL,'2013-07-25',NULL),
+(89,'V0089','MTB','MITRA BERKAH, CV','JL. WR MARGATANI','',NULL,'SERANG, BANTEN','INDONESIA','087771714489','0254-384070','BPK. YASIN','','','N',NULL,NULL,'2015-07-29',NULL),
+(90,'V0090','MCP','MUCHAROM PUTRA, CV','JL. PANGERAN ANTASARI NO 86','',NULL,'CILEGON, BANTEN','INDONESIA','0254-398899','0254-376848','IRIN ANGGRAENI','','','Y',NULL,NULL,'2013-07-25',NULL),
+(91,'V0091','MSS','MULIASARI SPRING','JL.RAYA CILEGON-SERANG','TOYOMERTO, KRAMATWATU',NULL,'SERANG, BANTEN','INDONESIA','0254-281703, mila 0877 4101 6134','0254-230690, muhaemin@gmail.com','EMIN MUHAEMIN','','','Y',NULL,NULL,'2015-05-20',NULL),
+(92,'V0092','MFI','MULTI FASTPACK INDONESIA, PT','TAMAN PILO GEBANG BLOK D2/2','PULO GEBANG',NULL,'JAJARTA','INDONESIA','021 29319337-9','021 29319340','BPK. HENDRY BUDIYANTO','','','Y',NULL,NULL,'2014-04-08',NULL),
+(93,'V0093','MYN','MULYA NIAGA','JL.RAYA TLAJUNG UDIK NO.120','GUNUNG PUTRI','anshory09@yahoo.co.id','BOGOR, JAWA BARAT','INDONESIA','021-8670738, 0852 1072 0000','021-8670738','A J I',NULL,NULL,'Y',NULL,NULL,'2015-04-22',NULL),
+(94,'V0094','MMS','MUSIMASSEJAHTERA ABADI, PT','JL. KAPUK KAMAL MUARA NO.8','JAKARTA 14470',NULL,'JAKARTA','INDONESIA','021-5551195,5553993','021-5553922','BPK.HERMAN SUSILO/IBU ESIH','','','Y',NULL,NULL,'2013-07-25',NULL),
+(95,'V0095','MTF','MUTIARA FORKLIFT, PT','JL. RAYA SERANG','CIKUPA',NULL,'TANGERANG, BANTEN','INDONESIA','021-5961850','021-59404872','ANASTASIA ENI','','','Y',NULL,NULL,'2013-07-25',NULL),
+(96,'V0096','NCM','NAZWA CIPTA MANDIRI, CV','KRAKATAU JUNGTION LT.2 NO.8','KOMPLEK KS',NULL,'CILEGON, BANTEN','INDONESIA','0254 - 7030666','0254 - 7031345','NAZIR SUDIRMAN','','','Y',NULL,NULL,'2013-08-21',NULL),
+(97,'V0097','NPB','NIPINDO BATTERY','JL. RUKO ROXYMAS','BLOK D1/33',NULL,'JAKARTA PUSAT','INDONESIA','021-63858520','021-63868114','DARMANTO','','','N',NULL,NULL,'2015-07-29',NULL),
+(98,'V0098','PDN','NUR, PD','JL. RAYA MERAK KM115','',NULL,'CILEGON, BANTEN','INDONESIA','0254 571383','0254 574721','IMAD','','','Y',NULL,NULL,'2014-04-22',NULL),
+(99,'V0099','PAJ','PADERONA ARTHAJAYA, PT','KOMP, PERGUDANGAN KOSAMBI PERMAI','BLOK L NO.20, JL. RAYA PERANCIS, DADAP',NULL,'TANGERANG, BANTEN','INDONESIA','021-29316111/29316162','021 55916594','EMIL PURWANA','','','Y',NULL,NULL,'2015-03-25',NULL),
+(100,'V0100','PDM','PANDU DINAMIKA','JL,.RAYA BOGOR KM.9','NO.281, CIRACAS',NULL,'JAKARTA TIMUR','INDONESIA','021-8724846','021-29384310','ABRAHAM SUBANDI','','','Y',NULL,NULL,'2013-08-26',NULL),
+(101,'V0101','PRT','PANJI RIMBA TEKNIK, PT','KOMP.RUKO CILEGON PERMAI','BLOK B NO.17','panjirimbatehnik@yahoo.com','CILEGON, BANTEN','INDONESIA','0254-385215','0254-394535','RATIH',NULL,NULL,'Y',NULL,NULL,'2014-01-15',NULL),
+(102,'V0102','PPJ','PAPAJAYA AGUNG, PT','JL. WAHAB AFFAN NO.8','PONDOK UNGU, MEDAN SATRIA KM.28',NULL,'BEKASI, JAWA BARAT','INDONESIA','021-8886 1070','021-8886 1498','RATNA / TUTI','','','Y',NULL,NULL,'2013-07-25',NULL),
+(103,'V0103','PPH','PERUM PERHUTANI','JL. KOL. POL. YUSUF MARTADILAGA','NO.09 SERANG 42117',NULL,'BANTEN','INDONESIA','0254-205810','0254-200205','BPK. MUHTADIN','','','Y',NULL,NULL,'2013-07-25',NULL),
+(104,'V0104','PPI','PETROASIA PASIFIK INTERNUSA, PT','JL. RAYA SERPONG NO.26 B','TANGERANG',NULL,'BANTEN','INDONESIA','021-53127266','021-53127235','AULIA, LIDIA 0813 8012 5723','TOP 30D','OIL, FLUIDA','Y',NULL,NULL,'2015-01-05',NULL),
+(105,'V0105','PJM','PRIMA JAYA MOTOR','JL. RAYA CILEGON KM.3.LEGOK','BCA 2454 0009 69 a/n Rahman',NULL,'SERANG, BANTEN','INDONESIA','0254-224201','0254-224204','ANAM',NULL,'no rek BCA 2454000969 a/n rahman bdn','Y',NULL,NULL,'2015-06-03',NULL),
+(106,'V0106','PNG','PRIMANUSA GLOBALINDO, PT','JL.RIAU NO.38 F','PEKANBARU',NULL,'RIAU','INDONESIA','0761-20133, 27975','0761-857021','LUHAN DONO','','','Y',NULL,NULL,'2014-09-26',NULL),
+(107,'V0107','PRO','PRO ENERGY','JL. KAPTEN P. TENDEAN NO.9A',NULL,NULL,'JAKARTA','INDONESIA','021-52892321','021-52892310','DINI',NULL,NULL,'N',NULL,NULL,'2014-12-11',NULL),
+(108,'V0108','PPM','PUTRA PRIMA MANDIRI, CV','JL.DAMAI RAYA NO.24','CIPETE UTARA','putra_prima_mandiri@yahoo.co.id','JAKARTA SELATAN','INDONESIA','021-7261202, 0821 1489 0065','021-7261202','H.AHMAD SARIP',NULL,NULL,'Y',NULL,NULL,'2015-04-08',NULL),
+(109,'V0109','RHB','RAIHAN BAN, UD','JL. MAWAR NO.17','MAJENANG',NULL,'CILACAP, JAWA TENGAH','INDONESIA','0280-623308/08572634888','','Y A Y A N','','Retreader','N',NULL,NULL,'2015-07-29',NULL),
+(110,'V0110','RAH','RODA ASIA HANAMI, PT','KAWASAN INDUSTRI MODERN','CIKANDE',NULL,'SERANG, BANTEN','INDONESIA','0254-400331','0254-400331','FATA WIJAYA','','','N',NULL,NULL,'2015-07-29',NULL),
+(111,'V0111','RAH','RODA ASIA HANAMI, PT  CLP','JL. MT HARYONO','KAWASAN INDUSTRI LOMANIS',NULL,'CILACAP, JAWA TENGAH','INDONESIA','0282-546302','0282-546302','YOGI WIBOWO','','','N',NULL,NULL,'2015-07-29',NULL),
+(112,'V0112','RMD-NMG','NSAM MAJU GEMILANG, CV','JL. TLAJUNG UDIK NO.70 RT03 RW16. TANJUNG UDIK. GUNUNG PUTRI','ACC ; BANK MANDIRI 133-00-1245734-7',NULL,'BOGOR, JAWA BARAT','INDONESIA','021-8670528','021-8677316','N A R T I','','GAS','Y',NULL,NULL,'2014-11-24',NULL),
+(113,'V0113','SNR','SADIKUN NIAGAMAS RAYA, PT','JL. RAYA GEREM NO.19','MERAK','ani_andriani@sadikun.com','CILEGON, BANTEN','INDONESIA','0254-571554',NULL,'AGUS GENTA/IBU ANI',NULL,NULL,'N',NULL,NULL,'2015-07-29',NULL),
+(114,'V0114','SMM','SAMIJAN  MANDIRI, PD','JL.RAYA PELABUHAN LORONG F1 NO.26','RT/RW 08/04',NULL,'JAKARTA UTARA','INDONESIA','021-4357907, 081310613195','021-4300351','S U R I P T O',NULL,NULL,'Y',NULL,NULL,'2013-07-25',NULL),
+(115,'V0115','SKT','SEFAS KELIANTAMA, PT','JL. CIDENG BARAT NO.87.3','RD-4 FLOOR','andhika@sefasgroup.com','JAKARTA','INDONESIA','021-3858756 / 38434366','021 3847801/3866056','A N D H I K A',NULL,NULL,'Y',NULL,NULL,'2014-04-04',NULL),
+(116,'V0116','SMI','SEHO MAKMUR INDUSTRI, PT','RUKO KEBON JERUK PERMAI BLOK B. NO. 3','JL. KEBON JERUK PERMAI NO. 10',NULL,'JAKARTA BARAT','INDONESIA','021 53671460','021 5328158','OBED S LUKAS / FIQO','TOP 30D','SAFETY SHOES','Y',NULL,NULL,'2014-10-13',NULL),
+(117,'V0117','SSS','SELANG SUPER SENTOSA, PT','JL.RAYA NAROGONG KM.15','PANGKALAN VI',NULL,'BEKASI, JAWA BARAT','INDONESIA','021-82492568','021-82491421','MARIA','','','Y',NULL,NULL,'2013-07-25',NULL),
+(118,'V0118','SBJ','SEMBRANI JAYA, CV','PERUMNAS BCK BLOK D-23','NO. 04 RT 01/09 CIBEBER',NULL,'CILEGON, BANTEN','INDONESIA','087271126468 /399054','0254-399054','BPK. KASAN / RAFIULLAH','','','Y',NULL,NULL,'2013-07-25',NULL),
+(119,'V0119','STB','JAYA SENTOSA BARU, PT','JL. PULO KAMBING II NO.16','KAWASAN INDUSTRI PULOGADUNG',NULL,'JAKARTA','INDONESIA','021-4602338','021-4602312','ASENG','','PLYWOOD','Y',NULL,NULL,'2015-09-10',NULL),
+(120,'V0120','SJE','SENTRAL JAYA ENERGI, PT','KOMP. PERKANTORAN CIRCLE WEST','BLOK I-NO A-09 CITRA 6',NULL,'CENGKARENG JAKARTA','INDONESIA','021 56945660/61','','W A T I','solar industri','','Y',NULL,NULL,'2014-08-29',NULL),
+(121,'V0121','SGK','SIGINDO KEMAS, PT','JL. LODAN NO. 1 BLOK CO',NULL,NULL,'JAKARTA','INDONESIA','021-6930304','021-6919728, 69830059','PAULUS',NULL,NULL,'Y',NULL,NULL,'2013-07-25',NULL),
+(122,'V0122','SCK','SINAR CANGKRING, PD','WARINGIN KURUNG','SERDANG',NULL,'SERANG, BANTEN','INDONESIA','','','H ARIFIN',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(123,'V0123','SCM','SINAR CEMERLANG MOTOR','JL. TAMAN ARI RAYA, PASAR ASEM REGES','BLOK BKS NO.8/9',NULL,'JAKARTA','INDONESIA','021-6010048','021-6010048','BP. GOBEL','','','Y',NULL,NULL,'2014-10-23',NULL),
+(124,'V0124','SJS','SINAR JAYA SAKTI, PD','JL. RAYA SERDANG','WARINGIN KURUNG',NULL,'CILEGON, BANTEN','INDONESIA','0254-297525 /08787149613','','A S E P','','','Y',NULL,NULL,'2013-07-25',NULL),
+(125,'V0125','SJT','SINAR JAYA TAILOR, CV','JL. ANYER NO. 22','RAMANUJU',NULL,'CILEGON, BANTEN','INDONESIA','0254 394051','','BPK. H. FATONI','','','Y',NULL,NULL,'2014-04-22',NULL),
+(126,'V0126','SMK','SINAR MAKMUR, CV','CIWANDAN','',NULL,'CILEGON, BANTEN','INDONESIA','0819 1118 8765 / 0254 2431380','0254-377224','BPK. MAHRUS','TOP14D, BANK MANDIRI 155 000 1864 552, MAHRUS','','Y',NULL,NULL,'2015-05-07',NULL),
+(127,'V0127','SMS','SINAR MUTIARA SENTOSA, PT','JL. HAYAM WURUK NO.114','BLOCK A3',NULL,'JAKARTA','INDONESIA','021-6010101','021-6008910','S U H A R T A','','','Y',NULL,NULL,'2013-07-25',NULL),
+(128,'V0128','SRR','SINAR REJEKI RAYA, CV','JL.MT HARYONO NO 480','SEMARANG',NULL,'JAWA TENGAH','INDONESIA','024-7609293','024-7611245','A G U S ','','','Y',NULL,NULL,'2013-08-27',NULL),
+(129,'V0129','SAG','SUMBER AGUNG BAN','JL. RAYA CILEGON KM. 3','LEGOK',NULL,'SERANG, BANTEN','INDONESIA','0254-205517/0254-216558','0254-216558','H. DIDIN / IDA','','','Y',NULL,NULL,'2013-07-25',NULL),
+(130,'V0130','SCP','SUMBER CAHAYA PRIMA, PT','CITY RESORT RUKO MALIBU','BLOK 1 NO.39',NULL,'CENGKARENG ,JAKARTA','INDONESIA','021 - 29024820/21 081212787767','021 - 29024822','SITI ZAENAB','','','Y',NULL,NULL,'2014-12-15',NULL),
+(131,'V0131','SST','SUMBER SAHABAT TEKNIK','RUKO PCI BLOK E 22 NO.15','',NULL,'CILEGON, BANTEN','INDONESIA','0254-384836','0254-378795, 384913','BPK. DADAN PRIYATNA','','','Y',NULL,NULL,'2015-05-15',NULL),
+(132,'V0132','SSM','SUMBER SINAR MAS, CV','RUKO PCI BLOK KK 2','CILEGON',NULL,'BANTEN','INDONESIA','0254-377598','0254-397438, 377599','LADA WAHYUDI','','Rental Forklift','Y',NULL,NULL,'2015-07-06',NULL),
+(133,'V0133','SBU','SUMBER USAHA','JL.GUNUNG PUTRI KM.1','CAGAK, GUNUNG PUTRI',NULL,'BOGOR, JAWA BARAT','INDONESIA','021-8672014/8677261','021-8674208','A N D I','','','Y',NULL,NULL,'2013-07-25',NULL),
+(134,'V0134','SHL','SUMBERHARPINDO L S, PT','JL.JENDERAL SUDIRMAN','NO 248',NULL,'SEMARANG','INDONESIA','024-7609293','024-7611245','JONA BINTORO','','','Y',NULL,NULL,'2013-08-27',NULL),
+(135,'V0135','SVA','SUPERVULKANIN ADIJAYA, PT','JL. RAYA BOGOR KM. 52','KEDUNG HALANG',NULL,'BOGOR, JAWA BARAT','INDONESIA','0251-8657779 / 8652860','0251–8652914','N O V I','','','Y',NULL,NULL,'2013-07-25',NULL),
+(136,'V0136','SAK','SURYA AGUNG KARYA UTAMA, PT','JL, RAYA MERAK NO.118','JOMBANGKALI',NULL,'CILEGON, BANTEN','INDONESIA','0254-383484','0254 383483','HERRIAT',NULL,NULL,'Y',NULL,NULL,'2014-04-02',NULL),
+(137,'V0274','GMM','GUNUNG MAS MANDIRI','LINK GEREM, CIKUASA','RAWA ARUM GROGOL ',NULL,'CILEGON BANTEN','INDONESIA','087774540444','','H. UTOK','','','Y',NULL,NULL,'2014-04-03',NULL),
+(138,'V0138','KBS','KARYA BAJA SENTOSA, PT','JL. HALIM PERDANA KUSUMA NO. 25 A KEL, JURUMUDI BARU','EX CAHAYA BAJA PRATAMA',NULL,'TANGERANG, BANTEN','INDONESIA','021 5582599, 5582787','021 5582784','BPK.  AZIS',NULL,NULL,'Y',NULL,NULL,'2014-09-26',NULL),
+(139,'V0139','SYT','SURYA TEKNIK','JL. RAYA MERAK NO. 12B','CILEGON',NULL,'BANTEN','INDONESIA','0254 388064','0254 395927, surya_teknik97@yahoo.com','DAVID','TOP 14 DAYS','MATERIAL TEKNIK','Y',NULL,NULL,'2015-09-09',NULL),
+(140,'V0140','TTL','TATA LOGAM','JL. RAYA MERAK KM.5, RAWA ARUM','GROGOL',NULL,'CILEGON, BANTEN','INDONESIA','0254-576016','0254-576016','CHRISTIAN','','','Y',NULL,NULL,'2013-07-25',NULL),
+(141,'V0141','TRA','TERANG ABADI, UD','BONAKARTA BLOK B/7','',NULL,'CILEGON, BANTEN','INDONESIA','0254-376865','0254-376865','IBU. SUSI SULAIMAN','','','Y',NULL,NULL,'2013-07-25',NULL),
+(142,'V0142','TSP','TIGA SAUDARA PUTRI, PT','CEMPAKA MAS BLOK M1 NO.30','SUMUR BATU-KEMAYORAN',NULL,'JAKARTA','INDONESIA','021-6508465','021-6505175','TJEN HENRY','','','N',NULL,NULL,'2015-07-29',NULL),
+(143,'V0143','TJH','TIMBUL JAYA HYDRO','JL.RAYA NAROGONG KM.6,5 NO.I5','KM.6,5 NO.I5',NULL,'BEKASI, JAWA BARAT','INDONESIA','021-82422715','021-82422715','SUSAN','','','Y',NULL,NULL,'2013-07-25',NULL),
+(144,'V0144','TOP','TOP ONE PLASTINDO','MITRA GADING VILLA BLOK F1 NO.5','KELAPA GADING',NULL,'JAKARTA','INDONESIA','021-4504521','021 4503514','DESSY',NULL,NULL,'Y',NULL,NULL,'2014-05-21',NULL),
+(145,'V0145','TLA','TRACK LINK AUTO PART, CV','JL.KAMAL RAYA OUTER RING ROAD','RUKO GALAXY BLOK O NO.50',NULL,'CENGKARENG ,JAKARTA','INDONESIA','021-55957434','021-55957434','AGUS DARMAWAN','','','Y',NULL,NULL,'2013-07-25',NULL),
+(146,'V0146','TBP','TRIBINA PANUTAN, PT','JL. RAYA MERAK BLOK A-B NO.2','KOTA SARI-GROGOL',NULL,'CILEGON, BANTEN','INDONESIA','0254 - 5753219, 08176393934','0254 - 5753301, sophiebmiranti@gmail.com','SOFIE BUNGA MIRANTI','TOP 30D','SHELL OIL','Y',NULL,NULL,'2015-04-22',NULL),
+(147,'V0147','TLJ','TULUS JAYA','JL. BY PASS TABANAN','TABANAN',NULL,'BALI','INDONESIA','0361-7430802/0811385406','','A D I','','','Y',NULL,NULL,'2013-07-25',NULL),
+(148,'V0148','TSN','TUNGGAL SURYA NUSANTARA','KOMPLEK MEGA SPARE PARTS','JL.TAMANSARI RAYA','johny_tsn@yahoo.com','JAKARTA PUSAT','INDONESIA','021-27997929','021- 6231 8270 / 27997919','JOHNY SETIAWAN',NULL,NULL,'Y',NULL,NULL,'2015-04-22',NULL),
+(149,'V0149','UMB','USAHA MAJU BERSAMA','JL. MUSLIHAT NO.56','BOGOR',NULL,'JAWA BARAT','INDONESIA','0251-7285530','','YENA ANUGERAH','','','Y',NULL,NULL,'2013-07-25',NULL),
+(150,'V0150','VRI','VERON INDONESIA, PT','KOMPLEK PERGUDANGAN PRIMA CENTER 1 BLOK D.29-30, JL PESING POGLAR NO11 JAKARTA BARAT 11710','',NULL,'JAKARTA BARAT ','INDONESIA','021 2951 8999','021 2951 8990','MASANDRY','TOP 60 DAYS','BAN','Y',NULL,NULL,'2015-09-23',NULL),
+(151,'V0151','VCP','VISCO PRATAMA, CV','JL. JEND SUPRAPTO NO 07','RAMANUJU, CILEGON',NULL,'BANTEN','INDONESIA','0254-380175','0254-380175','Bpk. HARUN','','','Y',NULL,NULL,'2015-07-23',NULL),
+(152,'V0152','WSI','WAHANA SAFETY INDONESIA, PT','PUSAT NIAGA ROXY MAS','BLOK C5 NO. 4',NULL,'JAKARTA','INDONESIA','021-63855111','021-63855222','BAMBANG','','','Y',NULL,NULL,'2013-07-25',NULL),
+(153,'V0153','WNM','WINA MOTOR','KJL.MAYJEND SUTOYO','NO.I6A',NULL,'CILACAP, JAWA TENGAH','INDONESIA','0282-534082','0282-535396','L WINARSO','','','Y',NULL,NULL,'2013-07-25',NULL),
+(154,'V0154','WPM','WINDU PRASETYA M, PT','JL. RAYA ANYER, NO.43','KUBANG WELUT',NULL,'CILEGON, BANTEN','INDONESIA','0254-312238 087772512328','0254-312676','Bpk. EDI BAMBANG, ELLA',NULL,NULL,'Y',NULL,NULL,'2015-01-07',NULL),
+(155,'V0155','WMT','WIRA MOTOR, PD','JL. AHMAD YANI','NO. 18 A','renaldus_priastian@yahoo.com','CILEGON, BANTEN','INDONESIA','0254-395280, 398090','0254-398090','R E N A L D U S',NULL,NULL,'Y',NULL,NULL,'2015-01-20',NULL),
+(156,'V0156','YMI','YONMING INDONESIA, PT','JL. CAKUNG CILINCING KM.3 BLOK J1 NO. 12-15. JAKARTA UTARA',NULL,'ymid@yonming.com','JAKARTA','INDONESIA','021-2148 3111','021 2148 3085, syarifuddin_id@yonming.com','SYARIFUDIN',NULL,NULL,'Y',NULL,NULL,'2014-11-14',NULL),
+(157,'V0159','JYT','JAYA TEKNIK CIBINONG','JL.RAYA BOGOR KM.41,5','DEPAN PINTU AIR CIBINONG',NULL,'BOGOR, JAWA BARAT','INDONESIA','081314376657','','M NURDIN','','Bengkel Bubut','Y',NULL,NULL,'2013-07-23',NULL),
+(463,'V0468','SPM','SAPUTRA MOTOR','JL. RAYA MERAK KM. 5 RT.03/04 DS GEREM','DS GEREM, KEC GROGOL',NULL,'CILEGON','BANTEN','0254-571018','0254-571018','H.AHMAD JUNAIDI',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(159,'V0161','SSY','SANG SURYA, CV','JL. LETJEN SUPRAPTO NO. 5','KRENCENG',NULL,'CILEGON','BANTEN','087808925951',NULL,'JUNAEDI','30 DAYS','CONSUMABLE','Y',NULL,NULL,'2013-08-12',NULL),
+(160,'V0162','DRM','DUTA RIMBA MANDIRI, CV','LINK. TERONDOL R, 03/01 KEL. TERONDOL','',NULL,'SERANG, BANTEN','INDONESIA','08176334499','0254 200205','Bpk. MUHTADIN','','','Y',NULL,NULL,'2014-11-06',NULL),
+(161,'V0163','CHR','CAHAYA RISKI, CV','WARINGIN KURUNG','',NULL,'SERANG BANTEN','INDONESIA','081316639059','','BPK. HASIB','','','Y',NULL,NULL,'2013-08-12',NULL),
+(162,'V0164','BKM','BERKAH MULYA','JL. RAYA JAKARTA, PRAPATAN CIRUAS, DS. CITEREP','KEC. CIRUAS',NULL,'SERANG - BANTEN ','INDONESIA','0254 - 7040907','0254 - 7040907','BPK. HASAN','','','Y',NULL,NULL,'2013-08-13',NULL),
+(163,'V0165','UAM','UNITEC ARTHA MAKMUR, PT','RUKO ASTC NO. 10 G NO.20, ALAM SUTRA SERPONG','',NULL,'TANGERANG','INDONESIA','021-29211604-605','021-29211606','Bpk/Ibu RIKY, YOLA','TOP 14 DAYS','PARACHEM','Y',NULL,NULL,'2013-08-13',NULL),
+(164,'V0166','RCH','RICOH','','',NULL,'JAKARTA','INDONESIA','081289734261','','BPK. IMAM FATHONI','CASH','TONER, SERVICE FOTOCOPY','Y',NULL,NULL,'2013-08-14',NULL),
+(165,'V0167','DLM','DAIRI LAMTAMA MAKMUR','JL.SUPRIYADI NO.14 (OUTER RING ROAD)','TB SIMATUPANG, CIRACAS, JAKARTA TIMUR',NULL,'JAKARTA','INDONESIA','021-4370490','021-4370490','S A N I M A N','Solar ','','Y',NULL,NULL,'2013-08-15',NULL),
+(166,'V0168','OGI','ORIGINAL INK','JL. AHMAD YANI NO. 129','',NULL,'SERANG, BANTEN','INDONESIA','0254 - 202634','0254 - 202634','LIA / MAULANA','','REFIL TONER','Y',NULL,NULL,'2013-08-16',NULL),
+(167,'V0169','HHI','H. HAERUL','','',NULL,'CILEGON','','081911250903','','','','','Y',NULL,NULL,'2013-08-20',NULL),
+(168,'V0170','PTU','PUTRA USAHA, CV','JL. MEKARMULYA PERKEBUNAN KERTAMAHAN NO. 09','',NULL,'MARGAMUKTI - PENGALENGAN','BANDUNG','081320530599','','BPK. AEP','','KAYU','Y',NULL,NULL,'2013-08-20',NULL),
+(169,'V0171','FRV','FR VARIASI','JL. RAYA TLAJUNG UDIK SIMPANG TIGA CICADAS','',NULL,'GUNUNG PUTRI','BOGOR','081388494905','','UMAR DANI','','','Y',NULL,NULL,'2013-08-20',NULL),
+(170,'V0172','PTM','PUTRI TUNGGAL JAYA MAKMUR, PD','JL. RAYA MANCAK BOJONG BATU KUDA',NULL,NULL,'MANCAK - SERANG','INDONESIA','087771119220',NULL,'H. UJI FAROJI','KAYU','BRI. No. Rek 3864-01-014520-534 an H,M. Uji Faroji','Y',NULL,NULL,'2013-12-19',NULL),
+(171,'V0173','GJT','GARUDA JAYA TEKNIK','LINDETEVES TRADE CENTER','LT. GF 1 BLOK B15 NO.7',NULL,'JAKARTA','INDONESIA','021 - 622 00675','021 - 625 2083','BUDI SEPTIOAJI','','POMPA','Y',NULL,NULL,'2013-08-22',NULL),
+(172,'V0174','VKM','VICKA MANDIRI','KRAMATWATU','',NULL,'CILEGON - BANTEN','INDONESIA','087771957554','','YUDI','','','Y',NULL,NULL,'2013-08-22',NULL),
+(173,'V0175','BSS','BINA SEKAWAN SEJAHTERA, CV','KP. KADUREGES RT. 24/04','DS. BATU KUDA KEC. MANCAK',NULL,'SERANG - BANTEN','INDONESIA','087771311967','','Bpk. KASAN','','','Y',NULL,NULL,'2013-08-23',NULL),
+(174,'V0176','TSPI','TUV SUD PSB INDONESIA, PT','GRAND PURI NIAGA','JL. PURI KENCANA BLOK K6 NO 2-0 KEMBANGAN',NULL,'JAKARTA BARAT 11610','INDONESIA','021 - 2885091/92/99 EXT.102','021 - 58351561','BPK. HADI SANJAYA SIM','','UJI LAP','Y',NULL,NULL,'2013-08-23',NULL),
+(175,'V0177','WHS','WHS KOMPUTER','HARCO MANGGA DUA LT.2 BLOK B2 NO.53 ','',NULL,'JAKARTA','INDONESIA','021 6127162 / 63','021 6121874','RISDA','','','Y',NULL,NULL,'2015-09-15',NULL),
+(176,'V0178','MTR','MITRA, PD','JL. RAYA MERAK NO. 1 DS. RAWA ARUM','TEGAL WANGI ',NULL,'CILEGON','INDONESIA','0254-570647','','','','MATERIAL BANGUNAN','Y',NULL,NULL,'2013-08-26',NULL),
+(177,'V0179','FRD','FRIDAY FASHION','JL. JOHAR , TRITIH KULON','CILACAP UTARA',NULL,'CILACAP, JAWA TENGAH','INDONESIA','085726004183','',' A J I','','PENJAHIT','Y',NULL,NULL,'2013-08-27',NULL),
+(178,'V0180','RCM','RED COMPUTER','RAMAYANA MALL SERANG, LT.DASAR','JL.VETERAN NO.7',NULL,'SERANG, BANTEN','INDONESIA','0254 - 9100088','','','','LAPTOP,DLL','Y',NULL,NULL,'2013-09-16',NULL),
+(179,'V0181','CLA','CITRA LAKSANA ASEUS, CV','JL. JAHE NO.3 KAVLING BLOK G','',NULL,'CILEGON, BANTEN','INDONESIA','081808119662','','BPK. ASEP SUTISNA','','','Y',NULL,NULL,'2014-05-14',NULL),
+(180,'V0182','VKM','V KOMPUTER','CILEGON SUPERMALL, LT.2 NO.1','SEBELAHMATAHARI DEPT STORE',NULL,'CILEGO, BANTEN','INDONESIA','O254-701817/081911163810','0254-391296','CI....','LAPTOP','','Y',NULL,NULL,'2013-09-02',NULL),
+(181,'V0183','GMP','GUNA MANDIRI PRIMA, CV','JL. LINGKAR UTARA, DS WANASABA, KRAMATWATU','',NULL,'SERANG BANTEN','INDONESIA','0254 230885','0254 231070','Bpk, AGENDI S','','','Y',NULL,NULL,'2014-05-12',NULL),
+(182,'V0184','GNP','GIRI NUSA PERSADA, CV','JL.ANJASMORO TENGAH 5 NO.14','SEMARANG',NULL,'SEMARANG','INDONESIA','024-7471447','024-7600601','HARY AFANDI','','RENTAL FORKLIFT','Y',NULL,NULL,'2013-09-02',NULL),
+(183,'V0185','PKKS','PRIMER KOPERASI KARYAWAN KRAKATAU STEEL','JL. JEND. SUDIRMAN KM 3 PUSDIKLAT KS','',NULL,'CILEGON, BANTEN','INDONESIA','0254 372331','0254 398884','Bpk. ARIEF. S / YUYUN','','','Y',NULL,NULL,'2014-04-30',NULL),
+(184,'V0186','JYA','JAYA ABADI, CV','JL. RAYA MERAK DS. GEREM','KEC. GROGOL  CILEGON',NULL,'','INDONESIA','087871711829','0254-572687','Bpk. SOFYAN','','','Y',NULL,NULL,'2013-09-04',NULL),
+(185,'V0187','PNB','PENUH BERKAH','JL. SUNAN BONANG CIGADING PASAR','',NULL,'CIWANDAN - CILEGON BANTEN','INDONESIA','081708 44441','0254-8317001','Bpk. BUSTOMI','','','Y',NULL,NULL,'2013-09-05',NULL),
+(186,'V0188','ZRF','ZAHRA FURNITURES','TAMAN CIRUAS PERMAI BLOK M 6 NO.3',NULL,'zahrafurnitures@yahoo.com','SERANG BANTEN','INDONESIA','087871933621',NULL,'M. TAUFIK',NULL,'SERVICE LEMARI','Y',NULL,NULL,'2013-09-06',NULL),
+(187,'V0189','BSM','BANGUN ERA SEJAHTERA MANDIRI, PT','JL. PALEM MANIS II','KAW. INDUSTRI MANIS JATIUWUNG',NULL,'TANGERANG, BANTEN','INDONESIA','021-55652538','021–55652539','Bpk.TEDY / ARIF','14 DAYS','SLITING','Y',NULL,NULL,'2013-09-09',NULL),
+(188,'V0190','RGJ','RAGIL JAYA, CV','JL.PERINTIS KEMERDEKAAN NO.95','GUMILIR, CILACAP',NULL,'CILACAP','JAWA TENGAH','0282-542255, 541669','','SISWORO','','','Y',NULL,NULL,'2013-09-09',NULL),
+(189,'V0191','TRK','TIMURRAYA KURNIAMANUNGGAL, PT','JL.PROF.DR.LATUMETEN NO.19','PERKANTORAN GROGOL PERMAI BLOK C NO.29',NULL,'JAKARTA','INDONESIA','021-5661478,5665534','021-5679722','BINSAR','','GREASE','Y',NULL,NULL,'2013-09-11',NULL),
+(190,'V0192','BK','BUDI KARYA','PASAR LAMA SERANG','',NULL,'BANTEN','INDONESIA','','','','','PAKU KELING','Y',NULL,NULL,'2013-09-11',NULL),
+(191,'V0193','SPM','SIUSCO PERSADA MANDIRI, PT.','JL. DAAN MOGOT KM. 19.8 KAWASAN INDUSTRI BLOK D','NO. 3 KBN BESAR',NULL,'TANGERANG, BANTEN','INDONESIA','021-6197455','021-6194466','IBU. AKIM','','','Y',NULL,NULL,'2013-09-11',NULL),
+(192,'V0194','RSC','RASCOM','JL. DI PANJAITAN NO.50','PAGEBANGAN, CILEGON',NULL,'CILEGON','BANTEN','0254 - 7051313/08527776688','','ROZA','','REFILL TONER','Y',NULL,NULL,'2015-02-25',NULL),
+(193,'V0195','SB','SUMBER BANGUNAN. TB','JL. MAYJEN SUTOYO NO. 13 KM. 7 DS RAWA ARUM','',NULL,'CILEGON BANTEN','INDONESIA','0254-570135','0254-570135','','','Rek BCA Then Djun Khim 2951164005','Y',NULL,NULL,'2013-12-19',NULL),
+(194,'V0196','SKM','SETIAKAWAN MENARA MOTOR, PT','JL.JEND A YANI NO.101','SUKMAJAYA',NULL,'CILEGON, BANTEN','INDONESIA','0254 - 391267','0254 - 391171','R I S A','','','Y',NULL,NULL,'2013-09-12',NULL),
+(195,'V0197','ABM','ANUGERAH BUDI MANDIRI, CV.','KOMPLEK KRAKATAU STEEL','',NULL,'CILEGON, BANTEN','INDONESIA','08111204081','0254-570336','BPK. BUDI','','','Y',NULL,NULL,'2013-09-13',NULL),
+(196,'V0198','IPP','INKA PERSADA PRIMA, CV','KOMP. P','JL. PANANCANGAN BARU',NULL,'SERANG, BANTEN','INDONESIA','087871961383','','Bpk. JONI','','','Y',NULL,NULL,'2013-09-13',NULL),
+(197,'V0199','PBR','PELITA BARU ','JLN. RAYA SOKARAJA ','PURWOKERTO',NULL,'PURWOKERTO','JAWA TENGAH','0281 - 7607902','','G U F R O N','','RREKONDISI INJECTION PUMP','Y',NULL,NULL,'2013-09-16',NULL),
+(198,'V0200','PKJ','PADUMACOM KARYA JAYA, PT','KOMP. RUKO GRIYA INTI SENTOSA BLOK L1 NO. 3','JL. GRIYA SEJAHTERA SUNTER',NULL,'JAKARTA UTARA','INDONESIA','021-29384883','021-29384881','Bpk. SUBADA CHANDRA','','MOTOROLA','Y',NULL,NULL,'2015-02-11',NULL),
+(199,'V0201','BND','BERKAT NIAGA DUNIA, PT','JL CIDENG BRT 47-D, CIDENG GAMBIR',NULL,NULL,'JAKARTA PUSAT','INDONESIA','021-6327060, 63868283','021-63851240, 63851241','IBU.  RIANA',NULL,'PPE','Y',NULL,NULL,'2013-09-24',NULL),
+(200,'V0202','EKI','ERAKOMP INFONUSA','GEDUNG ERAKOMP, JL.ALAYDRUS NO.37','JAKARTA 10130',NULL,'JAKARTA','INDONESIA','021 - 6310355','021 - 6310358','P U T R A','putra@erakomp.com','','Y',NULL,NULL,'2014-03-14',NULL),
+(201,'V0203','KPC','KANSAI PRAKARSA COATINGS, PT','JL. HAYAM WURUK NO. 38 LT.4','',NULL,'JAKARTA','INDONESIA','021-3854121, 3854125','021 3810929','Bpk. YUSWARI','','CAT','N',NULL,NULL,'2015-07-29',NULL),
+(202,'V0204','NSU','NATILAN SELARAS UTAMA','JL. PONDOK KELAPA BARAT B8 NO. 1 KAV, DKI','',NULL,'JAKARTA TIMUR','INDONESIA','087743604888/86903509','021-86903504','Bpk. SALAN','','KAYU','N',NULL,NULL,'2015-07-29',NULL),
+(203,'V0205','RKS','TOKO RADIO KOMUNIKASI SAKTI','JL.KSU PARUNG SERAB.NO 77A TIRTAJAYA','SUKMAJAYA DEPOK. 16412',NULL,'DEPOK','DEPOK','021 77836261','','','','HANDY TALKY','Y',NULL,NULL,'2013-09-27',NULL),
+(204,'V0206','DNA','DUNIA ALKES','JL. MAYOR SYAFEI NO. 26 KEL. KOTA BARU','',NULL,'SERANG','BANTEN','0254-2559555','0254-8243046','','','P3K','Y',NULL,NULL,'2014-02-18',NULL),
+(205,'V0207','LHS','LILY MARTALIA SUSANTO','JL. TEGAL SARI 58','',NULL,'SURABAYA','INDONESIA','031 5340639','031 5341830','Ibu. LILY MARTALIA S','','','Y',NULL,NULL,'2014-09-18',NULL),
+(206,'V0208','SKS','SUMBER KARYA SAMUDERA','JL. Ir. SUTAMI KRENCENG, KP BARU NO. 58','KEBONSARI CITANGKIL',NULL,'CILEGON','INDONESIA','0254-311005','0254-311005','BP. FREDY','','','Y',NULL,NULL,'2014-06-09',NULL),
+(207,'V0209','PCM','PRIMADAYA CITRA MANDIRI, PT','PUSAT NIAGA ROXYMAS BLOK D1/37','JL. KH HASHIM ASHARI 125',NULL,'JAKARTA PUSAT','INDONESIA','021-6308228','','IBU NUNUK','','','Y',NULL,NULL,'2013-10-03',NULL),
+(208,'V0210','MLT','MULTI TEKNIK','JL.RAYA MERAK KM.117, DESA GEREM, PULOMERAK','CILEGON',NULL,'BANTEN','INDONESIA','0254 ','','H E R M A N','','Repair Dynamo','Y',NULL,NULL,'2013-10-03',NULL),
+(209,'V0211','SBR','SUMBER REJEKI, CV','RUKO MARINATAMA','BLOK G12-12A',NULL,'JAKARTA','INDONESIA','021- 6457106','021-6457107, feby@sumberrejekiban.com , marketing-','ROCHYADI / D I A N','TOP 30 DAYS','TIRE','Y',NULL,NULL,'2015-01-09',NULL),
+(210,'V0212','APJ','ANDHIKA PRADANA JAYA, PT ','PUSAT NIAGA BINTARO TRADE CENTER ','SEKTOR 7 BINTARO JAYA ',NULL,'TANGERANG  ','BANTEN ','021 - 70339400 ','021 - 74861378 ','I N D A H / VIAN ','','SOLAR INDUSTRI','Y',NULL,NULL,'2013-10-08',NULL),
+(211,'V0213','NNK','NANANG KOPLING','JL.RAYA MERAK KM.117','DEPAN SPBU GEREM, CILEGON',NULL,'CILEGON, BANTEN','INDONESIA','0812 1825 5528, 0813 1546 0901','','N A N A N G','','PANTEK KOPLING','Y',NULL,NULL,'2015-01-15',NULL),
+(212,'V0214','PBI','PRIMA BAKTI IDAMAN','JL.PETERNAKAN 3 NO.36-37','KAPUK. JAKARTA BARAT',NULL,'DKI JAKARTA','INDONESIA','083895976027','','T O Y I B','','Rekondisi Velg','Y',NULL,NULL,'2013-10-09',NULL),
+(213,'V0215','RMJ','BENGKEL REMAJA','JL.RAYA MERAK, DESA GEREM','CILEGON',NULL,'CILEGON','BANTEN','08128149891','','HIDAYATULLAH','','','Y',NULL,NULL,'2013-10-18',NULL),
+(214,'V0216','ATP','ARTHA PRIMA','JL.TB SUWANDI NO.78','CIRACAS',NULL,'SERANG','BANTEN','0254 - 216377, 217817','','O J I','','Toko bangunan','Y',NULL,NULL,'2013-10-18',NULL),
+(215,'V0217','LTB','LAUTAN BAN','JL.PLUIT PERMAI RAYA NO.7','JAKARTA UTARA',NULL,'JAKARTA ','INDONESIA','021-6691606/08128888198','021 5588499','RAYMOND','lautanban.tgr@gmail.com','ban','Y',NULL,NULL,'2014-05-22',NULL),
+(216,'V0218','ERT','ENERREN TECHNOLOGIES		',' GRAHA KAPITAL LT.1 SUITE 102','JL. KEMANG SELATAN RAYA NO.4',NULL,'JAKARTA 12730','INDONESIA','021 7198634','021 7199525','JONNY SIMAMORA','','','Y',NULL,NULL,'2014-06-24',NULL),
+(217,'V0219','PBM','PUTRA BANDUNG MOTOR','PASAR MERDEKA LT.2 N0.150','BOGOR',NULL,'BOGOR','JAWA BARAT','081808736699','','IWAN GIOK','','','Y',NULL,NULL,'2013-10-23',NULL),
+(218,'V0220','PRI','PRIMAREKSA INTERNUSA, PT','RUKO LOCAL GROGOL BLOK C','JL.RAYA CILEGON - MERAK, GROGOL',NULL,'CILEGON, BANTEN','INDONESIA','0254 - 8495150','0254 - 8495151','YOHANES','AGIP','','Y',NULL,NULL,'2013-10-25',NULL),
+(219,'V0221','SBM','SIBA MANDIRI, PT','THE BOUTIQUE OFFICE PARK UNIT A17-18','JL.BENYAMIN SUEB BLOK A6 KEMAYORAN','luv.me.lecka@gmail.com','JAKARTA PUSAT','INDONESIA','088802490853 081291571678',NULL,'LECKA ROSARIO CARTIEN','PART EURO TRUCKS',NULL,'Y',NULL,NULL,'2014-08-08',NULL),
+(220,'V0222','BRY','BARAYA KOMPUTER','JL. RAYA SIMPANG TIGA','SUPER MALL BLOK J NO. 5 ',NULL,'CILEGON BANTEN','INDONESIA','0254-9168878','','','','','Y',NULL,NULL,'2013-11-01',NULL),
+(221,'V0230','NBSI','NS BLUESCOPE INDONESIA','BRI II BUILDING 9th FLOOR','JL. JEND. SUDIRMAN KV 44-46',NULL,'JAKARTA','INDONESIA','021-57854150','021-57854138','Ibu. WIWIK','','','Y',NULL,NULL,'2014-04-14',NULL),
+(222,'V0225','DTC','DTC TOTAL SOLUTIONS, PT','JL. PULO RIBUNG RAYA JAKA SETIA ','',NULL,'BEKASI SELATAN','INDONESIA','021-82424888','021-82434949','IBU ANNIS ANNAVI. R','','','Y',NULL,NULL,'2013-11-13',NULL),
+(223,'V0226','SMM','SENTRA MULIA MANDIRI, PT','JL.TAMAN SARI RAYA 10 N0.10','JAKARTA PUSAT',NULL,'JAKARTA','INDONESIA','021 - 6259716','021 - 62309647','TOMMY BUDIKUSUMA','smuliamandiri@yahoo.com','Euro Trucks, CAT, TCM','Y',NULL,NULL,'2013-11-14',NULL),
+(224,'V0227','CPB','CAKRAWALA PANOPA BAJA, PT','JL. KRAMAT WATU','',NULL,'SERANG BANTEN','INDONESIA','0254-233251','0254-233340','Bpk. BENI','','','N',NULL,NULL,'2015-07-29',NULL),
+(225,'V0228','ACC','ACC COMPUTER','CILEGON SUPERMAL','LANTAI DASAR BLOK A-47',NULL,'CILEGON - BANTEN','INDONESIA','Telp. 0254-388799','','','','','Y',NULL,NULL,'2013-11-21',NULL),
+(226,'V0229','SPK','SUMBER PLASTIK','JL. RAYA SERANG','',NULL,'CILEGON BANTEN','INDONESIA','0254-380031, 27','','','','','Y',NULL,NULL,'2013-11-22',NULL),
+(227,'V0257','APM','ALFA PUTRA MANDIRI, CV','KOMPLEK PCI BLOK A-II NO. 6 KEL. KEDALEMAN','KEC. CIBEBER ',NULL,'CILEGON BANTEN','INDONESIA','0254-386603','0254-386602','ARIS. S','','','Y',NULL,NULL,'2015-06-16',NULL),
+(228,'V0232','BCSI','BUANA CENTRA STEEL IND, PT','JL.  RAYA MERAK KM 115','RAWA ARUM GROGOL ',NULL,'CILEGON, BANTEN','INDONESIA','0254-572111','0254-572111','Bpk. HANDRI','','','Y',NULL,NULL,'2013-11-27',NULL),
+(229,'V0233','JSR','JASA SWARGA RAYA, PT','JL.BABAKAN TURI NO.3','TAMAN SARI, PULOMERAK',NULL,'CILEGON','BANTEN','0254 - 574543','0254 - 574543','H.TEDY AHADIROHMAN','','Rental forklift, 3-5 ton','Y',NULL,NULL,'2013-11-28',NULL),
+(230,'V0234','KS','PT. KRAKATAU STEEL PERSERO. TBK','GEDUNG KRAKATAU STEEL','JL. JEND. GATOT SUBROTO KAV. 54',NULL,'JAKARTA SELATAN 12950','INDONESIA','021-5221255','021-5201608','BPK. HERLAMBANG','','','Y',NULL,NULL,'2013-11-29',NULL),
+(231,'V0235','BTP','BINTANG PURNAMA, CV','LINK RANCA PULO RIDA 004/001, LEBAK PULO MERAK','',NULL,'CILEGON','CILEGON','08780984039','','AURI ADIWINATA','TOP 14','GENERAL SUPLIER','Y',NULL,NULL,'2014-08-07',NULL),
+(232,'V0236','MWP','MARISA WIDYA PRATAMA','JL.RAYA MERAK KM.117, DESA GEREM, PULOMERAK','CILEGON',NULL,'BANTEN','INDONESIA','081906088091','','IGA N AZARRI','','Rental forklift 5 ton','Y',NULL,NULL,'2013-12-03',NULL),
+(233,'V0237','SDS','SINAR DIESEL','JL.RAYA CIMONE BITUNG, ','TANGERANG',NULL,'TANGERANG','BANTEN','','','JONI','','','Y',NULL,NULL,'2013-12-04',NULL),
+(234,'V0238','BME','BERKAT MAJU ENERGI, PT','JL.TEGALSARI IV, NO.9','TANGERANG',NULL,'TANGERANG','BANTEN','021-55735552','021-5580999','I N D A H','','solar','Y',NULL,NULL,'2013-12-04',NULL),
+(235,'V0239','SJM','SUDJATMIKO','(FREE LAND HEAVY EQP REPAIR)','',NULL,'JAKARTA','INDONESIA','','','SUDJATMIKO','','','Y',NULL,NULL,'2013-12-06',NULL),
+(236,'V0240','CHA','CIPTA HYDROPOWER ABADI','CILEGON BISSNIS SQUARE','BLOK D 17 PCI',NULL,'CILEGON BANTEN','INDONESIA','0254-393302','','','','','Y',NULL,NULL,'2013-12-12',NULL),
+(237,'V0241','BRK','BAROKAH, UD','JL.RAYA GUNUG PUTRI','KOMPLEK BINAMARGA NO.141',NULL,'CITEUREUP, BOGOR','INDONESIA','087870446550','','ROHMAN','','TERPAL','Y',NULL,NULL,'2013-12-12',NULL),
+(238,'V0242','PJM','PRIMA JAYA MAKMUR, CV','VILLA BALARAJA BLOK.F1 NO 1','TANGERANG',NULL,'TANGERANG','BANTEN','021-59431324','021-59430326','NCE ACHMAD MUCHLISIN','','Forklift Spescialis','Y',NULL,NULL,'2013-12-12',NULL),
+(239,'V0243','TJS','TRIJASA','JL.LODAN','JAKARTA UTARA',NULL,'JAKARTA','INDONESIA','021-93310878','021-69831455','ANTON','','Expedisi ke Bali','Y',NULL,NULL,'2013-12-13',NULL),
+(240,'V0244','MDS','MAHADANA SURAYA, CV','JL. TEGALSARI NO 58',NULL,NULL,'SURABAYA 60261','INDONESIA','031-5340639','031-5345821','Bpk. HENRY SATRIA LIM',NULL,'BCA A/C 6720384424 AN. PHANG LILY MARTHALIA SUSANTO','Y',NULL,NULL,'2014-04-14',NULL),
+(241,'V0245','JUT','JAYA UTAMA, CV','Jl. LINK. CIGADING PASAR RT.01/02 ','KEL. KUBANGSARI CIWANDAN',NULL,'CILEGON','INDONESIA','0254-312644, 0819 1108 6555, 0852 1573 9888','0254-312644','RATNO','-','RENTAL FORKLIFT','Y',NULL,NULL,'2014-11-03',NULL),
+(242,'V0246','KTG','KASANA TEKNINDO SEMARANG, PT','JL. WALISONGGO KM.9 RT.001/RW.002 TAMBAK AJI             NGALIYAN - SEMARANG',NULL,'gunari@kasana.co.id  wahyukasana@gmail.com','JAWA TENGAH','INDONESIA','024-7614366  , 081225649325 ,  082136820996','024-8662904','GUNARI SE',NULL,NULL,'Y',NULL,NULL,'2017-01-30',NULL),
+(243,'V0247','DTP','DUNIA TONER TECHNOLOGI PRINT','HARCO MANGGA DUA BLOK B2 NO 57','-',NULL,'JAKARTA','INDONESIA','-','-','RENDI ARISANDI','REFILL TONER CENTER','REK MANDIRI 900-00-0378400-7','Y',NULL,NULL,'2013-12-23',NULL),
+(244,'V0248','SAS','SINAR ALAM SEMESTA, CV','JL. WARINGIN KURUNG KP. MARGAGIRI RT. 03 / 03','DS. MARGANTANI, KEC KRAMAT WATU',NULL,'SERANG, BANTEN','INDONESIA','Telp.  087736999991','Fax. ','Bpk. YASIN','','REK MANDIRI, AN YUYUN NAYLUFAR 163 00 00970510','Y',NULL,NULL,'2015-09-17',NULL),
+(245,'V0249','NJP','NUSA JAYA PERTIWI, CV','PRAPAT KURUNG SELATAN NO.7','PERAK',NULL,'SURABAYA, JAWA TIMUR','INDONESIA','031-3293612,3291555','031-3294413','DIKI HANDOYO','','Rental Forklift','Y',NULL,NULL,'2014-01-06',NULL),
+(246,'V0250','TPM','TROPICAL MULTI CO. PT','JL RAYA MANGGA BESAR 2H','KOMP INDUSTRIAL ESTATE BLOC C NO.4, JL DAAN MOGOT KM 19.8',NULL,'JAKARTA','INDONESIA','021-6253305, 6294967','021-6295158','IBU. AGNES S. KESUMA',NULL,NULL,'Y',NULL,NULL,'2014-01-09',NULL),
+(247,'V0251','BCK','BUANACAKRA KENCANAPRATAMA','JL.RAYA TAMAN SARI  56BE','JAKARTA BARAT',NULL,'JAKARTA','INDONESIA','021-6009788','021-6492916','SUSIANA','','','Y',NULL,NULL,'2014-01-17',NULL),
+(248,'V0252','STM','SETIA MOTOR','JL.PERINTIS KEMERDEKAAN 77','CILACAP',NULL,'CILACAP','JAWA TENGAH','0282-542308','0282-540732','SETIA','','','Y',NULL,NULL,'2014-01-17',NULL),
+(249,'V0253','SAG','SINAR AGUNG. PD','JL. KELENTENG / BIO BANTEN NO 44 KARANGANTU','',NULL,'SERANG','BANTEN','081382245777, 085920003214','','H. M. YUNUS','','','Y',NULL,NULL,'2014-01-23',NULL),
+(250,'V0254','ABU','ABADI UTAMA, CV','JL. SUNAN DRAJAT, LINK BANJARNEGARA','KARANGJETAK, CIWANDAN',NULL,'CILEGON, BANTEN','INDONESIA','087871059722 / 081310804424',NULL,'J U B A E D I',NULL,NULL,'Y',NULL,NULL,'2014-01-28',NULL),
+(251,'V0255','ACT','ADILLA COLLECTION','JL. RAYA BBS NO.26','CIWADUK KECIL ',NULL,'CILEGON','INDONESIA','0254 394286, 08212502 5563','','Bpk. DESWARDI','','','Y',NULL,NULL,'2014-01-29',NULL),
+(252,'V0256','MTS','MITRA SEMPURNA','PUSAT ELEKTRONIKA ','HARCO MANGGA DUA LT.2 BLOK.B NO. 133',NULL,'JAKARTA ','INDONESIA','021-62307856','021-62307856','WIJININGSIH','','Computer, Printer','Y',NULL,NULL,'2014-11-25',NULL),
+(253,'V0258','LSD','LIMA SAUDARA','JL.MAYOR OKING JAY ATMAJA ','DEPAN POM BENSIN CITEUREUP',NULL,'BOGOR, JAWA BARAT','INDONESIA','','','LIMA','','','Y',NULL,NULL,'2014-02-10',NULL),
+(254,'V0259','BAS','BINTANG AGRINO SARI, PT','RUKAN PONDOK CILEGON INDAH BUSINESS SQUARE','BLOK D NO.9',NULL,'CILEGON','BANTEN','0254-8495335','0254-8493909','BONITA','','Hig Speed Diesel','Y',NULL,NULL,'2014-02-13',NULL),
+(255,'V0260','PM','PROMETAMA MULTIKARYA, PT','JL. HALIM PERDANA KUSUMAH NO. 96 ','JURUMUDI BARU',NULL,'KECAMATAN BENDA TANGERANG BANTEN','INDONESIA','021-5588291, 5588340','021-5588579','SHINTA','','','Y',NULL,NULL,'2014-02-17',NULL),
+(256,'V0261','CM','CAHAYA MULYA GEMILANG. CV','JL. MELATI NO.1 KEDAWUNG KP PEDALI RT. 04 / 04','WARINGIN KURUNG','cv.cahayamulyagemilang@gmail.com','SERANG BANTEN','INDONESIA','085920126669, 081287349818',NULL,'H. SOFA',NULL,NULL,'Y',NULL,NULL,'2014-02-18',NULL),
+(257,'V0262','WBI','WANGSA BINATHARA INDONESIA, PT','JL. KH. HASYIM NO.11 RT. 16/06','TEGAL RATU CIWANDAN ',NULL,'CILEGON BANTEN','INDONESIA','0254-2540076','0254-312559','NAZMUDIN','','','Y',NULL,NULL,'2014-02-18',NULL),
+(258,'V0263','TSP','TIGA SATRIA PEMENANG','JL. MANUKAN REJO 9 BLOK 4D NO 20 SURABAYA','',NULL,'SURABAYA','INDONEISA','031-7404926','031-7404926','081230065440','','PAKU ULIR 10 CM','N',NULL,NULL,'2015-07-29',NULL),
+(259,'V0264','HJ','HARAPAN JAYA','DESA GAYAM, KEC PANENGAHAN','',NULL,'LAMPUNG SELATAN','INDONESIA','081997415880','','JAHRUDIN','','','Y',NULL,NULL,'2014-02-25',NULL),
+(260,'V0265','JJS','JURISAJAYA SAMA, PT','JL. RANGU III NO. 6 PANGKALAN JATI','',NULL,'CINERE JAKARTA SELATAN','INDONESIA','021-7543784, 3116750','021-7271180','BPK. HABIM / SUNGGUL','','','Y',NULL,NULL,'2014-02-27',NULL),
+(261,'V0266','ALI','AIR LIQUIDE INDONESIA, PT','MM 2100 INDUSTRIAL TOWN BLOK I BO-1-2','CIKARANG BARAT',NULL,'BEKASI','JAWA BARAT','021-8980071','021-8980072-73','OKTIVIANA SARI','','','Y',NULL,NULL,'2014-03-03',NULL),
+(262,'V0267','BSA','BUDI SETIO ADJI','MAINTENANCE SERVICE',NULL,NULL,NULL,NULL,'08111220033',NULL,NULL,NULL,NULL,'Y',NULL,NULL,'2014-03-03',NULL),
+(263,'V0268','BAM','BERKAT ABADI MAKMUR','TAMAN SURYA MEGAH 1G, JL.PAMOYANAN. BOGOR 16135','-',NULL,'BOGOR','INDONESIA','-','-','081213032928 / 0816635827','PEMBAYARAN 50%','PLYWOOD 90/100/110','Y',NULL,NULL,'2014-03-04',NULL),
+(264,'V0269','TKA','TAGLINE KREASI ASKARA','GEDUNG DNA LANTAI 2, KOMPLEK KUWERA','JL.RAYA TENGAH NO.4 GEDONG, PASAR REBO',NULL,'JAKARTA TIMUR 13760','INDONESIA','O21-87786704','021-87791341','EVY PUSPITARINI','','Mesin finger print','Y',NULL,NULL,'2014-03-05',NULL),
+(265,'V0270','SKJ','SURYA KENCANA JAYA, CV','JL. KAPTEN TENDEAN RT. 03/01','LINK WARU KEL. PANGGUNG RAWI',NULL,'KEC. JOMBANG KOTA CILEGON','INDONESIA','08176452678, 081310024000','0254 331178','Bpk. AWARA, ALEK','','','Y',NULL,NULL,'2014-05-28',NULL),
+(266,'V0271','RTT','REMA TIP TOP INDONESIA, PT','JL.KH ZAINUL ARIFIN NO.3A','(SAMPING BANK MUAMALAT)',NULL,'JAKARTA','INDONESIA','021-6338348, 6333056, 6337946','021-6338479','RICA CAHYADI','','','N',NULL,NULL,'2015-07-29',NULL),
+(267,'V0272','WJE','WIJAYA EQUIPMENTS, PT','RUKO GOLDEN BOULEVARD BOK E-23','JL. PAHLAWAN SERIBU BSD',NULL,'TANGERANG 15322','INDONESIA','021-83821555, 26108505, 26108525, 53160838, 538988','021-53160837','D E S I','','','Y',NULL,NULL,'2014-03-12',NULL),
+(268,'V0273','KPM','KHARISMA PUTRA MANDIRI, CV','JLSUNTER JAYA II NO.15','JAKARTA UTARA',NULL,'JAKARTA','INDONESIA','021-6508244','021-6508244','PRIYO UTOMO','','PART TIMBANGAN','N',NULL,NULL,'2015-07-29',NULL),
+(269,'V0275','SHJ','SINAR HARAPAN JAYA','JL. RAYA ANYER - MANCAK','',NULL,'SERANG BANTEN','INCONESIA','087771000837','Bpk. FATONI','','','','Y',NULL,NULL,'2014-04-04',NULL),
+(270,'V0276','CSP','CARISMA SENTRA PERSADA, PT','PLAZA BISNIS KEMANG, GROUND FLOOR','JL. KEMANG RAYA 2',NULL,'JAKARTA ','INDONESIA','021 7181181','021 7191237','SALMAN','','','Y',NULL,NULL,'2014-04-10',NULL),
+(271,'V0277','ETC','ELECTRONIC CITY, KARAWACI','SUPERMALL KARAWACI LANTAI 3','KARAWACI',NULL,'TANGERANG','BANTEN','','','LIS SUGIARTI','','','Y',NULL,NULL,'2014-04-15',NULL),
+(272,'V0278','PIE','PULAU INDAH ELECTRONICS','CILEGON PLAZA BLOK. A NO.1','CILEGON',NULL,'BANTEN','INDONESIA','0254 393961','0254 394453','YADI','','','Y',NULL,NULL,'2014-04-16',NULL),
+(273,'V0279','DI','DOA IBU','JL.RAYA CILEGON SERANG LONTAR SUMUR BOR',NULL,'ferdylius@gmail.com','SERANG BANTEN','INDONESIA','0254 200059','0254 200202','BPK BUDI','bca a/n yan jaya lius (2451016221)',NULL,'Y',NULL,NULL,'2014-04-21',NULL),
+(274,'V0280','SA','PABRIK SEPATU ASIA','JL. CICUKANG NO. 8 CIGODEWAH ','',NULL,'BANDUNG JAWA BARAT','INDONESIA','022 6071432','022 6071485','Bpk. INDRA JAYA SAPUTRA','','','N',NULL,NULL,'2015-07-29',NULL),
+(275,'V0281','SS','SALMANSTORE','JL. SOKA NO. 10 JATIBENING PERMAI','',NULL,'BEKASI','INDONESIA','089610105290','','Bpk. SALMAN AGHNIEA','','','N',NULL,NULL,'2015-07-29',NULL),
+(276,'V0282','MI','MUTIARA INDAH','JL. TEMU PUTIH BLOCK C','',NULL,'CILEGON BANTEN','INDONESIA','0254 398111','0254 399004','','','TOKO PLYWOOD','Y',NULL,NULL,'2014-04-24',NULL),
+(277,'V0283','DAT','DEA AGUNG TEKNIK, CV','JL. MAYJEN SUTOYO KM. 7 LINK TEGAL WANGI TR 03/02 NO. 67','RAWA ARUM, GROGOL',NULL,'CILEGON BANTEN','INDONESIA','0254 571986','0254 573340','ROHITA','','','Y',NULL,NULL,'2015-07-28',NULL),
+(278,'V0284','MSP','MULTIGUNA SEJAHTERA PERSADA, PT','JL. Anyer Km.8, RT.03/04, Kubangsari','Cilegon',NULL,'Banten','INDONESIA','081318126687','0254 310823','U D I N','','Rental Forklift','Y',NULL,NULL,'2014-05-06',NULL),
+(279,'V0285','RTM','RATU MOTOR','Jl. Magelang 95, ','Yogyakarta',NULL,'Yogyakarta','INDONESIA','0274 515672','','Ratu Motor','','','Y',NULL,NULL,'2014-05-06',NULL),
+(280,'V0286','RS','RAJA SURVEY','JL. PESANTREN NO. 64','PONDOK AREN',NULL,'TANGERANG SELATAN','INDONESIA','021 7303447','021 7303447','AHMAD WAHYUDI','','','Y',NULL,NULL,'2014-05-06',NULL),
+(281,'V0287','DAT','DEWATA AGUNG TEHNIK','JL. PUPUTAN BARU VII NO. 04','MONANG MANING',NULL,'DENPASAR BALI','INDONESIA','0361 8500105','','IK PRAYITNA','','','N',NULL,NULL,'2015-07-29',NULL),
+(282,'V0288','ARG','ADI RIZKI GEMILANG, PT','TAMAN KRAKATAU BLOK G. 21 NO. 15','WARINGIN KURUNG',NULL,'SERANG BANTEN ','INDONESIA','0254 9039586 / 087808776164','','AGUS','','','Y',NULL,NULL,'2014-05-08',NULL),
+(283,'V0289','HB','HOLCIM BETON, PT','MARKETING OUTER SITE CILEGON','',NULL,'CILEGON','INDONESIA','0254 377942','0254 377942','Bpk. HERMAN SIRAIT','','','Y',NULL,NULL,'2014-05-12',NULL),
+(284,'V0290','DDC','DOUBLE DWI CAKRA, PT','JL.SULTAN AGENG TIRTAYASA 46','KOMP.RUKO BONAKARTA BLOK C15',NULL,'CILEGON','BANTEN','085692267658','0254 383870','ANDI SOEKARDIANTO','','','Y',NULL,NULL,'2014-05-12',NULL),
+(285,'V0291','RMT','REMAJA MOTOR','JL.AHMAD YANI NO.','SUKAMAJAYA, CILEGON',NULL,'BANTEN','INDONESIA','0254-392200, 391893, 391334, 08161842145','0254-392992','DEDI',NULL,'BAN','Y',NULL,NULL,'2014-09-12',NULL),
+(286,'V0292','SCT','STARINDO CLEANING TECNOLOGIES, PT','WAREHOUSE, JL. RAYA BOGOR KM. 30',NULL,NULL,'CIAMIS DEPOK','INDONESIA','021 22461046','021 22461047','Ibu ATIK',NULL,NULL,'Y',NULL,NULL,'2014-05-20',NULL),
+(287,'V0293','MSS','MAJAMAKMUR SUKSES SEJAHTERA, PT','JL. PRANCIS PERGUDANGAN 9 NO. 9 AO',NULL,NULL,'TANGERANG','INDONESIA','021 5594321, 5594322','021 5502618','Bpk. WANI JOSUNARTO',NULL,NULL,'Y',NULL,NULL,'2015-07-27',NULL),
+(288,'V0294','BU','BAHTERA UNGGUL UTAMAJAYA','JL. BOULEVAR RAYA  BLOK AA3 NO, 62 GADING','',NULL,'SERPONG TANGERANG','INDONESIA','021-54211800','021 54211800','Ibu. TANTI','','','Y',NULL,NULL,'2014-05-21',NULL),
+(289,'V0295','CPU','CAHAYA PASIFIK UTAMA, PT','JL.SAMANHUDI RAYA NO.21 (KOMP.KREKOT 21J)','',NULL,'JAKARTA PUSAT','INDONESIA','021 3523227 28 29 30','021 3503286','SUBUR','TOP 30 DAYS','HINO, SCANIA, VOLVO, GENERAL','N',NULL,NULL,'2015-07-29',NULL),
+(290,'V0296','MSU','MITRA SEJATI UTAMA, CV','JL. RAYA MERAK KM.5 NO.110 LINK.PABUARAN','RT 01/05, RAWA ARUM, GROGOL, mitrasejatiutama_cv@yahoo.com',NULL,'CILEGON, BANTEN','INDONESIA','0254 570930, 081298229091','0254 570930','SOLEH',NULL,'RENTAL FORKLIFT','Y',NULL,NULL,'2014-11-03',NULL),
+(291,'V0297','MD','MUHAMAD. CADASARI','ASRAMA YONIF 320 / BADAK PUTIH. RT03/ RW04 CADASARI PANDEGLANG','',NULL,'PANDEGLANG','INDONESIA','087774501068','','Bpk. MUHAMAD','TOP CASH','JASA UMUM','Y',NULL,NULL,'2015-09-25',NULL),
+(292,'V0298','BTA','BINTANG TIMUR ABADI, PT','RUKO PURI MUTIARA BLOK A NO. 131','JL. GRIYA UTAMA',NULL,'SUNTER AGUNG, JAKARTA UTARA','INDONESIA','021 65310911','021 653 10916','Bpk, FIRLI APRILIANSYAH','','APD','Y',NULL,NULL,'2014-05-28',NULL),
+(293,'V0299','MT','MULTI TEKNIK SEMESTA, PT','RUKO PCI',NULL,'abidin_mtsmpp@yahoo.com','CILEGON, BANTEN','INDONESIA','0254 8484424 / 08176015018','0254 8484425','Bpk. ANTO',NULL,'APD BSI','Y',NULL,NULL,'2014-08-12',NULL),
+(294,'V0300','TAJ','TEGER ARUM JAYA, CV','JL. RAYA MERAK KM. 7 RT. 07/02','RAWA ARUM PULOMERAK ',NULL,'CILEGON BANTEN','INDONESIA','0878713100121','','Bpk. FATUROJI','','','N',NULL,NULL,'2015-07-29',NULL),
+(295,'V0301','MMM','MEGA MAKMUR MAJU MANDIRI , PT','JL.PAHLAWAN SERIBU RUKO GOLDEN BOULEVARD BLOK S-27',NULL,'barokah4m@yahoo.com','SERPONG','TANGERANG','021 29047228 68811102','021 29047229','MERAL THAHARA','TIRE',NULL,'Y',NULL,NULL,'2015-11-04',NULL),
+(296,'V0302','IPB','ILHAM PUTRA  BANTEN, CV','LINK. KESERANGAN RT. 01/04 NO. 12','',NULL,'RAWA ARUM GROGOL CILEGON BANTEN','INDONESIA','08170435776','','Bpk. GAMA','','','Y',NULL,NULL,'2014-06-06',NULL),
+(297,'V0303','HCB','HOLLYWOOD CONCRETE BLOCKS','JL. RAYA SERANG','',NULL,'CIBEBER CILEGON BANTEN','INDONESIA','0254-384843','0254 386884','Ibu. DWI / RATNA','','','Y',NULL,NULL,'2014-06-09',NULL),
+(298,'V0304','LTH','PT. ELTEHA - CILEGON','JL. AHMAD YANI NO. 77','',NULL,'CILEILEGON, BANTEN','INDONESIA','0254-393571','','','','','Y',NULL,NULL,'2014-06-12',NULL),
+(299,'V0305','HL','H HAERUDIN','CIWANDAN','',NULL,'CILEGON BANTEN','INDONESIA','','','','','','N',NULL,NULL,'2015-07-29',NULL),
+(300,'V0306','TLT','TATA LOGAM TEKNIK, CV','JL. TEGALWANGI DEPAN PT. BCS','',NULL,'CILEGON','BANTEN','0813 8095 7997','0254-','ANDRI CHAIRUL','','LAS BUBUT ','N',NULL,NULL,'2015-07-29',NULL),
+(301,'V0307','PKN','PUTRA KARYA NUGRAHA, PT','JL. PEMBANGUNAN NO. 27/5 ','PRUMPUNG GUNUNG SINDUR',NULL,'BOGOR','INDONESIA','021 75872610, 75871038','021 7561107','Bpk. BUDDI SETYADI','','','Y',NULL,NULL,'2014-06-18',NULL),
+(302,'V0308','AJK','ADELAR JAYA KUSUMA. PT','Ruko Kuta Blok A No. 23 Ubud Village','Jl. Ciledug Raya ',NULL,'Tangerang, Banten',' Indonesia',' (021) 29431224, (021) 29431225',' (021) 29431223','Indah ','bbm industri','','Y',NULL,NULL,'2014-06-18',NULL),
+(303,'V0309','WJ','WARNA JAYA, CV','KOTA BUMI','',NULL,'TANGERANG BANTEN','INDONESIA','081383655289','','Bpk. WALAN','','BCA CAB. GREEN GANDER JAK BAR 2531291656 AN. WASLANI','Y',NULL,NULL,'2014-06-24',NULL),
+(304,'V0310','HCM','HUJANMAS CIPTA MANDIRI, CV','PURI KRAKATAU HIJAU BLOK E4 NO. 34','GROGOL KOTASARI',NULL,'CILEGON BANTEN','INDONESIA','087877467614','','HUMAIROH','','','Y',NULL,NULL,'2014-06-24',NULL),
+(305,'V0311','ITU','INDOTRUCK UTAMA, PT ,  JAKARTA','JL.RAYA CAKUNG CILINCING KAV.3A','SEMPER TIMUR , JAKARTA UTARA',NULL,'JAKARTA','INDONESIA','021 4412168','021 4412166','D A N D I','','','N',NULL,NULL,'2015-07-29',NULL),
+(306,'V0312','BMP','BERCA MANDIRI PERKASA, PT','JAKARTA : JL. PANGERAN JAYAKARTA 149A. /','CILEGON : Komplek Ruko PCI Blok A3/5 CILEGON. email : depocilegon@berca-mp.co.id',NULL,'JAKARTA','INDONESIA','021 6006125, 6399190. / 0254 390678 / 399971','021 6399191, 0254 399972','NANA SUTARNA, MUHLIS, AZIS','','UNIT ','Y',NULL,NULL,'2014-12-15',NULL),
+(307,'V0313','TPP','TJOKRO BERSAUDARA CILEGONINDO, PT','KOMPLEK KIEC KAV. G2 KRENCENG','',NULL,'CILEGON BANTEN','INDONESIA','0254 393005, 393 006','0254 392442','Bpk. SUHEMI','','','Y',NULL,NULL,'2015-09-16',NULL),
+(308,'V0314','TBP','TIGA BERMUDA PROGRESSIVE','JL. BRIGJENT KATAMSO NO. 09, CIGADING','',NULL,'CILEGON, BANTEN','INDONESIA','0254-600003','0254-600490','','','','Y',NULL,NULL,'2014-06-30',NULL),
+(309,'V0315','PBI','PRIMA BAKTI IDAMAN','JL.CAKUNG, JAKARTA TIMUR','',NULL,'JAKARTA','INDONESIA','','','','','','Y',NULL,NULL,'2014-06-30',NULL),
+(310,'V0316','JSN','JAYA SAKTI NOTEBOOK','HARCO MANGGA DUA, LT. 1 BLOK A1 NO. 94','',NULL,'JAKARTA','INDONESIA','021-6120630','-','','','','Y',NULL,NULL,'2014-07-07',NULL),
+(458,'V0464','MJS','MAHES JAYA STEEL, CV','JL. KH. MUSTAMIL LINK JERANG BARAT NO. 007 RT. 003/001',NULL,NULL,'CILEGON','INDONESIA','0254 7813221, 0817 6452 678','0254 386774','AWARA','ATAP BAJA',NULL,'Y',NULL,NULL,NULL,NULL),
+(312,'V0318','APJ','ARUM PUTRA JAYA','TAMAN WARNASARI INDAH BLOK FWA. 73 NO.12','RT. 10/04',NULL,'WARNASARI CITANGKIL CILEGON','INDONESIA','087871310021','','FATUROJI','','','N',NULL,NULL,'2015-07-29',NULL),
+(313,'V0319','AB','AR 3 BERSAUDARA','JL. RAYA BANTEN, KASUNYATAN','DEPAN MAULANA YUSUF',NULL,'KESEMEN SERANG BANTEN','INDONESIA','087871641169','','ANDI HASBI','','','N',NULL,NULL,'2015-07-29',NULL),
+(314,'V0320','LAM','LAS ALUMUNIUM','','',NULL,'CILEGON, BANTEN','INDONESIA','085218222058','','CAHYO MEGANTORO','ALUMUNIUM WELDING','','Y',NULL,NULL,'2014-07-17',NULL),
+(315,'V0321','BIJ','CV. BERKAH IMAN JAYA','KOMPLEK RSS PEMDA BLOK D 3 NO. 18','BANJARSARI, CIPOCOK JAYA',NULL,'SERANG, BANTEN','INDONESIA','087771009005, 081218534524','','SOIMAN','','','Y',NULL,NULL,'2014-07-23',NULL),
+(316,'V0322','AJM','ASRI JAYA MANDIRI','JL. KEMANGGISANPULO I NO. 21 C','',NULL,'JAKARTA BARAT','INDONESIA','021 53654070, 53652318','021 53652868','Bpk. DWI RIYANTO','','RETURN TONER PRINTER','Y',NULL,NULL,'2014-08-06',NULL),
+(317,'V0323','AJ','ANUGRAH JAYA, PD','KP. CAKAR II, DESA MELATI WARINGIN KURUNG','',NULL,'SERANG BANTEN','INDONESIA','085945694502','','Bpk. OJAT FAOJAT','','REK MANDIRI 163 000 105156 7 AN OJAT FAOJAT','Y',NULL,NULL,'2014-08-06',NULL),
+(318,'V0324','UT','UNITED TRACTOR Tbk.PT','Jl Raya Bekasi Km22, Cakung Jakarta 13910','',NULL,'Jakarta','Indonesia','021 460 5949 / 5959 / 5979','021 460 0657 / 0677, pssjkt@unitedtractors.com','Hendra Tanaya S, TEDDY','Suplier Heavy Equipment','UNIT, PART(Wahyu 081298555968, SERVICE (Nurcholik 0812 2608 714)','Y',NULL,NULL,'2015-06-26',NULL),
+(319,'V0325','API','ALLEGIANCE PRIMAPART INDONESIA','Ruko Mega Grosir Cempaka Mas F9 - F10, Jakarta Pusat 10640','',NULL,'JAKARTA','INDONESIA','021 4288 7149, 021 4666 9222','021 4288 6721','Eddy Purwanto','Spare Part, TOP 30 days','Mercedes, Volvo, Scania, Renault','Y',NULL,NULL,'2014-08-13',NULL),
+(320,'V0326','BS','BERKAT SEJAHTERA, CV','Jl.Gunung Sahari Raya No.2 Blok F16 Komplek Marina Mangga Dua Jakarta 14420',NULL,'mas001@cbn.net.id','JAKARTA','INDONESIA','021 645 1627, 1629','021 645 1633','Nathanael Terisno, Agus Darmawan','TOP 30 days','PART : General','Y',NULL,NULL,'2014-08-21',NULL),
+(321,'V0327','SK','SENTRA KANTOR','Jl. Kapten Tendean No.3 (Mampang Prapatan) Jak-Sel. (sebelah Hotel Maharaja)','',NULL,'JAKARTA','INDONESIA','021 6800 8785, 3200 1982','021 799 2536','HANDAYANI','Cash on Delivery','Office Furniture ','N',NULL,NULL,'2015-07-29',NULL),
+(322,'V0328','HK','HK TYRE. PT','Sovereign Plaza, 21st Floor, Jl TB Simatupang Kav. 36. Jakarta 12430','',NULL,'Jakarta','INDONESIA','021 2939 8826, 0811 900 3106','021 2939 8827','Ade Munaf, ade.munaf@ceat.in','TOP 30 days, registrasi 18 Aug 2014','Ban','Y',NULL,NULL,'2014-08-18',NULL),
+(323,'V0329','ADD','ASELI DAGADU DJOKDJA','JL. PAKUNINGRATAN NO 17 YOGYAKARTA','',NULL,'YOGYAKARTA','INDONESIA','0274 373 441','0274 373 493','FEBRIANA SUWARNINGSIH','COD','KAOS OLAH RAGA','Y',NULL,NULL,'2014-08-21',NULL),
+(324,'V0330','MJD','MANDIRI JAYA DIESEL. PD','Jl DELINGSENG NO.104, KEBONSARI - CITANGKIL','',NULL,'CILEGON','INDONESIA','0254 310 323, 0813 1919 0846','','JONI, MANDIRI 116 0000 240 359 a/n joni santosa','TOP 30 DAYS','REPAIR DYNAMO','Y',NULL,NULL,'2014-12-11',NULL),
+(325,'V0331','AJD','ALAM JATI DUA. PD','JL. CARGO PERMAI NO 1. UBUD DENPASAR - BALI','',NULL,'DENPASAR','INDONESIA','0361 4163 15','0361 4161 43','MOHAMAD SAIFUDIN. H','TOP DP 50%','RENTAL FORKLIFT','Y',NULL,NULL,'2014-09-03',NULL),
+(326,'V0332','AB','ARTHALAUT BUMIJASA. PT','JL. BUMI MASPION SELATAN II NO.8 (KAWASAN INDUSTRI ','JL. MARGOMULYO NO.44 KAV.EE 18 (PERGUDANGAN SRI MULIA PERMAI)',NULL,'SURABAYA','INDONESIA','031 3971 001','031 3984 918','DWI TRIWIBOWO','COD','RENTAL ALAT BERAT','Y',NULL,NULL,'2015-06-16',NULL),
+(327,'V0333','PKA','PRIMA KENCANA ABSOLUTE. CV','JL RAYA SERANG - CILEGON KM 8 KOMPLEK BUKIT KAWI BLOK E3-25 KRAMAT WATU - SERANG','',NULL,'CILEGON','INDONESIA','0254 823 5061','0254 823 5061','','','DIGITAL SCALE','N',NULL,NULL,'2015-07-29',NULL),
+(328,'V0334','KLS','KAWAN LAMA SEJAHTERA. PT','JL. AHMAD YANI NO.135 BLOK J-K CILEGON 42411','',NULL,'CILEGON','INDONESIA','0254 387 987','0254 391 327','EDY JUNAEDI','TOP 14 HARI','TOOL ','Y',NULL,NULL,'2014-09-16',NULL),
+(329,'V0335','TPA','TOKO PRIMA KENCANA','JL RAYA SERANG - CILEGON KM 8 KOMPLEK BUKIT KAWI BLOK E3-25 KRAMAT WATU','',NULL,'CILEGON','INDONESIA','0254 823 5061','0254 823 5061','PARDI','TOP 14 DAYS','SCALE EQUIPMENT','Y',NULL,NULL,'2014-09-16',NULL),
+(330,'V0336','TB','TEGAR BAN. CV','PURI HIJAU BLOK B2 / 20 CILEGON','',NULL,'CILEGON','INDONESIA','0878 7140 1088','','FARID EKO . S','TOP 14 DAYS','VULKANISIR BAN','N',NULL,NULL,'2015-07-29',NULL),
+(331,'V0337','NCM','NCM. CV','Krakatau Junction Mall Ruko no.38 Komplek KS. Cilegon','',NULL,'CILEGON','INDONESIA','081906486999/7113999 081380434999/9031999','','IR. NAZIR DS. MM.MBA','TOP COD',' IT EQUIPMENT, SERVICE','Y',NULL,NULL,'2014-09-17',NULL),
+(332,'V0338','NB','NUANSA BINTANG','JL EKONOMI NO 48B. KARANG ANYAR RAYA JAKARTA PUSAT','',NULL,'JAKARTA','INDONESIA','021 6250 886','021 6244 740','MARKUS','TOP','SPARE PART FORKLIFT','Y',NULL,NULL,'2014-09-17',NULL),
+(333,'V0339','DMP','DWI MAS PERKASA. PT','JL RAYA SUMAGUNG NO.28','dimas_mp86@yahoo.co.id',NULL,'JAKARTA','INDONESIA','021 5591 5980, 0877 8686 0888','021 55915979','DIMAS. MP','TOP 30 DAYS','MINYAK SOLAR','Y',NULL,NULL,'2014-09-18',NULL),
+(334,'V0340','HS','HARKAT SEJATI. CV','JL LIGKAR SELATAM KM 03 CIGODAG HRJATANI','PERUMNAS CIBEBER BLOK C/6 NO.14 CIBEBER CILEGON',NULL,'CILEGON','INDONESIA','0254 389 101','0254 389 101','SUHARTANTO','TOP 7 DAYS','KAYU ','Y',NULL,NULL,'2014-09-24',NULL),
+(335,'V0341','KIS','KRISBOW INDONESIA, PT. SOLO','RUKO SUDIEMAN NO 11 - 12 JL. ARIFIN SOLO 57129','',NULL,'SOLO','INDONESIA','0271 636 738','0271 664 738','ADITYA','TOP 14 DAYS','TOOL EQUIPMENT','Y',NULL,NULL,'2014-09-24',NULL),
+(336,'V0342','GM','GRAHA MANDIRI','JL AHMAD YANI NO88 / 113C - CILEGON',NULL,'wendycassidi@yahoo.com','CILEGON','INDONESIA','0254 392 257','0254 376 206','WENDY CASSIDI','TOP 30 D','TRUCK','Y',NULL,NULL,'2014-09-25',NULL),
+(337,'V0343','RTA','REGI TEKNIK ABADI','PCI BLOK D1 NO1 - CILEGON','(SAMPING ALFAMART PCI)',NULL,'CILEGON','INDONESIA','0254 7001 813, HP 0817 4966 385','','AAN','TOP CASH','BENGKEL MOBIL ANEKA MERK','Y',NULL,NULL,'2014-09-26',NULL),
+(338,'V0344','KI','KRISBOW INDONESIA. PT','Jl. Raya Narogong KM.7 Rawa Lumbu - Bekasi','',NULL,'BEKASI','INDONESIA','021.8229433','021.82429188','Yuni Fitria','TOP 14 D','TOOL ','Y',NULL,NULL,'2014-09-26',NULL),
+(339,'V0345','MA','MICROACCESS','JL JAMBORE RAYA BLOK V/1 NO2 VILLA CIBUBUR INDAH, CIBUBUR CIRACAS, JAK-TIM 13720','www.microaccess.co.id',NULL,'JAKARTA','INDONESIA','021 292 89 063 EXT 803','','BOWO','TOP CASH','SOFTWARE ','Y',NULL,NULL,'2014-09-30',NULL),
+(340,'V0346','MWM','MILAN WAHESTRA MANDIRI. PT','JL. RAYA KOSAMBI BARAT RT.03/02 KEL. KOSAMBI BARAT, KEC KOSAMBI - TANGERANG. BANTEN','',NULL,'TANGERANG','INDONESIA','0817 4110 920','','WAHYUDIN','TOP 30D','PAKAIAN SERAGAM','Y',NULL,NULL,'2014-10-01',NULL),
+(341,'V0347','FPS','FLUID POWER SUPLAY. TOKO','JL SEMARANG 94-124 SURABAYA','',NULL,'SURABAYA','INDONESIA','031 5353 500','031 5453 532','','TOP CASH','POMPA HYDRAULIK','Y',NULL,NULL,'2014-10-03',NULL),
+(342,'V0348','NJ','NEFA JAYA','PONDOK CILEGON INDAH D.75 NO1 CIBEBER - CILEGON','',NULL,'CILEGON','INDONESIA','0877 7333 1006, 0813 1047 0123','','MAMAN SUPARMAN','TOP 30 D','PALET 115 X 115','Y',NULL,NULL,'2014-10-03',NULL),
+(343,'V0349','AS','AA SEJAHTERA','JL RAYA CILEGON SERANG. SERDANG - CILEGON','TUGU PERBATASAN SERDANG BARAT',NULL,'CILEGON','INDONESIA','0254 380 310, 0813 9895 1991','0254 387 015','ANANG MULYADI','TOP CASH','SERVICE DINAMO','Y',NULL,NULL,'2014-10-03',NULL),
+(344,'V0350','ET','EVERECO TECH. PT','RUKO 5 NO.168A JL RAYA JAKARTA KM8 RANJENG,CIRUAS SERANG - BANTEN','',NULL,'SERANG','INDONESIA','0254 8285 686','0254 8285 679','YOPIE, BCA 4920134209','TOP CASH','JASA REPAIR  BATTERY ACCU','Y',NULL,NULL,'2014-12-18',NULL),
+(345,'V0351','KP','KIANIS PRATAMA. PT','KAWASAN PERGUDANGAN BIZPARK BLOK A2 NO1','JL RAYA BEKASI KM 21.5 PULO GADUNG JAK-TIM',NULL,'JAKARTA','INDONESIA','021 4683 0705, 4683 0706','021 4683 0708','JAKI LIE','TOP 30 D','JASA RENTAL FORKLIFT','Y',NULL,NULL,'2014-10-10',NULL),
+(346,'V0352','AJBS','ANAK JAYA BS. CV','LINK PABUARAN RT01/05','',NULL,'CILEGON','INDONESIA','0878 7193 3356, 0859 4516 0029','','MUHAMAD RIFAI','7 DAYS','KAYU','Y',NULL,NULL,'2014-10-14',NULL),
+(347,'V0353','CBS','CHABELINI BANTENINDO SUKSES. PT','RUKAN MEGA CILEGON BLOK A-3','cbscilegon@yahoo.co.id',NULL,'CILEGON','INDONESIA','0819 1112 1976','','IROM GUNAWAN','TOP 30 D','SPARE PART, FILTER','Y',NULL,NULL,'2014-10-15',NULL),
+(348,'V0354','VL','VIRLIE','MALL MGK MEGA GLODOK KEMAYORAN','LT. GF (GROUND FLOOR) BLOK A 10 NO. 1',NULL,'JAKARTA','INDONESIA','021 26646205, ','','Ibu. ANI','LEM BOSTIK','MANDIRI 119 000 551 4029 LIANA TANUDJAJA TARSIS','N',NULL,NULL,'2015-07-29',NULL),
+(349,'V0355','KE','KOBEXINDO EQUIPMENT. PT','JL. GARUDA NO 19 GUNUNG SAHARI SELATAN, KEMAYORAN JAKARTA PUSAT 10610','',NULL,'JAKARTA','INDONESIA','021 32530808, 4220808, 89140888','02142801390, 89141646','Bpk. OBED YUDI HARYANTO','TOP 14 D','EQUIPMENT','Y',NULL,NULL,'2015-02-26',NULL),
+(350,'V0356','JP','JAYA PER. UD','JL. RAYA ANYER LINK. PINTU AIR PANAUAN. KEL KUBANG SARI KM.13 CIGADING','',NULL,'CILEGON','INDONESIA','','','','CASH','TUKANG PER MOBIL','N',NULL,NULL,'2015-07-29',NULL),
+(351,'V0357','PE','PRO ENERGI. PT','GEDUNG GRAHA IRAMA LANTAI 5 UNIT G. JL H. RASUNA SAID BLOK X1 KAV1-2','',NULL,'JAKARTA','INDONESIA','021 5289 2321','021 5289 2310, dini@indonesia.proenergi.com','HANDININGSIH, dini.proenergi.@yahoo.com','TOP 30 D','SOLAR INDUSTRI','Y',NULL,NULL,'2014-12-22',NULL),
+(352,'V0358','DPS','DUTA PUTERA SUMATRA. PT','JL DI PANJAITAN NO. 138 JAKARTA 13410','',NULL,'JAKARTA','INDONESIA','021 859 07989','021 859 07780','RUDI SAUT SITORUS','TOP 30 D','BAN TRAILLER (EX)','Y',NULL,NULL,'2014-11-04',NULL),
+(353,'V0359','FPC','FEDIS PUTRA CILEGON. CV','JL. RAYA BOJONEGARA, DS KERTASANA','KOMPLEK BPI BL HB NO.6 PANGGUNGRAWI',NULL,'CILEGON','INDONESIA','0254 8494277, 5751610','0254 8494277, 5751610','ERNA WINARSIH','BANK MANDIRI 155-00-0223472-5','RENTAL FORKLIFT','Y',NULL,NULL,'2014-11-04',NULL),
+(354,'V0360','STM','SURYA TEHNIK MANDIRI. CV','JL. RAYA CILEGON KM.2 NO.39 SERANG - BANTEN','',NULL,'SERANG','INDONESIA','0254 202169','0254 203226','','CASH','BENGKEL BUBUT','Y',NULL,NULL,'2014-11-05',NULL),
+(355,'V0361','SRT','SRT','RUKO PCI','',NULL,'CILEGON','INDONESIA','','','','TOP CASH','BEARING','Y',NULL,NULL,'2014-11-06',NULL),
+(356,'V0362','JM','JAYA MORIA. PT','JL. KREKOT JAYA BLOK C2/D7 JAKARTA PUSAT','',NULL,'JAKARTA','INDONESIA','021 3442069, 0812 9184 865, 021 9808 5266','021 3505618','TOMMY','TOP 30D','GENERAL PART','N',NULL,NULL,'2015-07-29',NULL),
+(357,'V0363','IJTP','INDAH JAYA TEKNIK PRESISI. PT','KOMP GLODOK JAYA NO.14 JL. HAYAM WURUK - JAKARTA','',NULL,'JAKARTA','INDONESIA','021 5559375','021 5560596','EKO 0878 8177 2822','TOP 30D','SALE ','Y',NULL,NULL,'2014-11-11',NULL),
+(358,'V0364','BJC','BURSA JAYA CILEGON. CV','JL. RAYA MERAK NO 136E KOTA CILEGON 42411','',NULL,'CILEGON','INDONESIA','0254-387262, 384856','0254-387262','ELIANTO. S','TOP COD','POMPA AIR, SERVICE','Y',NULL,NULL,'2014-11-13',NULL),
+(359,'V0365','PBP','PANCA BINA PERSADA','JL. LAUTZE RAYA NO.63 JAKARTA','',NULL,'JAKARTA','INDONESIA','021 6220 3618, 6220 3619','021 6289 261, cahyadi_pbj@yahoo.com','CAHYADI','TOP 30D','GENERAL PART','Y',NULL,NULL,'2014-11-14',NULL),
+(360,'V0366','BT','BINTANG THERESYA','JL MAWAR I NO.14 CILEGON','',NULL,'CILEGON','INDONESIA','0818 4758 06','batee.tnb@gmail.com','H.BATEE.SH','CASH, BANK MANDIRI 155.0000.9094.92 a/n HAOGOLALA BATEE,SH','RENTAL FORKLIFT','Y',NULL,NULL,'2014-11-17',NULL),
+(361,'V0367','DSF','DIPO STAR FINANCE. PT','SENTRAL SENAYAN II 3RD FLOOR JL.ASIA AFRIKA NO.8 JAKARTA 10270','',NULL,'JAKARTA','INDONESIA','021 5795 4040, 0811 1537 646','021 5795 4053, mochamad.idris@dipostar.com, OPL.He','MOCHAMAD IDRIS','TOP DP','UNIT DUMP TRUCK, HINO RANGER','Y',NULL,NULL,'2014-11-18',NULL),
+(362,'V0368','SMT','SMT','JL INPRES NO.22 KRAMAT JATI JAK-TIM','',NULL,'JAKARTA','INDONESIA','021 2704 8481, 0818 0424 2956','021 2704 8481, smt.jakarta1@gmail.com','','TOP CASH','AC PANASONIC, SANYO','Y',NULL,NULL,'2014-11-18',NULL),
+(363,'V0369','BCL','BINTUNI CIPTA LESTARI. PT','RUKAN FRENCH WALK BLOK K-7 MOI (MALL OF INDONESIA). JL. RAYA BOULEVARD BARAT KELAPA GADING SQUARE. J','',NULL,'JAKARTA','INDONESIA','021 4586 7555','021 4586 7550, wbonggakarua@gmail.com','WARIS .B','TOP 30D','SOLAR INDUSTRI (HSD)','Y',NULL,NULL,'2014-11-20',NULL),
+(364,'V0370','BP','BINA PERTIWI','JL. RAYA BEKASI KM.22 JAKARTA 13910','',NULL,'JAKARTA','INDONESIA','021 4605952, 46823539, 46823540','021 4600903','YUNIS.R 0811 1042 972, KARYANA 0811 1550 339','TOP CASH','SERVICE UNIT KOMATSU','Y',NULL,NULL,'2014-11-20',NULL),
+(365,'V0371','GMMP','GUNUNG MORIA MEGA PRIMA. PT','JLN KEMBANG KENCANA BLOK A2 NO.3A-B JAKARTA','KOMP ARGABAJAPURA BLOK D8 NO5','admin2@gunungmoria.com','JAKARTA','INDONESIA','021 5890 5557, 0819 0647 2446','021 586 8345','MITA, DESTI, OKTAVIANTI','TOP 30D, PPN','HOSE, SEAL','Y',NULL,NULL,'2014-12-10',NULL),
+(366,'V0372','AT','ARTHA TELEKOMINDO','JL YASIN BEJI NO.6 WISMA KRAKATAU LT.2 CILEGON','',NULL,'CILEGON','INDONESIA','0254 389 516','0254 389 516, vemy.cahyasari@arthatel.co.id','VEMY CAHYASARI','TOP 30D,','JASA INTERNET DEDICATE SERVICE','Y',NULL,NULL,'2014-12-11',NULL),
+(367,'V0373','EI','EKADHARMA INTERNATIONAL. Tbk. PT','RUKO MODERN CIKANDE BLOK B NO.11 JL.RAYA SERANG KM 68. CIKANDE -SERANG','',NULL,'SERANG','INDONESIA','0254 402853, 9183709','0254 402853, sales@srg.ekadharma.com','SYARIF. H','','PRODUK : TAPE','Y',NULL,NULL,'2014-12-15',NULL),
+(368,'V0374','AAS','ANGGUN ADI SENTOSA. PT','JL. BOJONEGARA NO.65 DS KARANG TENGAH-KEDALEMAN-CIBEBER',NULL,'anggunadisentosa@yahoo.com','CILEGON','INDONESIA','0254 395081, 0812 1255 504','0254 848 8833','ISMAIL','TOP 30D','HSD (SOLAR)','Y',NULL,NULL,'2014-12-22',NULL),
+(369,'V0375','RBP','RIMASINDO BUANA PERKASA. PT','JL. TRIP JAMAKSARI GG NILA NO.23 CINANGGUNG - SERANG - BANTEN','',NULL,'SERANG','INDONESIA','0254 218 894','0254 206 694','BENNY R','TOP CASH','JASA FUMIGASI','Y',NULL,NULL,'2015-01-05',NULL),
+(370,'V0376','KAL','KAMAJAYA ANEKA LESTARI. PT','Jl. Raya Pandeglang Kp. Sempu kelapa endep Dpn. Giant kebon Jahe Kel. Cipare Kec. Cipocok Jaya City ','',NULL,'SERANG','INDONESIA','0254-9199671','0254-48496180, m.yunus@kamajayaanekalestari.com','YUNUS','TOP 30 D','BATTERY YUASA','Y',NULL,NULL,'2015-05-27',NULL),
+(371,'V0377','VBP','VULKANISIR BAN PERKASA','JL PUSPOWARNO SELATAN NO.23 SEMARANG','',NULL,'SEMARANG','INDONESIA','024 7600 929, 0828 9203 0737','024 7600 929','GIANTO PUTRA','','VULKANISIR BAN','Y',NULL,NULL,'2015-01-13',NULL),
+(372,'V0378','PT','PERDANA TEKNIK','JL A.YANI NO.141 B CILEGON','',NULL,'CILEGON','INDONESIA','0254 391 925, 375 425, 7050 390','0254 397 656','IWAN 0813 1706 6866','CASH','PERALATAN AC','Y',NULL,NULL,'2015-01-13',NULL),
+(373,'V0379','NGI','NASTRON GEMILANG INDONESIA','PERUMAHAN CITY RESORT RUKO MALIBU BLOK I NO.39 CENGKARENG','',NULL,'CENGKARENG','INDONESIA','021 2902 4820, 2902 4821','021 2902 4822, nastrongemilangindonesia@yahoo.co.i','SITI','TOP 30 D','LUBRICANT','Y',NULL,NULL,'2015-01-14',NULL),
+(374,'V0380','KM','KENCANA MOTOR','JL GATOT SUBROTO KM.8 JATAKE-KODYA TANGERANG','',NULL,'TANGERANG','INDONESIA','0254 591 9890','','','TOP CASH','GENERAL PART (TOKO)','Y',NULL,NULL,'2015-01-19',NULL),
+(375,'V0381','AP','ALMOND PRATAMA. CV','GRIYA PERMATA ASRI C2 NO12A JL.LINGKAR SELATAN - SERANG','',NULL,'SERANG','INDONESIA','0254 84 0957','0254 228 915','HERI RUSLI','TOP CASH','FIRE ALARM','Y',NULL,NULL,'2015-01-21',NULL),
+(376,'V0382','MR','MADU RAJA','JL RAYA ANYER - KUBANG SEPAT NO.71 CILEGON','ACCOUNT : BNI - REK NO 000 2070 328 A/N PUTIYAH',NULL,'CILEGON','INDONESIA','0254 374 160, 0878 7195 0037','','M. UMAR','TOP 14','TERPAL','Y',NULL,NULL,'2015-05-21',NULL),
+(377,'V0383','HAM','HIBAINDO ARMADA MOTOR','EXIT TOL CILEGON TIMUR. JL RAYA SERDANG NO.7 - SERDANG - KRAMAT WATU','',NULL,'SERANG','INDONESIA','0254 378 788, 0877 7852 0858','0254 378 790, donitasetiansyah@yahoo.com','DONI SETIANSYAH','','DEALER TRUCK','Y',NULL,NULL,'2015-01-27',NULL),
+(378,'V0384','HMM','HUDAYA MAJU MANDIRI. PT','JL. RAYA TEUKU UMAR KM.44 CIBITUNG - BEKASI 17520','GEDUNG MENARA HIJAU LT 12 WING SELATAN RUANG 1207 JL MT HARYONO KAV.33',NULL,'JAKARTA','INDONESIA','021 8833 8361, 7986 181','021 8833 8359, 7986 168','IIS SRIYANI 0816 1432 025','','AUTHORIZED DEALER HINO','Y',NULL,NULL,'2015-01-27',NULL),
+(379,'V0385','DMI','DAYAGUNA MOTOR INDONESIA. PT','JI. JEND SUDIRMAN NO.10 KOTA BARU CIKAMPEK 41373 - JAWA BARAT','',NULL,'CIKAMPEK','INDONESIA','0264 8389 105','0264 3016 39','','','PART HINO','Y',NULL,NULL,'2015-02-04',NULL),
+(380,'V0386','SDP','SARANA DWI PUTRA. PT','PERKANTORAN CILEGON HIGH WAY BLOK A NO.6-7. JL RAYA AKSES EXIT TOL CILEGON TIMUR. CILEGON','',NULL,'CILEGON','INDONESIA','0254 8494330','','JUJUG ROCHMAD','','RENTAL ALAT BERAT. BANK MANDIRI 155-000-1622-573','Y',NULL,NULL,'2015-02-16',NULL),
+(381,'V0387','PD','PANCA DEXALINDO','ROXI SQUARE LT1G BLOK A8 NO.1 JAKARTA','',NULL,'JAKARTA','INDONESIA','0813 1812 3880','','','CASH','PERALATAN TANKI','Y',NULL,NULL,'2015-02-17',NULL),
+(382,'V0388','BJ','BULUKUMBA JAYA','JL WIRASABA NO.109 ADIARSA BARAT - KARAWANG BARAT','',NULL,'KARAWANG','INDONESIA','0267 9075 366, 0838 9121 4466','jaya_bulukumba@yahoo.com','','TOP CASH','PART GENERAL','Y',NULL,NULL,'2015-02-17',NULL),
+(383,'V0389','MG','MULIA GEMILANG','MONJALI NO.40F GEMAWANG, YOGYAKARTA','',NULL,'YOGYAKARTA','INDONESIA','0274 742 4659, 0819 3216 6000','','Bpk. HARTONO','TOP CASH','PERLENGKAPAN SAFETY','Y',NULL,NULL,'2015-02-23',NULL),
+(384,'V0390','TR','TUNAS RIMBA. PD','LINK TERONDOL, KEL TERONDOL. RT03 / RW01 KEC SERANG','',NULL,'SERANG','INDONESIA','0817 6334 499','','MUHTADIN','','','N',NULL,NULL,'2015-07-29',NULL),
+(385,'V0391','MJL','MITRA JAYA LESTARI. CV','JL. TERATE LINK SEMENDARAN NO.17 RT03 RW RW03 KEL PANGGUNG RAWI KEC JOMBANG.','BANK MANDIRI a/n CV MITRA JAYA LESTARI REK NO 1630000872260',NULL,'CILEGON','INDONESIA','0254 929 3328','','LUKMANUL HAKIM','','UJI TYPE','Y',NULL,NULL,'2015-02-24',NULL),
+(386,'V0392','MP','MANDIRI PUTRA. CV','KAMPUNG CINGAGOLER RT. 01 RW. 05','DESA PANYAUNGAN, KEC. ',NULL,'LEBAK BANTEN','INDONESIA','081806130710','','H SALI PERMANA','','','Y',NULL,NULL,'2015-03-02',NULL),
+(387,'V0393','SMP','SAMPURNA. TK','JL. RAYA CILEGON KM 3 NO.4 (LEGOK)','',NULL,'SERANG','INDONESIA','0254 203485, 204688','0254 201600','','TOP CASH','ALAT ELEKTRIKAL','Y',NULL,NULL,'2015-03-09',NULL),
+(388,'V0394','MC','MUSTIKA CIGADING. CV','JL KI MUDAKIR LINK CIGADING RT02 RW01. TEGAL RATU - CIWANDAN','',NULL,'CILEGON','INDONESIA','0817 4940 720','mustikacigading77@gmail.com','MABRUR','30D','KAYU','N',NULL,NULL,'2015-07-29',NULL),
+(389,'V0395','DT','DAKARA CITRA TANGGUH','JL. PULO RIBUNG RT. 003 RE. 017','KEL. JAKA SETIA, KEC BEKASI SELATAN ',NULL,'BEKASI','INDONESIA','021 82424888','021 82434949','Ibu. ANNIS ANNAVI. R','','','Y',NULL,NULL,'2015-03-11',NULL),
+(390,'V0396','OA','OSHA ASIA. PT','JL KYAI MAJA NO.2 KEBAYORAN BARU. JAKARTA 12120','',NULL,'JAKARTA','INDONESIA','0218790 9333, 739 5555, 0812 9838 774','021 87909977, 87929292 , 7207855, ajie@drosha.com','JANUAR AJIE','','SAFETY SHOES','Y',NULL,NULL,'2015-03-16',NULL),
+(391,'V0397','TA','TEGUH ANUGRAH','SURABAYA','',NULL,'SURABAYA','','031 5453 569','031 5477 940','DEWI / NUGROHO','TOP CASH','MATERIAL BESI','Y',NULL,NULL,'2015-03-23',NULL),
+(392,'V0398','BCS','PT BUANA CENTRA SWAKARSA','JL.RAYA MERAK KM.115 , RAWA ARUM','GROGOL',NULL,'CILEGON, BANTEN','INDONESIA','0254-570555','0254-570666','-','','','Y',NULL,NULL,'2015-03-24',NULL),
+(393,'V0399','HS','HARDO SOLOPLAST. PT','JL. RAYA PALUR KM.8 KARANGANYAR','',NULL,'SOLO','INDONESIA','0271 825050','0271 825146','SITI','','FIBER PAPER','Y',NULL,NULL,'2015-03-26',NULL),
+(394,'V0400','OPE','OCEAN PETRO ENERGY. PT','JL. RAYA DAAN MOGOT KM.2 KOMPLEK RUKO WIJAYA KUSUMA NO.6V. JAKARTA','',NULL,'JAKARTA','INDONESIA','021 5655423','021 5655423','EDI SASMITO','TOP 30 D','HSD (SOLAR)','Y',NULL,NULL,'2015-04-08',NULL),
+(395,'V0401','MN','MITRA USAHA.CV (M.NET)','JL SEMAUN BAKRI NO.69 RT03/06 KALIWADAS - LOPANG. SERANG','',NULL,'SERANG','INDONESIA','0254 7111 110','','','','KONEKSI INTERNET','Y',NULL,NULL,'2015-04-27',NULL),
+(396,'V0402','PMP','PUTRA MEGA PURNAMA. PT','JL. RAYA PRANCIS KOSAMBI, DADAP - TANGERANG','FAX 021 2900 4972','prima.i@putramegapurnama.com','TANGERANG','INDONESIA','021 5592567, 5592568, 0821 1106 6629','021 5595 7512, putra_mega_purnama@yahoo.com','PRIMA ISWARA','TOP 30D','BAN MICHELIN','Y',NULL,NULL,'2015-05-05',NULL),
+(397,'V0403','YN','YENICO. CV','JL. BAKUNGAN WIDOMARTANI, NGEMPLAK, YOGYAKARTA','',NULL,'YOGYAKARTA','INDONESIA','0856 4303 0098','','','','','Y',NULL,NULL,'2015-05-20',NULL),
+(398,'V0404','AGF','APOTEK GRIYA FARMA','RUKO GRIYA BUKIT JAYA. BLOK A1 NO.16. GUNUNG PUTRI','',NULL,'BOGOR','','021 8686 0674','','','CASH','ALAT KESEHATAN','Y',NULL,NULL,'2015-05-21',NULL),
+(399,'V0405','SC','SICON TERMINAL. PT','JL. MEDAN BLOCK C03 KBN MARUNDA','',NULL,'JAKARTA','INDONESIA','0813 4722 2475','','AMIR','TOP DP','CONTAINER','Y',NULL,NULL,'2015-05-27',NULL),
+(400,'V0406','IBN','IIDAN BAJA NUSANTARA. PT','JL.DURI KOSAMBI RAYA NO.78V JAKARTA BARAT','',NULL,'JAKARTA','INDONESIA','021 2903 8374, 0821 2836 1988','021 2903 8371, heriibn@gmail.com','HERI','CASH','PERLENGKAPAN HOSE','Y',NULL,NULL,'2015-06-03',NULL),
+(401,'V0407','GTP','GOSON TRUCKPART','JL. TAMANSARI IV. NO16/6','',NULL,'JAKARTA','INDONESIA','021 6240 821','021 6240 822, gosontruckpart@yahoo.com','RISWANDI','TOP 30 DAY','PART','Y',NULL,NULL,'2015-06-03',NULL),
+(402,'V0408','CKG','CENTRAL KARPET / GORDIN','JL. SULTAN AGUNGTIRTAYASA NO.2 JOMBANG KALI','',NULL,'CILEGON','INDONESIA','0813 1804 5656, 0813 1040 8633','0254 391274','','CASH','KARPET, GORDIN','Y',NULL,NULL,'2015-06-04',NULL),
+(403,'V0409','DP','DIKA PRATAMA, PD','JL. RAYA MANCAK KM. 5 KP. CIPANAS KEC MANCAK',NULL,NULL,'SERANG BANTEN','INDONESIA','087809400999',NULL,'AGUS SUBIANTORO','TOP 7D','KAYU, BRI 34700 10215 71539, AHMAD SANWANI','N',NULL,NULL,'2015-07-29',NULL),
+(404,'V0410','NA','NOAH ARKINDO. PT','JL CIDENG BARAT NO.37 JAKARTA BARAT','',NULL,'JAKARTA','INDONESIA','021 6385 3830, 0817 7788 38','021 6385 3829','VALENTINA KARTIKA','','','Y',NULL,NULL,'2015-06-08',NULL),
+(405,'V0411','LTM','LAMDA TEKNIK MANDIRI.PT','JL.RAYA SERANG KM.8 PEJATEN KRAMAT WATU ','',NULL,'SERANG','BANTEN','0254-233408','0254233078','UBAD JUBAEDI','','','N',NULL,NULL,'2015-07-29',NULL),
+(406,'V0412','PB','PIJAR BINTANG. CV','KOMLEK TAMAN WARNA SARI FWA 104 NO.3 CITANGKIL','',NULL,'CILEGON','INDONESIA','0818 0828 8950, 0812 9895 1860','pijarbintangcv@gmail.com','SUHARYONO','CASH','RENTAL FORKLIFT','',NULL,NULL,'2015-07-13',NULL),
+(407,'V0413','CSA','CITRA SURYA AMILINDO. PT','JL PAHLAWAN SERIBU. RUKO GOLDEN BOULEVARD. BLOK C-32 DSD CITY','',NULL,'TANGERANG','INDONESIA','021 5316 7206 / 7, 0812 9800 1061','021 5316 7208 / 5','JIHANRIFA','TOP 30 D','PELUMAS','Y',NULL,NULL,'2015-06-18',NULL),
+(408,'V0414','APM','ANINDO PART MANDIRI. CV','JL.KEDONDONG III, NO 4A, RT/RW 010/06, SUNTER RAYA, JAKARTA UTARA','',NULL,'JAKARTA','INDONESIA','0813 8313 8313 021 29562101','021 65303843 ','TURIS','TOP 30D','PART','Y',NULL,NULL,'2015-06-23',NULL),
+(409,'V0415','SK','SINAR KIMIA','JLN. HOS COKRO AMINOTO NO. 14 CILEDUK KREO','',NULL,'TANGERANG','INDONESIA','021 7310025','021 7310025','Ibu. MARTINI','WANTEK, PEWARNA TEKTIL','','Y',NULL,NULL,'2015-06-24',NULL),
+(410,'V0416','ITS','ITEC SOLUTION INDONESIA','BOGOR NIRWANA RESIDENCE','JL. PADMA NIRWANA RAYA NO. 6 ',NULL,'BOGOR','INDONESIA','0251 7560193','0251 8715685','AHMAD SYUKRI','TES KEBISINGAN','','Y',NULL,NULL,'2015-06-24',NULL),
+(411,'V0417','AI','ASCENDO INTERNATIONAL. PT','JL. PALMERAH BARAT NO.8 RT03/RW03. GROGOL UTARA. KEBAYORAN LAMA. JAKSEL','',NULL,'JAKARTA','INDONESIA','021 5306 869 / 5308 151','021 5308 189','ADRIAN','TOP 60D','BAN VULK JADI','Y',NULL,NULL,'2015-06-29',NULL),
+(412,'V0418','GMI','GARUDA MART INDONESIA. PT','SAKURA REGENCY BLOK J5-8A. JAKARTA OUTER RING ROAD - JATIASIH','',NULL,'BEKASI','INDONESIA','021 8240 7309','021 8240 7323','BERNADETA ANNA','TOP 30D','ELECTRICAL PRODUCT','Y',NULL,NULL,'2015-07-03',NULL),
+(413,'V0419','SSI','SPANSET INDONESIA. PT','JL MARUNDA CENTER BLOK F NO.29. SEGARA MAKMUR - TARUMAJAYA','',NULL,'BEKASI','INDONESIA','021 2851 0077','021 2851 0088','SUKRISNO','CASH','SPANSET','Y',NULL,NULL,'2015-07-27',NULL),
+(414,'V0420','SCI','SADIKUN CHEMICAL INDONESIA. PT','JL. PINANGSIA TIMUR 4A JAKARTA 11110','',NULL,'JAKARTA','INDONESIA','021 6262121 / 571554','021 6598508 / 572473','Bpk. AGUS GENTA, Ibu, ANI','','ASPAL DRUM','Y',NULL,NULL,'2015-07-29',NULL),
+(415,'V0431','KBG','KARYA BAJA CIGADING. CV','JL. CIGADING NO.1 PINTU AIR, KUBANGSARI - CIWANDAN','',NULL,'CILEGON','INDONESIA','0254 312 343, 0813 8655 9601','','H. ABDULLAH','TOP CASH','KAYU KELAPA','Y',NULL,NULL,'2015-09-14',NULL),
+(416,'V0421','CKBP','CAMAR DIESEL','JL RAYA C/47 KARANG ANYAR. SAWAH BESAR, JAKARTA PUSAT',NULL,'camarkbp@gmail.com','JAKARTA','INDONESIA','021 6245 955 / 6','021 6290 489','SURANTO','30D','GENERAL PART, VELG','Y',NULL,NULL,'2015-08-03',NULL),
+(417,'V0422','ZHR','ZAHRAA PALET','JL RAYA KEDAWUNG - (SEBELAH BARAT) BELAKANG PERUM KEDAWUNG','',NULL,'CILEGON','INDONESIA','0821 3340 3363','','NURCHOLIS. A','TOP 30D','PALLET','Y',NULL,NULL,'2015-08-18',NULL),
+(418,'V0423','DMM','DWI MULTI MAKMUR','JL KAPUK MUARA NO.7 KOMP DUTA HARAPAN INDAH BLOK OO NO.12 JAK-UT','',NULL,'JAKARTA','INDONESIA','021 6669 4881 / 82','021 6669 4883','NICO','TOP 30D','HEAVY EQUIPMENT PART','Y',NULL,NULL,'2015-08-20',NULL),
+(419,'V0424','UDN','U D I N','JAKARTA','',NULL,'JAKARTA','INDONESIA','0877 3387 6249','','UDIN','TOP CASH','PART COPOTAN','Y',NULL,NULL,'2015-08-20',NULL),
+(420,'V0425','WAST','WH AST','JL GAMBIRAN NO.88, PANDEYAN YOGYAKARTA','',NULL,'YOGYAKARTA','INDONESIA','','','ANDI CAHYO','TOP CASH','JASA RENTAL GUDANG','Y',NULL,NULL,'2015-08-25',NULL),
+(421,'V0426','RM','RIAN MOTOR','JL KEMANG PUSRI - KEMANG SERANG','',NULL,'SERANG','INDONESIA','0254 205 170','','','TOP CASH','PART','Y',NULL,NULL,'2015-08-25',NULL),
+(422,'V0427','TTC','TUNAS TOYOTA CILEGON','JL. RAYA CILEGON KM. 14 ','',NULL,'CILEGON BANTEN','INDONESIA','0254 394777, 087771444077','0254 391580','Bpk. DHODHO','','','Y',NULL,NULL,'2015-09-02',NULL),
+(423,'V0428','SR','SUMBER REJEKI TEHNIK','KOMPLEK RUKO PCI',NULL,NULL,'CILEGON BANTEN','INDONESIA','0254 387755',NULL,'Bpk. AHIN','TOP CASH','BEARING, SEAL','Y',NULL,NULL,'2015-09-16',NULL),
+(424,'V0429','GSU','GEMALA SARANAUPAYA. PT','JL SEMPER TIMUR NO.3 - CILINCING JAKARTA 14130','',NULL,'JAKARTA','INDONESIA','021 4403 068. 4400 526','0214403 062. cservice@gsu.co.id','AKHI B.SUSETYO','TOP COD','TRANSPORTATION EQUIPMENT','Y',NULL,NULL,'2015-09-07',NULL),
+(425,'V0430','TJM','TRI JAYA MANDIRI','KOMP TWI. FW A 90/01 RT03 RW06 KEL WARNASARI - CITANGKIL','',NULL,'CILEGON','INDONESIA','0254 931 0560, 0878 0854 9096','cvtjm@yahoo.co.id','SLAMET RIYADI','TOP CASH','MAINTENANCE ALAT BERAT','Y',NULL,NULL,'2015-09-10',NULL),
+(426,'V0432','AA','ARTA ABADI. PT','BATIK VILAGE LIPPO CIKARANG. JL KARET IV BLOK H NO.36. CIKARANG',NULL,'Andrian.lim@e.pthunga.com','CIKARANG SELATAN','INDONESIA','021 8990 6748, 8972 063, 0878 0232 312','021 8990 6747','ANDRIAN LIM','TOP 30D','BAN','Y',NULL,NULL,'2015-10-08',NULL),
+(427,'V0433','RJT','ROJATEK. CV','JL. ROROTAN 9 RT17 / RW7. NO.40 JAKARTA UTARA','',NULL,'JAKARTA','INDONESIA','021 4485 1368, 0813 8122 2334','021 4485 1567. claudia@rojatek.com','DEDI','TOP 30D','PART','Y',NULL,NULL,'2015-10-26',NULL),
+(428,'V0434','DD','DERMAGA DINAHASA. CV','JL. PABEAN NO.53 PURWAKARTA CILEGON','',NULL,'CILEGON','INDONESIA','0254 386876, 0878 7138 6227','0254 386876','BPK . HASNI','','BAK DUMP TRUCK','Y',NULL,NULL,'2015-10-28',NULL),
+(429,'V0435','CC','CENTRALINDO COMPUTER','JL. AHMAD YANI UTARA 162B','',NULL,'BALI','INDONESIA','0361 413915, 413916','0361 413916','HERY','CASH','KOMPUTER','Y',NULL,NULL,'2015-11-03',NULL),
+(430,'V0438','WEI','WORLD EXPERT INDONESIA','JL. ALTERNATIF CILEUNGSI, KOMPLEK TAMAN METROPOLITAN LAND TRANSYOGI - GREEN PALMA. BLOK TANJUNG XIV ','',NULL,'BOGOR','INDONESIA','021 2962 8514','021 2962 8515','MARDO','14 D','PALET OVEN','Y',NULL,NULL,'2015-11-09',NULL),
+(431,'V0439','SM','SUTANTO MOTOR','JL. RAYA LABUAN - PANDEGLANG KM 4.5 - KP KADU JAWER',NULL,NULL,'PANDEGLANG','INDONESIA','0877 7323 7404',NULL,'SUTANTO',NULL,'BENGKEL','Y',NULL,NULL,'2015-11-16',NULL),
+(432,'V0440','AGP','ASTRAGRAPHIA XPRINS INDONESIA','JL. SISWA NO. 23 SUKA ASIH',NULL,NULL,'TANGERANG','INDONESIA','021 5526818, 0254 383106','021 5526491, 0254 383107','JAMIL','KERTAS A4',NULL,'Y',NULL,NULL,NULL,NULL),
+(433,'V0441','QJA','QUARANTA JAYA ABADI ,CV','JALAN MAULANA YUSUF No. 100 CILEGON',NULL,'gsr.aslinda@yahoo.com','BANTEN','INDONESIA','0254 - 394546','(0254)- 394546','Ir. H. Nasir',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(435,'V0442','JV','JAYA VULKANIN','JL. JEND AHMAD YANI NO.20 - SUKMAJAYA CILEGON','JL. RAYA BOGOR KM.52 KEDUNG HALANG - BOGOR 16710','jayavulkanin@yahoo.co.id','CILEGON','INDONESIA','0254 393 400,  0251-865 2860','0254 392 123, 0251 865 2914','YUDI PRATAMA','TOP 30D','BAN, JASA VULKANISIR','Y',NULL,NULL,NULL,NULL),
+(436,'V0443','UB','URBAN TAILOR .CV','JL. KH ISHAK NO.71 LINGKUNGAN','SENEJA,  SAMPING MASJID AL JAMI','yulianti.nurmaladewi@yahoo.com','CILEGON BANTEN','INDONESIA','0254 381718, 087871866524','0254 381718','YULIANTI NURMALA. D',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(437,'V0444','HMSI','HINO MOTORS SALES INDONESIA','Jl. RAYA GATOT SUBROTO KM. 8,5  TANGERANG 15111, BANTEN',NULL,'Renaldy.Rifai@hino.co.id','TANGERANG','INDONESIA','021 591 8844,  0811 812 6227','021 591 7887','Renaldy Rifai','TOP 30 D','PART HINO','Y',NULL,NULL,NULL,NULL),
+(438,'V0445','ABN','ALBANTANI. CV','JL. MAYJEN. SUTOYO KM. 7 NO 02 RAWA ARUM',NULL,NULL,'CILEGON BANTEN','INDONESIA','0254 572581, 081381316787',NULL,'H. SUJAWNDI',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(439,'V0446','BCS','PEMBELIAN CASH TIDAK RUTIN',NULL,NULL,NULL,'CILEGON BANTEN','INDONESIA',NULL,NULL,'PROCUREMENT',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(440,'V0447','SJ','SUBUR JAYA','JL. RAYA SERANG, PAKUPATAN',NULL,NULL,'SERANG','INDONESIA',NULL,NULL,NULL,'TOP CASH','PART','Y',NULL,NULL,NULL,NULL),
+(441,'V0454','MAB','MITRA AGUNG BAN','JL. RAYA MERDEKA KM. 1,7 NO.178 CIMONE - TANGERANG',NULL,NULL,'TANGERANG','INDONESIA','021 552 3526,  553 2004','021 552 3289','HARDJAKA','TOP 60 D','BAN','Y',NULL,NULL,NULL,NULL),
+(442,'V0451','SFA','SARANA FORINDO ABADI, CV','PERUM BEKASI REGENSI I BLOK L3 NO. 12A',NULL,NULL,'CIBITUNG BEKASI','INDONESIA','021 29255112, 0856 95707016','021 29255112','RUMBA PRAJA PUTRA','SPAREPART SWEEPER',NULL,'Y',NULL,NULL,NULL,NULL),
+(443,'V0452','BJM','BINTANG JAYA MAKMUR','JL. RAYA SERANG KM 14 SENTUL, KRAGILAN',NULL,'bintang_jayamakmur@yahoo.com','SERANG BANTEN','INDONESIA','087808600805, 081289887930',NULL,'Bpk. ARIF. RH','SUPLIER ACCU',NULL,'Y',NULL,NULL,NULL,NULL),
+(444,'V0453','ESC','ESC INDONESIA','JL. UTAMA DAYU Gg. JAMBU NO. 10 KALIURANG KM 8.7',NULL,NULL,'YOGYAKARTA','INDONESIA','081326435267',NULL,'HERIANTI SUZANA','CETAK BUKU',NULL,'Y',NULL,NULL,NULL,NULL),
+(445,'V0449','SJ','SUMBER JATI','DESA KALIBULI',NULL,NULL,'CIREBON','INDONESIA',NULL,NULL,'BOWO',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(446,'V0450','MJ','MUTUCHEM JAYA','JL. RAYA KRENCENG CILEGON. TEGAL TONG 17/06. KEBONSARI - CITANGKIL',NULL,NULL,'CILEGON','INDONESIA','0254 310252, 399768','0254 310252','SARAH, MARSONO','14 DAY','CHEMICAL','Y',NULL,NULL,NULL,NULL),
+(447,'V0455','JEG','JUCHANAH EXCELLENT GLOBAL, PT','KOMP. PELINDO II BLOK A1 NO .5 JL.ARTERI MARUNDA, CILINCING, JAKARTA UTARA 14120',NULL,'faizal@juchanah.com','JAKARTA UTARA','INDONESIA','021-4402224','021-4402295','FAIZAL MUZAKI',NULL,'BATTERY','Y',NULL,NULL,NULL,NULL),
+(448,'V0448','SJY','SUMBER JAYA. PD','JL. RAYA PETIR KM.3 NO.44 CIPOCOK JAYA',NULL,NULL,'SERANG BANTEN','INDONESIA','081293550725, 087871139607',NULL,'PAK JAYA',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(449,'V0456','DHI','DAI HAN INDAH, PT','JL. RAYA SERANG PANDEGELANG KM 9 PAL. 6',NULL,NULL,'SERANG BANTEN','INDONESIA','0254 250401','0254 250413','Mr. LEE YUN GYU','OVEN KAYU',NULL,'Y',NULL,NULL,NULL,NULL),
+(451,'V0457','XX','XXX',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(452,'V0458','GIS','GLOBAL INTERNUSA SENTOSA','PERUM DAAN MOGOT BARU BLOK KJE NO. 15',NULL,NULL,'KALIDERES JAKARTA BARAT','INDONESIA','021 29028980','021 54373980','YULIUS TERIANTO ATMA',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(453,'V0459','AF','ALFA KIMIA','JL. RAYA CILEGON A. YANI NO. 50C KP. SAWAH',NULL,NULL,'CILEGON BANTEN','INDONESIA','0254 9100831','0254 399705',NULL,NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(454,'V0460','TC','TEKNIKA COKRA','JL. TAMAN SARI IV NO 57',NULL,'tc.cokra@yahoo.com','JAKARTA BARAT','INDONESIA','021-6268078  ,021-6268077','021-6267055','AJI / TURIS',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(455,'V0461','PTE','PARAHYANGAN TRANS EXPRESSINDO, PT.','JL. SUDIRMAN NO. 614',NULL,NULL,'BANDUNG INDONESIA','INDONESIA',NULL,NULL,'LIM MENA RONALD',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(456,'V0462','JAE','JAYA ABADI ELEKTRONICS','JL.DANAU INDAH  XVI BLOK B10 No.25','SUNTER',NULL,'JAKARTA','INDONESIA','08128418887',NULL,'TRI WIDODO',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(457,'V0463','MKW','MULIA KARYA WIGUNA, CV','MAHAR REGENCY BLOK D NO. 10',NULL,NULL,'SERANG BANTEN','INDONESIA','087771021010',NULL,'ACHMAD SAFEI','CLEANING KURSI KANTOR',NULL,'Y',NULL,NULL,NULL,NULL),
+(459,'V0465','LSI','LURCH SIRA INDONESIA, PT','KOMP. PCI BLOCK C NO. 22 RT. 001/005 CIBEBER','JL. RAYA GEREM NO. 50 MERAK','lurchindonesia@gmail.com','CILEGON BANTEN','INDONESIA','0254 574987','0254 574946','HARISA P. PUTRI','REFIL APAR',NULL,'Y',NULL,NULL,NULL,NULL),
+(460,'V0466','GK','GENTA KARYA, CV','JL. KABUPATEN KM.2 PANGGUNG NO.5','TRIHARJO GAMPING SLEMAN','cv.gentakarya@yahoo.com','YOGYAKARTA','INDONESIA','0274 626636, 081931724145',NULL,'DIMAS ANANG SUSETYOKO, SE',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(461,'V0467','MBJ','MANDIRI BANGKIT JAYA, PT','JL. RAYA NAROGONG KM. 23 CILEUNGSI',NULL,'mandiribangkitjaya@gmail.com','BOGOR','INDONESIA','021 82496746','021 8230631','ERIK HAERUDIN',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(464,'V0469','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(158,'V0000','TSP','TIGA SAPUTRA, UD','JL. MAYOR OKING NO.11 CITEUREUP BOGOR, JAWA BARAT',NULL,'danielmandiri@yahoo.co.id','BOGOR','INDONESIA','08770261299','021 87943280','DHANIEL',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(466,'V0470','UPT','USAHA PUTRA TERPEDO, CV','TEGAL WANGI RAWA ARUM TR. 02/02',NULL,NULL,'CILEGON BANTEN','INDONESIA','085945160029',NULL,'ALI FIKRI',NULL,'SUPLIER KAYU','Y',NULL,NULL,NULL,NULL),
+(467,'V0471','RR','RR DESIGN KONVEKSI','LINK. TEGAL WANGI SOLOR RT. 002/006','RAWA ARUM GROGOL',NULL,'CILEGON BANTEN','INDONESIA',NULL,NULL,'Bpk. RIWANUDIN',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(468,'V0472','','GARUDA PRATAMA MUKTI, PT','JL.RAYA SERANG - JAKARTA KM. 7 PELAWAD, CIRUAS','SERANG - BANTEN','syam81.steelsupply@gmail.com','SERANG - BANTEN',NULL,'0254-8286333','0254-283518','SYAM',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(469,'V0473','KBI','KARUNIA BERCA INDONESIA, PT','KAWASAN INDUSTRI KIEC','JL.EROPA I, KAV. G2',NULL,'CILEGON BANTEN','INDONESIA','0254. 394133','0254. 394134','Bpk. YANUAR','PELAPISAN GALVANIS',NULL,'Y',NULL,NULL,NULL,NULL),
+(470,'V0474','GAI','GLOBAL AUTO INDONESIA','PERKANTORAN NIAGA KALIMAS II','JL. INSPEKSI KALIMALANG BLOK B 12 TAMBUN SELATAN','yudistira.globalautoindonesia@gmail.com','BEKASI','INDONESIA','021 88368034, 082298633559',NULL,'Bpk. RIVO YUDISTIRA','SUPLIER ACCU TROJAN',NULL,'Y',NULL,NULL,NULL,NULL),
+(471,'V0475','','INTI LINGGA SUKSES, PT','KOMP. MEGA GROSIR CEMPAKA MAS BLOCK A NO.20','JL.RAYA LET.JEND.SUPRAPTO','lingga@cbn.net.id','JAKARTA PUSAT','INDONESIA','021-42876828','021-42876654','WULAN BANUATI','FUEL',NULL,'Y',NULL,NULL,NULL,NULL),
+(472,'V0476','BBPK','BALAI BESAR PULP DAN KERTAS','BADAN PENELITIAN DAN PENGEMBANGAN INDUSTRI','JL. RAYA DAYEUHKOLOT NO. 132',NULL,'BANDUNG','INDONESIA','022 5202980, 5202871','022. 5202871','Bpk. ANDOYO SUGIYARTO',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(473,'V0477','PSC','PRIMA SARANA COMPUTER','HARCO MANGGA DUA  LANTAI 3 BLOK A NO. 118A',NULL,'primasaranacom@gmail.com','JAKARTA PUSAT','INDONESIA','081319908164',NULL,'Ibu. WIJININGSIH',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(474,'V0478','YK','YUDHITAMA KC, CV','KOMP BUMI PANGGUNG RAWI INDAH BLOK L1. NO. 1',NULL,NULL,'CILEGON BANTEN','INDONESIA','0254 233350',NULL,'IYUS FIRDAUS','KAYU',NULL,'Y',NULL,NULL,NULL,NULL),
+(475,'V0479','NA','NUURUL A\'LAA, CV','KOMPLEK GRIYA SERDANG INDAH BLOK F 1 NO. 10 SERDANG',NULL,NULL,'SERANG BANTEN','INDONESIA','0254 383353, 087771588363',NULL,'EMAN','KAYU',NULL,'Y',NULL,NULL,NULL,NULL),
+(476,'V0480','JHM','DJAJA HARAPAN MAKMUR. PT','JL.DANAU SUNTER BARAT A2-9 SUNTER AGUNG',NULL,'catur@djajaharapan.com','JAKARTA UTARA','INDONESIA','021-29461333','021-29384671','CATUR BUDI PRASETYO','PART BEARING',NULL,'Y',NULL,NULL,'2016-10-19',NULL),
+(477,'V0481','','TRASINDO SENTOSA. PT','JL.RAYA SERANG CILEGON NO.5',NULL,'trasindo.sentosa@yahoo.com','BANTEN','INDONESIA','0254-390666','0254-376777','INA KARTIKA',NULL,'FLUID','Y',NULL,NULL,NULL,NULL),
+(478,'V0482','MJA','MANDIRI JAYA, CV','PORIS INDAH BLOK.  C NO. 659 RT. 010/06, KEC. CIPONDOH',NULL,NULL,'TANGERANG BANTEN','INDONESIA','021 5912808, 0811187793','021 5913048','Bpk. YACOBUS. THE','PALLET SEMEN',NULL,'Y',NULL,NULL,NULL,NULL),
+(479,'V0483','ABL','ANUGERAH BUANA LANCAR','Gedung Maribaya Lantai 3 Jl. Otista Raya No.141 Bidara Cina',NULL,'pipit.abl.2016@gmail.com','Jakarta','Indonesia','021-21281211','021-29875131','PIPIT',NULL,'FLUID','Y',NULL,NULL,NULL,NULL),
+(480,'V0484','MSK','MITRA SENDANG KEMAKMURAN, PT','FIF GROUP CABANG CILEGON','RUKO PCI BLOK KK 1 NO.5',NULL,'CILEGON','INDONESIS','087772536198',NULL,'NIKEN',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(481,'V0485','SPM','SOLUSI PRIMA MANDIRI','KOMPLEK PERKANTORAN TAMAN SURYA 1 BLOK A/12A','JL. DAAN MOGOT KAV.100','adm.solusiprimamandiri@gmail.com','JAKARTA','INDONESIA','021-5663237',NULL,'ANISA',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(482,'V0486','AJP','ANDARU JAYA PERDANA, PT','PERUM GOLDEN PARADISE BLOK A/6 TR. 02/11','LONTAR BARU','andaruajp@gmail.com','SERANG BANTEN','INDONESIA','0254 222519',NULL,'Bpk. BUDI',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(483,'V0487','JBY','JAYA BAYA','RAWA ARUM',NULL,NULL,'CILEGON','INDONESIA','087774602350',NULL,'NASEHUDIN',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(484,'V0488','JB','JAGA BAYA. CV','JL. PUSKESMAS RAWA ARUM NO. 50 LINK RT. 05/03',NULL,NULL,'CILEGON BANTEN','INDONESIA','087774602350',NULL,'NASEHUDIN',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(485,'V0489','JL','JAYA LANGIT, CV','JL. YOS SUDARSO LINK. SUKASARI KEL. TAMANSARI KEC. PULOMERAK',NULL,'cvjayalangit@gmail.com','CILEGON BANTEN','INDONESIA','087871120151',NULL,'AZIZ ALLMAN WIMANJAYA',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(486,'V0490','FUJ','FAJAR UJUNG KULON, CV','JLN. RAYA CIBALIUNG KP.REUNGHAS DESA CITEREUP KEC. PANIMBANG',NULL,'cv.fajarujung.kulon@gmail.com','PANDEGELANG BANTEN',NULL,'08777250455',NULL,'Bpk. EMAN','BNI 0448095937 A.N EMAN',NULL,'Y',NULL,NULL,NULL,NULL),
+(487,'V0491','NAE','NUSA ABADI ELECTRIC','RUKO SIMPRUNG PORIS BLOK A4 NO.15','JL. MAULANA HASANUDIN CIPONDOH',NULL,'TANGERANG BANTEN','INDONESIA','021 5547959, 55751029','021 55750385','VERA LESTARI','SERVICE AC',NULL,'Y',NULL,NULL,NULL,NULL),
+(489,'V0000','ALN','ALUN, PT','JL. KOMARUDIN KM 23','CAKUNG','service.cakung@ptalun.com','JAKARTA','INDONESIA','021-4615657  08118305389','021-4615658','SIGIT HARDOYO',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(490,'V0000','CDS','CATUR DAMAI SEJAHTERA, PT','JL.INDUSTRI RAYA III, KOMPLEX FACTO C1','JATAKE','fansugi@yahoo.com','TANGERANG','INDONESIA','021-5667330','021-563231','PAURI',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(491,'V0000','SMA','SARANA MULTI ANUGERAH, PT','JL. BHAYANGKARA RAYA 5A, SERPONG UTARA',NULL,'tri@sma-tire.com','TANGERANG SELATAN','INDONESIA','021-53124120-21','021-53124393','TRI RAHWANTO','TIRE',NULL,'Y',NULL,NULL,NULL,NULL),
+(492,'V0000','SL','SHILA, PD','BATU KUDA , MANCAK',NULL,NULL,'SERANG BANTEN','INDONESIA','081906083697',NULL,'BPK. UDIN',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(493,'V0000','','PAURI','JL.INDUSTRI RAYA III, KOMPLEX JATAKE',NULL,'fansugi@yahoo.com','TANGERANG','INDONESIA','021-5667330','021-563231','PAURI',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(494,'V0000','MK','MILIK KITA, CV','LINK TERONDOL RT. 03/01 TERONDOL',NULL,NULL,'SERANG BANTEN','INDONESIA','087808960405',NULL,'MUHAMAD YUDA, MUHTADIN',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(495,'V0000','MKS','MITRA KARUNIA SELARAS, PT','JL. KH AGUS SALIM KEC CITANGKIL',NULL,'nardi.muslim@gmail.com','CILEGON BANTEN 42435','INDINESIA','087880943535, 085778105997',NULL,'SUNARDI','PERCETAKAN',NULL,'Y',NULL,NULL,NULL,NULL),
+(496,'V0000','LD','LA\'MINDA DECORATION','PONDOK CILEGON INDAH D 99 NO. 6',NULL,NULL,'CILEGON BANTEN','INDONESIA','0254 376113, 081318230333',NULL,'Bpk. AMRI THOIB','GORDENG',NULL,'Y',NULL,NULL,NULL,NULL),
+(497,'V0000','KA','KHARISMA, CV','JL. LINGKAR SELATAN KOMP. BUKIT PERMAI BLOK B NO. 2',NULL,'cv_kharisma@yahoo.com','SERANG BANTEN','INDONESIA','087871395973',NULL,'ISHAK ISWOYO',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(498,'V0000','AKM','AGUNG KARYA MANDIRI','RAHAYU RESIDENT BLOK D. 5 NO. 03','JL. KH SULAIMAN LINK CANTILAN KELAPA DUA',NULL,'SERANG BANTEN','INDONESIA','08532683600',NULL,'IBU WILIS',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(499,'V0000','BSJ','BERKAH SAFETINDO JAYA','CITEREUP',NULL,NULL,'BOGOR','INDONESIA','085310028826',NULL,'SUKARNO','SERAKAM DAN ALAT SAFETY',NULL,'Y',NULL,NULL,NULL,NULL),
+(500,'V0000','MYH','MUSYAROFAH','JAKARTA',NULL,'cv.suryajaya28@gmail.com',NULL,NULL,'0221-6336590/6346601',NULL,'mia musyarofah',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(501,'V0000','CVP','CCTV  PRO','JL. HAYAM WURUK, LINDETEVES TRADE CENTER (LTC)','LANTAI 1 BLOK C2 NO.0','sscctvpro@yahoo.co.id','JAKARTA','INDONESIA','021-601162',NULL,NULL,NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(502,'V0000','KSA','KREASI SOLUSINDO AKADEMIKA, PT','JL. OTISTA RAYA NO.3 NO. 117',NULL,'tasya.nid@gmail.com','JAKARTA','INDONESIA','087882116646',NULL,'Ibu. TASYA NUR INTAN DEWI',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(503,'V0000','JBD','JUBAEDI','JL. SUNAN DRAJAT, LINK KARANG JETAK,',NULL,NULL,'CIWANDAN CILEGON','INDONESIA','0877871059722',NULL,'JUBAEDI',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(505,'V0000','TAJ','TOKO AJI JAYA','JL. LISTAS PENGHUBUNG TOL CILEGON BARAT NO. 02',NULL,NULL,'CILEGON BANTEN','INDONESIA','0254 571650, 574166','0254 574166','SUNAJI, SHI',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(506,'V0000','TW','TWIN PHOTO, VIDIO','JL. TB SUEB RT. 02/02 SERANG',NULL,'admin@twin-photo.com','SERANG BANTEN','INDONESIA','0254 204158, 08989663586',NULL,'FEBRI',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(507,'V0000','EPO','EXPO MANDIRI. PT','KOMP. CILEGON BUSSINES SGUARE B18',NULL,'pt.expro_mandiri@yahoo.co.id','CILEGON BANTEN','INDONESIA','0254 8493572','0254 386246','Ibu. ENTRI MARLINI',NULL,NULL,'Y',NULL,NULL,NULL,NULL),
+(508,'V0000','IPP','INDOPLASTIK PERSADA, CV','PERUM. GRAHA DE\' FATH - KAV 04, JL. DIPONEGORO, TANGKILSARI','TAJINAN 65172 - MALANG','indoplastikpersada@gmail.com','JAWA TIMUR','INDONESIA','08191114267 021283600567',NULL,'IBU VIKA',NULL,NULL,'Y',NULL,NULL,NULL,NULL);
+
+/*Table structure for table `message` */
+
+DROP TABLE IF EXISTS `message`;
+
+CREATE TABLE `message` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` datetime NOT NULL,
+  `to` varchar(220) DEFAULT NULL,
+  `subject` varchar(220) DEFAULT NULL,
+  `from` varchar(225) DEFAULT NULL,
+  `from_id` int(23) DEFAULT NULL,
+  `message` text,
+  `description` varchar(252) DEFAULT NULL,
+  `image` varchar(252) DEFAULT NULL,
+  `document` varchar(252) DEFAULT NULL,
+  `remark` varchar(252) DEFAULT NULL,
+  `status_pesan` varchar(80) DEFAULT 'sent',
+  `bool` bit(1) DEFAULT NULL,
+  `draft` bit(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `message` */
+
+/*Table structure for table `mpd` */
+
+DROP TABLE IF EXISTS `mpd`;
+
+CREATE TABLE `mpd` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_header` int(11) DEFAULT NULL,
+  `product_id` varchar(20) DEFAULT NULL,
+  `qty` int(11) DEFAULT NULL,
+  `created_by` varchar(100) DEFAULT NULL,
+  `date_created` datetime DEFAULT NULL,
+  `updated_by` varchar(100) DEFAULT NULL,
+  `last_updated` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=latin1;
+
+/*Data for the table `mpd` */
+
+insert  into `mpd`(`id`,`id_header`,`product_id`,`qty`,`created_by`,`date_created`,`updated_by`,`last_updated`) values 
+(1,1,'001',3,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(2,1,'049',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(3,2,'001',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(4,2,'051',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(5,3,'003',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(6,3,'051',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(7,4,'119',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(8,4,'051',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(9,5,'001',5,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(10,5,'050',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(11,6,'001',2,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(12,6,'019',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(13,6,'050',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(14,7,'031',2,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(15,7,'069',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(16,8,'032',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(17,8,'029',2,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(18,8,'077',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(19,8,'052',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(20,9,'037',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(21,9,'077',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(22,9,'053',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(23,10,'033',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(24,10,'029',2,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(25,10,'077',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(26,10,'055',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(27,11,'034',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(28,11,'029',2,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(29,11,'077',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(30,11,'050',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(31,12,'046',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(32,12,'029',2,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(33,12,'077',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(34,12,'054',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(35,13,'047',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(36,13,'029',2,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(37,13,'077',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(38,13,'054',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(39,14,'041',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(40,14,'029',3,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(41,14,'077',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(42,14,'057',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(43,15,'042',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(44,15,'031',3,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(45,15,'077',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(46,15,'057',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(47,16,'043',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(48,16,'031',3,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(49,16,'077',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(50,16,'057',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(51,17,'044',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(52,17,'031',3,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(53,17,'077',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(54,17,'082',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(55,18,'032',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(56,18,'029',2,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(57,18,'077',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(58,18,'065',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(59,19,'038',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(60,19,'077',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(61,19,'064',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(62,20,'040',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(63,20,'077',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(64,20,'066',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(65,21,'046',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(66,21,'039',2,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(67,21,'077',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(68,21,'065',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(69,22,'038',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(70,22,'077',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(71,22,'067',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(72,23,'032',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(73,23,'029',2,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(74,23,'077',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(75,23,'067',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(76,24,'046',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(77,24,'035',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(78,24,'077',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(79,24,'067',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(80,25,'032',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(81,25,'029',2,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(82,25,'077',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(83,25,'052',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(84,26,'033',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(85,26,'029',2,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(86,26,'077',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(87,26,'054',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(88,27,'034',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(89,27,'031',2,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(90,27,'077',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(91,27,'078',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(92,28,'041',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(93,28,'031',3,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(94,28,'077',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(95,28,'083',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(96,29,'034',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(97,29,'077',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(98,29,'058',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(99,30,'003',5,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(100,30,'077',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(101,30,'059',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(102,31,'034',2,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(103,31,'077',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(104,31,'060',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(105,32,'034',2,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(106,32,'029',4,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(107,32,'077',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(108,32,'075',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(109,32,'061',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(110,33,'034',2,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(111,33,'029',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(112,33,'077',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(113,33,'075',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(114,33,'080',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(115,33,'062',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(116,34,'034',2,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(117,34,'077',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(118,34,'081',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(119,34,'063',1,'77','0000-00-00 00:00:00','77','0000-00-00 00:00:00');
+
+/*Table structure for table `order_detail` */
+
+DROP TABLE IF EXISTS `order_detail`;
+
+CREATE TABLE `order_detail` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id_header` bigint(20) DEFAULT NULL,
+  `tipe` varchar(2) DEFAULT NULL,
+  `product_id` varchar(100) DEFAULT NULL,
+  `description` text,
+  `qty` int(11) DEFAULT NULL,
+  `price` decimal(10,0) DEFAULT NULL,
+  `subtotal` decimal(10,0) DEFAULT NULL,
+  `created_by` varchar(200) DEFAULT NULL,
+  `date_created` date DEFAULT NULL,
+  `updated_by` varchar(200) DEFAULT NULL,
+  `last_updated` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `order_detail` */
+
+/*Table structure for table `order_header` */
+
+DROP TABLE IF EXISTS `order_header`;
+
+CREATE TABLE `order_header` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `order_no` varchar(20) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `customer_name` varchar(200) DEFAULT NULL,
+  `customer_phone` varchar(20) DEFAULT NULL,
+  `package` varchar(200) DEFAULT NULL,
+  `receive_date` date DEFAULT NULL,
+  `down_payment` decimal(10,0) DEFAULT NULL,
+  `status` varchar(100) DEFAULT 'OPEN',
+  `flag_print` enum('Y','N') DEFAULT NULL,
+  `discount` decimal(8,2) DEFAULT NULL,
+  `subtotal` decimal(10,0) DEFAULT NULL,
+  `ppn_amount` decimal(10,0) DEFAULT NULL,
+  `total` decimal(10,0) DEFAULT NULL,
+  `payment` decimal(10,0) DEFAULT NULL,
+  `return` decimal(10,0) DEFAULT NULL,
+  `created_by` varchar(200) DEFAULT NULL,
+  `date_created` date DEFAULT NULL,
+  `updated_by` varchar(200) DEFAULT NULL,
+  `last_updated` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `order_header` */
+
+/*Table structure for table `other_expense` */
+
+DROP TABLE IF EXISTS `other_expense`;
+
+CREATE TABLE `other_expense` (
+  `id` bigint(20) DEFAULT NULL,
+  `category` varchar(200) DEFAULT NULL,
+  `description` text,
+  `qty` int(11) DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  `received_by` varchar(200) DEFAULT NULL,
+  `created_by` varchar(200) DEFAULT NULL,
+  `date_created` date DEFAULT NULL,
+  `updated_by` varchar(200) DEFAULT NULL,
+  `last_updated` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `other_expense` */
+
+/*Table structure for table `po` */
+
+DROP TABLE IF EXISTS `po`;
+
+CREATE TABLE `po` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `document_no` varchar(50) NOT NULL,
+  `date` date DEFAULT NULL,
+  `id_vendor` bigint(20) DEFAULT NULL,
+  `shipment_date` date DEFAULT NULL,
+  `due` varchar(15) DEFAULT NULL,
+  `status` enum('Canceled','Revised','Ok') DEFAULT NULL,
+  `opt_disc` enum('%','Rp') NOT NULL,
+  `disc` int(10) DEFAULT NULL,
+  `subtotal` decimal(18,0) NOT NULL DEFAULT '0',
+  `ppn_amount` decimal(18,0) NOT NULL DEFAULT '0',
+  `disc_amount` decimal(18,0) NOT NULL DEFAULT '0',
+  `total` decimal(18,0) NOT NULL DEFAULT '0',
+  `date_created` date DEFAULT NULL,
+  `created_by` varchar(100) DEFAULT NULL,
+  `last_updated` date DEFAULT NULL,
+  `updated_by` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQUE_PO` (`document_no`),
+  KEY `po_date` (`date`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `po` */
+
+/*Table structure for table `po_item` */
+
+DROP TABLE IF EXISTS `po_item`;
+
+CREATE TABLE `po_item` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id_header` bigint(20) NOT NULL,
+  `id_product` varchar(90) DEFAULT NULL,
+  `qty` int(11) DEFAULT NULL,
+  `unit` varchar(50) DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `date_created` date DEFAULT NULL,
+  `created_by` varchar(100) DEFAULT NULL,
+  `last_updated` date DEFAULT NULL,
+  `updated_by` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pr_id` (`qty`,`price`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+/*Data for the table `po_item` */
+
+/*Table structure for table `receive_slip` */
+
+DROP TABLE IF EXISTS `receive_slip`;
+
+CREATE TABLE `receive_slip` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `document_no` varchar(50) NOT NULL,
+  `kategori` varchar(15) NOT NULL,
+  `date` date DEFAULT NULL,
+  `vendor` varchar(50) NOT NULL DEFAULT '',
+  `kurir` varchar(100) DEFAULT NULL,
+  `remarks` varchar(25) DEFAULT NULL,
+  `created_by` varchar(56) NOT NULL,
+  `date_created` datetime NOT NULL,
+  `updated_by` varchar(56) NOT NULL,
+  `last_updated` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `lpb_no` (`document_no`,`vendor`)
+) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=latin1;
+
+/*Data for the table `receive_slip` */
+
+insert  into `receive_slip`(`id`,`document_no`,`kategori`,`date`,`vendor`,`kurir`,`remarks`,`created_by`,`date_created`,`updated_by`,`last_updated`) values 
+(1,'RS/10/0001','','0000-00-00','','','','77','0000-00-00 00:00:00','','0000-00-00 00:00:00');
+
+/*Table structure for table `receive_slip_wedus` */
+
+DROP TABLE IF EXISTS `receive_slip_wedus`;
+
+CREATE TABLE `receive_slip_wedus` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_header` int(11) NOT NULL,
+  `product_id` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `receive_slip_wedus` */
+
+/*Table structure for table `rsd` */
+
+DROP TABLE IF EXISTS `rsd`;
+
+CREATE TABLE `rsd` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_header` int(11) DEFAULT NULL,
+  `product_id` varchar(20) DEFAULT NULL,
+  `qty` int(11) DEFAULT NULL,
+  `qty_on_hand` int(11) DEFAULT NULL,
+  `receive_price` decimal(11,0) DEFAULT '0',
+  `selling_price` decimal(11,0) DEFAULT '0',
+  `remarks` varchar(255) DEFAULT NULL,
+  `created_by` varchar(100) DEFAULT NULL,
+  `date_created` datetime DEFAULT NULL,
+  `updated_by` varchar(100) DEFAULT NULL,
+  `last_updated` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=latin1;
+
+/*Data for the table `rsd` */
+
+insert  into `rsd`(`id`,`id_header`,`product_id`,`qty`,`qty_on_hand`,`receive_price`,`selling_price`,`remarks`,`created_by`,`date_created`,`updated_by`,`last_updated`) values 
+(1,1,'001',10,10,3500,5000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(2,1,'002',10,10,7000,10000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(3,1,'003',10,10,7000,10000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(4,1,'004',10,10,8000,20000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(5,1,'005',10,10,20000,70000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(6,1,'006',10,10,55000,100000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(7,1,'007',10,10,75000,135000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(8,1,'008',10,10,100000,170000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(9,1,'009',10,10,5500,30000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(10,1,'010',10,10,11000,80000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(11,1,'011',10,10,22000,150000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(12,1,'012',10,10,35000,170000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(13,1,'013',10,10,50000,200000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(14,1,'014',10,10,20000,25000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(15,1,'015',10,10,25000,30000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(16,1,'016',10,10,50000,65000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(17,1,'017',10,10,75000,100000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(18,1,'018',10,10,100000,150000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(19,1,'019',10,10,45000,55000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(20,1,'020',10,10,40000,75000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(21,1,'021',10,10,60000,90000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(22,1,'022',10,10,30000,75000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(23,1,'023',10,10,35000,50000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(24,1,'024',10,10,75000,90000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(25,1,'025',10,10,400000,540000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(26,1,'026',10,10,550000,750000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(27,1,'027',10,10,900000,1000000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(28,1,'028',10,10,1000000,1200000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(29,1,'029',10,10,23500,30000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(30,1,'030',10,10,32000,40000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(31,1,'031',10,10,32000,40000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(32,1,'032',10,10,58000,85000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(33,1,'033',10,10,95000,170000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(34,1,'034',10,10,155000,250000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(35,1,'035',10,10,52000,65000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(36,1,'036',10,10,50500,90000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(37,1,'037',10,10,81000,120000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(38,1,'038',10,10,40500,105000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(39,1,'039',10,10,42000,60000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(40,1,'040',10,10,92500,115000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(41,1,'041',10,10,435000,710000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(42,1,'042',10,10,600000,950000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(43,1,'043',10,10,935000,1170000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(44,1,'044',10,10,1050000,1400000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(45,1,'045',10,10,111000,270000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(46,1,'046',10,10,122000,350000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(47,1,'047',10,10,225000,450000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(48,1,'048',10,10,250000,575000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(49,1,'049',10,10,85000,85000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(50,1,'050',10,10,175000,175000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(51,1,'051',10,10,20000,20000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(52,1,'052',10,10,90000,90000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(53,1,'053',10,10,105000,105000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(54,1,'054',10,10,205000,205000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(55,1,'055',10,10,125000,125000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(56,1,'056',10,10,155000,155000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(57,1,'057',10,10,285000,285000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(58,1,'058',10,10,235000,235000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(59,1,'059',10,10,535000,535000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(60,1,'060',10,10,485000,485000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(61,1,'061',10,10,365000,365000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(62,1,'062',10,10,555000,555000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(63,1,'063',10,10,585000,585000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(64,1,'064',10,10,130000,130000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(65,1,'065',10,10,210000,210000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(66,1,'066',10,10,220000,220000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(67,1,'067',10,10,100000,100000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(68,1,'068',10,10,30000,30000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(69,1,'069',10,10,180000,180000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(70,1,'070',10,10,200000,200000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(71,1,'071',10,10,200000,200000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(72,1,'072',10,10,200000,200000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(73,1,'073',10,10,250000,250000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(74,1,'074',10,10,300000,300000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(75,1,'075',10,10,500000,500000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(76,1,'076',10,10,200000,200000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(77,1,'077',10,10,8500,15000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(78,1,'078',10,10,185000,185000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(79,1,'079',10,10,25000,25000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(80,1,'080',10,10,700000,700000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(81,1,'081',10,10,300000,300000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(82,1,'082',10,10,265000,265000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(83,1,'083',10,10,355000,355000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(84,1,'084',10,10,200000,200000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(85,1,'119',10,10,4700,10000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(86,1,'120',10,10,4700,25000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(87,1,'121',10,10,9400,100000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(88,1,'122',10,10,19000,130000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(89,1,'123',10,10,58000,80000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(90,1,'124',10,10,95000,180000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00'),
+(91,1,'125',10,10,155000,280000,'','77','0000-00-00 00:00:00','77','0000-00-00 00:00:00');
+
+/*Table structure for table `sent_item` */
+
+DROP TABLE IF EXISTS `sent_item`;
+
+CREATE TABLE `sent_item` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` datetime NOT NULL,
+  `to` varchar(220) NOT NULL,
+  `subject` varchar(220) NOT NULL,
+  `from` varchar(225) NOT NULL,
+  `from_id` int(23) NOT NULL,
+  `message` text NOT NULL,
+  `description` varchar(252) NOT NULL,
+  `image` varchar(252) NOT NULL,
+  `document` varchar(252) NOT NULL,
+  `remark` varchar(252) NOT NULL,
+  `status_pesan` varchar(80) NOT NULL DEFAULT 'sent',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `sent_item` */
+
+/*Table structure for table `settings` */
+
+DROP TABLE IF EXISTS `settings`;
+
+CREATE TABLE `settings` (
+  `setting_id` int(1) NOT NULL,
+  `logo` varchar(255) NOT NULL,
+  `logo2` varchar(255) NOT NULL,
+  `site_name` varchar(55) NOT NULL,
+  `language` varchar(20) NOT NULL,
+  `default_warehouse` int(2) NOT NULL,
+  `currency_prefix` varchar(3) NOT NULL,
+  `default_invoice_type` int(2) NOT NULL,
+  `default_tax_rate` int(2) NOT NULL,
+  `rows_per_page` int(2) NOT NULL,
+  `no_of_rows` int(2) NOT NULL,
+  `total_rows` int(2) NOT NULL,
+  `version` varchar(5) NOT NULL DEFAULT '1.2',
+  `default_tax_rate2` int(11) NOT NULL DEFAULT '0',
+  `dateformat` int(11) NOT NULL,
+  `sales_prefix` varchar(20) NOT NULL,
+  `quote_prefix` varchar(55) NOT NULL,
+  `purchase_prefix` varchar(55) NOT NULL,
+  `transfer_prefix` varchar(55) NOT NULL,
+  `barcode_symbology` varchar(20) NOT NULL,
+  `theme` varchar(20) NOT NULL,
+  `product_serial` tinyint(4) NOT NULL,
+  `default_discount` int(11) NOT NULL,
+  `discount_option` tinyint(4) NOT NULL,
+  `discount_method` tinyint(4) NOT NULL,
+  `tax1` tinyint(4) NOT NULL,
+  `tax2` tinyint(4) NOT NULL,
+  PRIMARY KEY (`setting_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `settings` */
+
+/*Table structure for table `trash` */
+
+DROP TABLE IF EXISTS `trash`;
+
+CREATE TABLE `trash` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `to` varchar(220) NOT NULL,
+  `subject` varchar(220) NOT NULL,
+  `from` varchar(225) NOT NULL,
+  `from_id` int(23) NOT NULL,
+  `message` text NOT NULL,
+  `description` varchar(252) NOT NULL,
+  `image` varchar(252) NOT NULL,
+  `document` varchar(252) NOT NULL,
+  `remark` varchar(252) NOT NULL,
+  `status_pesan` varchar(80) NOT NULL DEFAULT 'sent',
+  `delete_by` varchar(80) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `trash` */
+
+/*Table structure for table `unit` */
+
+DROP TABLE IF EXISTS `unit`;
+
+CREATE TABLE `unit` (
+  `unit_id` int(5) NOT NULL AUTO_INCREMENT,
+  `unit` varchar(20) NOT NULL DEFAULT '',
+  PRIMARY KEY (`unit_id`,`unit`)
+) ENGINE=MyISAM AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
+
+/*Data for the table `unit` */
+
+insert  into `unit`(`unit_id`,`unit`) values 
+(1,'%'),
+(2,'BLN'),
+(3,'BOX'),
+(4,'BTG'),
+(5,'BTL'),
+(6,'BUKU'),
+(7,'DRUM'),
+(8,'DUS'),
+(9,'GLN'),
+(10,'HOURS'),
+(11,'KG'),
+(12,'KLG'),
+(13,'LBR'),
+(14,'LOT'),
+(15,'LSN'),
+(16,'LTR'),
+(17,'LUSIN'),
+(18,'M3'),
+(19,'ML'),
+(20,'MT'),
+(21,'MTR'),
+(22,'PAIL'),
+(23,'PCS'),
+(24,'PK'),
+(25,'PSG'),
+(26,'RIM'),
+(27,'ROLL'),
+(28,'SET'),
+(29,'SHEET'),
+(30,'SHIFT'),
+(31,'STEL'),
+(32,'TBG'),
+(33,'TON'),
+(34,'UNIT'),
+(35,'ZAK');
+
+/*Table structure for table `users` */
+
+DROP TABLE IF EXISTS `users`;
+
+CREATE TABLE `users` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `ip_address` varchar(15) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL DEFAULT '$2y$08$svHHPKlTfZxIY4L29rqeMewQvlLXtAqpMBh5/QoWaxUCfz3J6dEXC',
+  `salt` varchar(255) DEFAULT NULL,
+  `email` varchar(100) NOT NULL,
+  `activation_code` varchar(40) DEFAULT NULL,
+  `forgotten_password_code` varchar(40) DEFAULT NULL,
+  `forgotten_password_time` int(11) unsigned DEFAULT NULL,
+  `remember_code` varchar(40) DEFAULT NULL,
+  `default_group` int(11) DEFAULT NULL,
+  `created_on` int(11) unsigned NOT NULL,
+  `last_login` datetime DEFAULT NULL,
+  `active` tinyint(1) unsigned DEFAULT NULL,
+  `first_name` varchar(50) DEFAULT NULL,
+  `last_name` varchar(50) DEFAULT NULL,
+  `company` varchar(100) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `nik` varchar(45) NOT NULL,
+  `foto` varchar(100) NOT NULL,
+  `create_user` varchar(800) NOT NULL,
+  `divisi` varchar(90) NOT NULL,
+  `sub_group` varchar(100) NOT NULL,
+  `tanggal_aktif` date DEFAULT NULL,
+  `modify_user` varchar(255) NOT NULL,
+  `create_date` datetime NOT NULL,
+  `browser` varchar(255) NOT NULL,
+  `modify_date` datetime NOT NULL,
+  `project` varchar(80) DEFAULT NULL,
+  `aproved_dedicate` varchar(80) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8;
+
+/*Data for the table `users` */
+
+insert  into `users`(`id`,`ip_address`,`username`,`password`,`salt`,`email`,`activation_code`,`forgotten_password_code`,`forgotten_password_time`,`remember_code`,`default_group`,`created_on`,`last_login`,`active`,`first_name`,`last_name`,`company`,`phone`,`nik`,`foto`,`create_user`,`divisi`,`sub_group`,`tanggal_aktif`,`modify_user`,`create_date`,`browser`,`modify_date`,`project`,`aproved_dedicate`) values 
+(64,'10.2.2.100','Ricky','$2y$08$plQTTaD7VJ4aLtLhBg1m6uTH2jSEXuwXrkfIQxwE6wzE6KVYGonnW',NULL,'ricky',NULL,NULL,NULL,NULL,1,1426666587,'0000-00-00 00:00:00',1,'Ricky','Alexander','Lexadata','081807938182','7','2b01z3sxref4o80sws.png','','','IT','2015-07-01','Ricky Alexander','0000-00-00 00:00:00','','2015-12-30 09:04:54',NULL,NULL),
+(77,'::1','','$2y$08$/GyYWehT.dPBFsQbiWW0/.bdlvhZnzjLv1Mf3WV1iecbeNBBE51Pa',NULL,'4gungmuliawan@gmail.com',NULL,NULL,NULL,NULL,1,0,'0000-00-00 00:00:00',1,'Agung','Muliawan','Concept Photo',NULL,'','54x9nrjnsigw84.png','Ricky Alexander','','',NULL,'Ricky Alexander','2017-05-01 06:26:18','Mozilla/5.0 (Windows NT 10.0; rv:53.0) Gecko/20100101 Firefox/53.0','2017-05-01 06:26:18',NULL,NULL);
+
+/*Table structure for table `users_groups` */
+
+DROP TABLE IF EXISTS `users_groups`;
+
+CREATE TABLE `users_groups` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
+  `group_id` mediumint(8) unsigned NOT NULL,
+  `access` enum('user','admin','approver','procure') NOT NULL,
+  `access_group` varchar(60) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uc_users_groups` (`user_id`,`group_id`),
+  KEY `fk_users_groups_users1_idx` (`user_id`),
+  KEY `fk_users_groups_groups1_idx` (`group_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8;
+
+/*Data for the table `users_groups` */
+
+insert  into `users_groups`(`id`,`user_id`,`group_id`,`access`,`access_group`) values 
+(126,64,1,'admin',''),
+(140,77,1,'admin','');
+
+/* Trigger structure for table `m_product` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `newproduct` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `newproduct` AFTER INSERT ON `m_product` FOR EACH ROW BEGIN
+	INSERT INTO `concept`.`inventory_on_hand` (`product_id`)  VALUES (NEW.product_id);
+    END */$$
+
+
+DELIMITER ;
+
+/* Function  structure for function  `f_date_ke_tanggal` */
+
+/*!50003 DROP FUNCTION IF EXISTS `f_date_ke_tanggal` */;
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`10.2.2.%` FUNCTION `f_date_ke_tanggal`(tanggal VARCHAR(11), mode INT) RETURNS varchar(255) CHARSET latin1
+    DETERMINISTIC
+BEGIN
+/*DECLARE VALUES YOU MAY NEED, EXAMPLE:
+  DECLARE NOM_VAR1 DATATYPE [DEFAULT] VALUE;
+  */
+  DECLARE hasil VARCHAR(50) DEFAULT "";
+  DECLARE tgl VARCHAR(2) DEFAULT "";
+  DECLARE bln VARCHAR(2) DEFAULT "";
+  DECLARE bln2 VARCHAR(3) DEFAULT "";
+  DECLARE bln3 VARCHAR(20) DEFAULT "";
+  DECLARE thn VARCHAR(4) DEFAULT "";
+  SET tgl = right(tanggal,2);
+  SET bln = mid(tanggal,6,2);
+  SET bln2 = LEFT((SELECT bulan FROM bulan WHERE id=bln),3);
+  SET bln3 = (SELECT RTRIM(bulan) FROM bulan WHERE id=bln);
+  SET thn = left(tanggal,4);
+  
+  IF mode = 1 THEN
+    SET hasil = concat(tgl,'/',bln,'/',thn);
+  ELSEIF mode = 2 THEN
+    SET hasil = concat(tgl,'-',bln2,'-',thn);
+  ELSEIF mode = 3 THEN
+    SET hasil = concat(tgl,' ',bln3,' ',thn);
+  END IF;
+  RETURN hasil;
+  
+END */$$
+DELIMITER ;
+
+/* Function  structure for function  `f_date_ke_tgl` */
+
+/*!50003 DROP FUNCTION IF EXISTS `f_date_ke_tgl` */;
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`10.2.2.%` FUNCTION `f_date_ke_tgl`(tanggal VARCHAR(11)) RETURNS varchar(11) CHARSET latin1
+    DETERMINISTIC
+BEGIN
+/*DECLARE VALUES YOU MAY NEED, EXAMPLE:
+  DECLARE NOM_VAR1 DATATYPE [DEFAULT] VALUE;
+  */
+  DECLARE hasil VARCHAR(11) DEFAULT "";
+  DECLARE tgl VARCHAR(2) DEFAULT "";
+  DECLARE bln VARCHAR(2) DEFAULT "";
+  DECLARE thn VARCHAR(4) DEFAULT "";
+  SET tgl = right(tanggal,2);
+  SET bln = mid(tanggal,6,2);
+  SET thn = left(tanggal,4);
+  SET hasil = concat(tgl,'/',bln,'/',thn);
+  RETURN hasil;
+END */$$
+DELIMITER ;
+
+/* Function  structure for function  `f_split_string` */
+
+/*!50003 DROP FUNCTION IF EXISTS `f_split_string` */;
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`10.2.2.%` FUNCTION `f_split_string`(`str` varchar(255),`delim` varchar(12),`pos` INT) RETURNS varchar(255) CHARSET latin1
+    DETERMINISTIC
+BEGIN
+	#Routine body goes here...
+	DECLARE return_string VARCHAR(255);
+	SET return_string = REPLACE(SUBSTRING(SUBSTRING_INDEX(str, delim, pos),
+       LENGTH(SUBSTRING_INDEX(str, delim, pos-1)) + 1),
+       delim, '');
+	RETURN return_string;
+END */$$
+DELIMITER ;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
