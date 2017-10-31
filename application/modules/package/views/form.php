@@ -46,7 +46,7 @@
            data-minimum-count-columns="2"
            data-pagination="true"
            data-page-list="[10, 25, 50, 100, ALL]"
-           data-show-footer="false"
+           data-show-footer="true"
            data-export-data-type="all"
            data-export-types="['excel']"
            data-height="300"
@@ -56,8 +56,8 @@
                 <th data-field="id">ID</th>
                 <th data-field="product">Product</th>
 				<th data-field="qty">Qty</th>
-                                <th data-field="selling_price">Sell Price</th>
-                                <th data-field="receive_price">Receive Price</th>
+                                <th data-field="selling_price" data-footer-formatter="sumFormatter1">Sell Price</th>
+                                <th data-field="receive_price" data-footer-formatter="sumFormatter1">Receive Price</th>
 				<th data-field="action">Action</th>
             </tr>
         </thead>
@@ -75,6 +75,13 @@
       $('#toolbar').hide();
     <?php } ?>
   });
+  
+     function sumFormatter1(data) {
+                field = this.field;
+            return 'Rp. '+data.reduce(function(sum, row) { 
+                return sum + (+row[field]);
+            }, 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+            }
   
 	var $table = $('#table');
 	var $add = $('#add');

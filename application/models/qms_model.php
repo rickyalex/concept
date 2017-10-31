@@ -820,6 +820,10 @@ class Qms_model extends CI_Model {
         
         return $full_name;
     }
+    
+    function formatCurrency($value){
+        return "Rp. ".number_format($value, 0);
+    }
 
     //=============================== SET DATA ======================================//
 

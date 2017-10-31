@@ -44,13 +44,13 @@ class Package extends MX_Controller {
 			//die(print_r($arr));
         
 			foreach ($res as $key => $field) {
-                                $selling = $selling + $this->qms_model->getSellingPrice($res[$key]['product_id']);
-                                $receive = $receive + $this->qms_model->getReceivePrice($res[$key]['product_id']);
-                                $total = $total + $this->qms_model->getSellingPrice($res[$key]['product_id']);
+                                $selling = $selling + ($this->qms_model->getSellingPrice($res[$key]['product_id'])*$res[$key]['qty']);
+                                $receive = $receive + ($this->qms_model->getReceivePrice($res[$key]['product_id'])*$res[$key]['qty']);
+                                $total = $total + ($this->qms_model->getSellingPrice($res[$key]['product_id'])*$res[$key]['qty']);
 			}
                         
-                        $data['total'] = $total;
-                        $data['profit'] = $selling - $receive;
+                        $data['total'] = $this->qms_model->formatCurrency($total);
+                        $data['profit'] = $this->qms_model->formatCurrency($selling - $receive);
 		}
 		
 		//die(print_r($data));
@@ -119,8 +119,8 @@ class Package extends MX_Controller {
         
 			foreach ($arr as $key => $field) {
 				$arr[$key]['product'] = $this->qms_model->getProductName2($arr[$key]['product_id']);
-                                $arr[$key]['selling_price'] = $this->qms_model->getSellingPrice($arr[$key]['product_id']);
-                                $arr[$key]['receive_price'] = $this->qms_model->getReceivePrice($arr[$key]['product_id']);
+                                $arr[$key]['selling_price'] = $this->qms_model->getSellingPrice($arr[$key]['product_id'])*$arr[$key]['qty'];
+                                $arr[$key]['receive_price'] = $this->qms_model->getReceivePrice($arr[$key]['product_id'])*$arr[$key]['qty'];
 				$arr[$key]['action'] = "<a class='remove' href='#'><i class='glyphicon glyphicon-remove'></a>";
 			}
 			

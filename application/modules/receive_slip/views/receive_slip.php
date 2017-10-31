@@ -3,7 +3,13 @@
     <ol class="breadcrumb">
 </section></br>
 <section class="content">
+    <div id="toolbar">
+        <button id="add" class="btn btn-success">
+            <i class="glyphicon glyphicon-add"></i> Add
+        </button>
+    </div>
     <table id="table"
+           data-toolbar="#toolbar"
            data-toggle="table"
            data-search="true"
            data-show-refresh="true"
@@ -18,6 +24,7 @@
            data-export-data-type="all"
            data-export-types="['excel']"
            data-height="600"
+           data-url="<?php echo base_url(); ?>receive_slip/getData">
         <thead>
             <tr>
                 <th data-field="id">ID</th>
@@ -34,7 +41,11 @@
 </section>
 <script>
     var $table = $('#table');
-    $table.bootstrapTable({
-        data : <?php echo $result; ?>
-    })
+    var $add = $('#add');
+    $table.on('dbl-click-row.bs.table', function (row, $element) {
+	window.open("<?php echo base_url(); ?>receive_slip/view_detail/id/"+$element.id,'_parent');
+    });
+    $add.on('click',function(){
+	window.open("<?php echo base_url(); ?>receive_slip/form/mode/add",'_parent');
+    });
 </script>
