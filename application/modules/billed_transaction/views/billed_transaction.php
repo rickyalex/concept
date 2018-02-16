@@ -38,9 +38,7 @@
                 <th data-field="customer_name">Customer Name</th>
 				<th data-field="status">Status</th>
 				<th data-field="date">Date</th>
-				<th data-field="receive_date">Receive Date</th>
 				<th data-field="total">Total</th>
-				<th data-field="payment">Cash</th>
 				<th data-field="down_payment">DP</th>
 				<th data-field="outstanding">Outstanding</th>
             </tr>

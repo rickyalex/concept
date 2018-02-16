@@ -48,7 +48,8 @@
            data-height="600">
         <thead>
             <tr>
-                <th data-field="date">Date</th>
+                <th data-field="date">Transaction Date</th>
+				<th data-field="closed_date">Closed Date</th>
                 <th data-field="type_name">Tipe</th>
                 <th data-field="product">Produk</th>
                 <th data-field="total">Qty Order</th>

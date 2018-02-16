@@ -308,10 +308,7 @@
 
 	$('#confirm').on('click',function(e){
 		//if(field=='action'){
-		confirmDelete();
-	});
-	
-	function confirmDelete(){
+		e.preventDefault();
 		var id = $('#idDelete').val();
 		var form_confirm = $(".form_confirm")[0];
 		var formConfirm = new FormData(form_confirm);
@@ -324,10 +321,11 @@
 			url: "<?php echo base_url();?>transaction/remove/id/"+id,
 			success: function(response){
 				if (response.match(/Error: .*/)) {
-					alert(response);
+					alert('Delete Error!');
 				}else{
-					// alert(response);
-					location.reload();
+					var data = JSON.parse(response);
+					$('#table').bootstrapTable('load', data);
+					getTotal();
 				}
 				
 			}
@@ -336,7 +334,9 @@
 				alert('Delete Error');
 			}
 		});
-	}
+		hideConfirmation();
+		return false;
+	});
 	
 	$('#product_id').on('change', function(){
 		var receive_id = $('#product_id').val();
@@ -410,9 +410,9 @@
 		
 		$('#total').val(numberFormat(subtotal2-discount2,"."));
 
-		var payment = eval(replaceChar($('#payment').val()));
-        var down_payment = eval(replaceChar($('#down_payment').val()));
-        var total = eval(replaceChar($('#total').val()));
+		var payment = parseInt(replaceChar($('#payment').val()));
+        var down_payment = parseInt(replaceChar($('#down_payment').val()));
+        var total = parseInt(replaceChar($('#total').val()));
         $('#return').val(numberFormat((payment+down_payment)-total,"."));
         $('#payment').val(numberFormat(payment,"."));
         $('#down_payment').val(numberFormat(down_payment,"."));
@@ -451,9 +451,35 @@
 	$('#password').on('keydown',function(e){
 		//e.preventDefault();
 		if(e.which == 13) { //F2
-			confirmDelete();
+			e.preventDefault();
+			var id = $('#idDelete').val();
+			var form_confirm = $(".form_confirm")[0];
+			var formConfirm = new FormData(form_confirm);
+	
+			$.ajax({
+				type: "POST",
+				data: formConfirm,
+				contentType: false,
+				processData: false,
+				url: "<?php echo base_url();?>transaction/remove/id/"+id,
+				success: function(response){
+					if (response.match(/Error: .*/)) {
+						alert('Delete Error!');
+					}else{
+						var data = JSON.parse(response);
+						$('#table').bootstrapTable('load', data);
+						getTotal();
+					}
+					
+				}
+				,
+				error: function(e){
+					alert('Delete Error');
+				}
+			});
+			hideConfirmation();
+			return false;
 		}
-		
 	});
 	
 	function hideConfirmation(){
@@ -516,8 +542,8 @@
 	}
 	
 	function checkout1(){
-		var payment = eval($('#payment').val());
-        var down_payment = eval($('#down_payment').val());
+		var payment = parseInt($('#payment').val());
+        var down_payment = parseInt($('#down_payment').val());
         if(payment == 0 && down_payment == 0){
         	alert('DP/Cash empty!');
         	return false;

@@ -36,8 +36,7 @@
 <script>
   function cellStyle(value, row, index) {
     console.log(row);
-
-    if (row.qty_on_hand  < parseInt(row.min_stock) ) {
+    if (row.qty_on_hand  < row.min_stock ) {
         return {
             classes: 'danger'
         };

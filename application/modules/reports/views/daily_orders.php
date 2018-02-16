@@ -43,7 +43,7 @@
             <tr>
                 <th data-field="id">ID</th>
                 <th data-field="order_no">Order No</th>
-                <th data-field="date">Date</th>
+                <th data-field="date">Transaction Date</th>
                 <th data-field="customer_name">Customer</th>
                 <th data-field="status">Status</th>
         				<th data-field="product">Product</th>

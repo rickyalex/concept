@@ -440,7 +440,6 @@ class Transaction extends MX_Controller {
 		
 		$data['subtotal'] = $this->qms_model->getTotal($data['order_no']);
 		$data['discount'] = ($data['discount']/100); //percentage
-		$data['last_updated'] = Date('Y-m-d');
 		// $array = array('order_no', $data['order_no'],'date', $data['date']);
 		// $this->db->where($array);
 		// print_r($data);
@@ -611,6 +610,9 @@ class Transaction extends MX_Controller {
 					}
 				}
 			}
+			$id_header = '';
+			$id_header = $this->qms_model->getIDHeader2($id);
+			
 			$this->db->where('id', $id);
 			$query = $this->db->delete('order_detail');
 			// echo $query;
@@ -618,11 +620,14 @@ class Transaction extends MX_Controller {
 			if($this->db->trans_status() === FALSE){// Check if transaction result successful
 			    $this->db->trans_rollback();
 			    $res = 'Error: Delete Error';
+				die($res);
 			}else{
 				$this->db->trans_complete();
-			    $res = 'Delete Success';			   	
+			    //$res = 'Delete Success';	
+				$arr = $this->reload($id_header);
+				echo json_encode($arr);	
+				die;	   	
 			}
-			die($res);
 		}
 		else die('Error: no parameter found !');
 		
