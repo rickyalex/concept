@@ -484,6 +484,14 @@ class Qms_model extends CI_Model {
 
         return $res;
     }
+
+    function getCheckoutStatus($order_no) {
+        
+        $query = $this->DB->query("SELECT flag_print as result from order_header where order_no = '$order_no'");
+        $res = $query->row()->result;
+
+        return $res;
+    }
     
     function getTransactionDetailByOrderNo($order_no) {
         
@@ -611,6 +619,17 @@ class Qms_model extends CI_Model {
     
     function getIDHeader2($id_detail) {
         $query = $this->DB->query("SELECT id_header as result from order_detail WHERE id=$id_detail");
+        if ($query->num_rows() > 0) {
+            $res = $query->row()->result;
+        }
+        else
+            $res = '';
+
+        return $res;
+    }
+
+    function getIDHeaderByOrderNo($order_no) {
+        $query = $this->DB->query("SELECT id as result from order_header WHERE order_no='$order_no'");
         if ($query->num_rows() > 0) {
             $res = $query->row()->result;
         }

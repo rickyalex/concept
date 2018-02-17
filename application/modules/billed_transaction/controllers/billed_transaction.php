@@ -40,8 +40,8 @@ class Billed_transaction extends MX_Controller {
             $arr[$key]['total'] = $arr[$key]['subtotal'] - ($arr[$key]['subtotal'] * $arr[$key]['discount']);
             // print_r($arr[$key]);
             //update header
-            $this->db->where('id', $arr[$key]['id']);
-            $query = $this->db->update('order_header' ,$arr[$key]);
+            //$this->db->where('id', $arr[$key]['id']);
+            //$query = $this->db->update('order_header' ,$arr[$key]);
 
             $arr[$key]['outstanding'] = $arr[$key]['total'] - ($arr[$key]['payment'] + $arr[$key]['down_payment']);
         }

@@ -497,13 +497,27 @@ class Transaction extends MX_Controller {
 	    // 	echo 'PDF saved';
 	    // }
     }
+
+    public function getCheckoutStatus(){
+    	if ($this->uri->segment(3) !== FALSE){
+			$order_no = $this->uri->segment(4);
+			
+			$res = $this->qms_model->getCheckoutStatus($order_no);
+			//die(print_r($$res));
+		}
+		else {
+			$res = "MISSING";
+		}
+    	
+		return $res;
+    }
 	
 	public function getDataByOrderNo() {
 		if ($this->uri->segment(3) !== FALSE){
 			$order_no = $this->uri->segment(4);
 			
 			$arr = $this->qms_model->getTransactionDetailByOrderNo($order_no);
-			die(print_r($arr));
+			//die(print_r($arr));
 			foreach($arr as $key => $value){
 				$arr[$key]['product'] = $this->qms_model->getProductName($arr[$key]['product_id']);
 			}
@@ -633,6 +647,7 @@ class Transaction extends MX_Controller {
 		
 		// die($res);
 	}
+
 }
 
 /* End of file welcome.php */
